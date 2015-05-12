@@ -2,7 +2,7 @@
 
 A workshop presented by	[Sahir Bhatnagar](http://sahirbhatnagar.com/) (McGill University)
   
-**Date**: Thursday,	May 28, 2015, 13:00-­‐16:00
+**Date**: Thursday,	May 28, 2015, 13:00-­‐16:00  
 **Location**: Purvis Hall, Room 25, McGill University
 
 Sponsored by the CRM Statistics	Laboratory and the Montreal Biostatistics Seminar Series
