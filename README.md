@@ -14,7 +14,7 @@ Sponsored by the CRM Statistics	Laboratory and the Montreal Biostatistics Semina
 Participants must bring their own laptops, with the following programs and packages installed:
 
 * [R](http://cran.r-project.org/)
-* [RStudio v0.99.429 Preview](http://www.rstudio.com/products/rstudio/download/preview/)
+* [RStudio v0.99.441 Preview](http://www.rstudio.com/products/rstudio/download/preview/)
 * `R` packages `knitr`, `magrittr`, `data.table`, `ggplot2`, `devtools`
 * A working instance of `LaTeX`
 * [TeXStudio (optional)](http://texstudio.sourceforge.net/)

@@ -1,0 +1,268 @@
+%\documentclass[10pt,handout]{beamer}
+\documentclass[10pt]{beamer}
+\usepackage{etex} % helps fix \newdimen error which is cause when ctable is loaded with other packages
+\usepackage{comment}
+\usepackage{ctable}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{url}
+\usepackage{color, colortbl}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows,shapes.symbols,decorations.pathreplacing}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30,text width=2.0cm]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30,text width=1.5cm]
+\tikzstyle{process} = [rectangle, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=orange!30,text width=2cm]
+\tikzstyle{decision} = [diamond, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{both} = [thick,<->,>=stealth, red]
+
+\tikzset{myshade/.style={minimum size=.4cm,shading=radial,inner color=white,outer color={#1!90!gray}}}
+\newcommand\mycirc[1][]{\tikz\node[circle,myshade=#1]{};}
+\newcommand\myrect[1][]{\tikz\node[rectangle,myshade=#1]{};}
+\newcommand\mystar[1][]{\tikz\node[star,star points=15,star point height=2pt,myshade=#1]{};}
+\newcommand\mydiamond[1][]{\tikz\node[diamond,myshade=#1]{};}
+\newcommand\myellipse[1][]{\tikz\node[ellipse,myshade=#1]{};}
+\newcommand\mykite[1][]{\tikz\node[kite,myshade=#1]{};}
+\newcommand\mydart[1][]{\tikz\node[dart,myshade=#1]{};}
+\newcommand\mycloud[1][]{\tikz\node[cloud,myshade=#1]{};}
+
+%\usepackage{subcaption}
+\usepackage{subfig}
+%\usepackage{caption}
+
+\mode<presentation>
+\usetheme{Hannover}
+\usecolortheme{rose}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{frametitle}[default][left]
+
+\usepackage[]{hyperref}
+\hypersetup{
+    unicode=false,          
+    pdftoolbar=true,        
+    pdfmenubar=true,        
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Reproducible Research},    % title
+    pdfauthor={Sahir Rai Bhatnagar},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Sahir Rai Bhatnagar},   % creator of the document
+    pdfproducer={Sahir Rai Bhatnagar}, % producer of the document
+    pdfkeywords={}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\begin{document}
+
+<<packages,echo=FALSE,warning=FALSE,message=FALSE, eval=FALSE>>=
+library(knitr)
+library(data.table)
+library(lattice)
+library(splines)
+library(latticeExtra)
+library(nlme)
+library(xtable)
+library(geepack)
+library(gee)
+library(ggplot2)
+library(lme4)
+library(gridExtra)
+library(VGAM)
+library(dplyr)
+library(boot)
+library(ordinal)
+@
+
+
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+#setwd("~/Dropbox/Winter 2015/BIOS612/Assignments/A3/")
+options(width=60, digits=2)
+set.seed(45)
+opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+knit_hooks$set(crop = hook_pdfcrop)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', crop = TRUE, fig.pos = 'h'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', crop = TRUE, fig.pos = 'h'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', crop = TRUE, fig.pos = 'h')
+)
+knitr::read_chunk("slides-code.R")
+#knitr::read_chunk("compv2.R")
+#source("multiplot.R")
+#knitr:::knit_code$get()
+#devtools::install_github("rstudio/DT")
+#opts_knit$set(upload.fun = image_uri)
+@
+
+<<functions>>=
+@
+
+
+
+\title[RR: Intro to \texttt{knitr}]{Reproducible Research}
+\subtitle{An Introduction to \texttt{knitr}}
+
+\author[]{Sahir Bhatnagar%
+\thanks{sahir.bhatnagar@mail.mcgill.ca%
+}}
+
+\date{May 28, 2014}
+
+%\makebeamertitle
+
+\maketitle
+
+\begin{frame}{Acknowledgements}
+% \hspace*{-1.9cm}\parbox[t]{\textwidth}
+%\frametitle{Acknowledgements}
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+
+\begin{itemize}
+%\scriptsize
+\item Dr. Erica Moodie
+\item Maxime Turgeon, Kevin McGregor
+\item You
+\end{itemize}
+
+\column{.45\textwidth} % Right column and width
+\begin{figure}
+\includegraphics[width=0.6\columnwidth]{eboh50.pdf}\\[5mm]
+\includegraphics[width=1.0\columnwidth]{crm.png}
+%\includegraphics[width=0.7\columnwidth]{Logo-LUDMER.jpg}
+\end{figure}
+
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{Disclaimer}
+\begin{figure}
+\includegraphics[width=1.0\columnwidth]{rstudio.png}\\[5mm]
+\includegraphics[width=0.2\columnwidth]{rlogo.png}\\[5mm]
+\includegraphics[width=0.2\columnwidth]{LaTeX_logo.png}
+\end{figure}
+
+\textit{I don't work for, nor am I an author of any of these packages. I'm just a messenger.}
+
+\end{frame}
+
+\begin{frame}{Disclaimer}
+
+\begin{itemize}
+\item Material for this tutorial comes from many sources. For a complete list see:  \href{https://github.com/sahirbhatnagar/knitr-tutorial}{https://github.com/sahirbhatnagar/knitr-tutorial}
+\item Alot of the content in these slides are based on these two books
+\end{itemize}
+
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+\column{.45\textwidth} % Left column and width
+\begin{figure}
+\includegraphics[width=0.6\columnwidth]{yihui.png}
+\end{figure}
+
+\column{.45\textwidth} % Right column and width
+\begin{figure}
+\includegraphics[width=0.6\columnwidth]{chris.png}
+\end{figure}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Eat Your Own Dog Food}
+
+\begin{itemize}
+\item These slides are reproducible
+\item Source code: \href{https://github.com/sahirbhatnagar/knitr-tutorial}{https://github.com/sahirbhatnagar/knitr-tutorial}
+\end{itemize}
+
+\end{frame}
+
+
+\section{Reproducible Research}
+
+\subsection{What?}
+
+\begin{frame}
+
+\frametitle{What is Science Anyway?}
+
+\pause
+\begin{block}{According to the American Physical Society:}
+\emph{Science is the systematic enterprise of gathering knowledge about the universe and organizing and condensing that knowledge into \textbf{testable} laws and theories. The \textbf{success and credibility of science} are anchored in the \textbf{willingness} of scientists to \textbf{expose their ideas} and results to \textbf{independent testing} and \textbf{replication} by other scientists}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+\frametitle{RR: A Minimum Standard to Verify Scientific Findings}
+
+\pause
+\begin{block}{Reproducible Research (RR) in Computational Sciences}
+\emph{The data and the code used to make a finding are available and they are sufficient for an independent researcher to recreate the finding}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Why?}
+
+\begin{frame}
+\begin{tikzpicture}
+\scriptsize
+\node (expr) [startstop] {Why should we care about RR?};
+\node (science) [decision, right of=expr, xshift=2cm, yshift=1.5cm] {For Science};
+\draw [arrow] (expr) -- (science);
+\node (stan) [process, right of=science, xshift=3cm, yshift=2cm] {Standard to judge scientific claims};
+\node (dupli) [process, right of=science, xshift=3cm, yshift=0.5cm] {Avoid duplication};
+\node (know) [process, right of=science, xshift=3cm, yshift=-1cm] {Cumulative knowledge development};
+\draw [arrow] (science) -- (stan);
+\draw [arrow] (science) -- (dupli);
+\draw [arrow] (science) -- (know);
+\pause \node (you) [decision, right of=expr, xshift=2cm, yshift=-1.5cm] {For You};
+\draw [arrow] (expr) -- (you);
+\node (work) [process, right of=you, xshift=3cm, yshift=0.5cm] {Better work habits};
+\node (team) [process, right of=you, xshift=3cm, yshift=-0.7cm] {Better teamwork};
+\node (change) [process, right of=you, xshift=3cm, yshift=-1.9cm] {Changes are easier};
+\node (soft) [process, right of=you, xshift=3cm, yshift=-3.1cm] {Higher research impact};
+\draw [arrow] (you) -- (work);
+\draw [arrow] (you) -- (team);
+\draw [arrow] (you) -- (change);
+\draw [arrow] (you) -- (soft);
+\end{tikzpicture}
+\end{frame}
+
+
+\subsection{001-motivating-example}
+
+\begin{frame}
+<<example-2, results = 'asis'>>=
+@
+\end{frame}
+
+
+\section{002-tables}
+\begin{frame}
+<<example, results = 'asis'>>=
+@
+\end{frame}
+
+\begin{frame}
+<<example-2, results = 'asis'>>=
+@
+\end{frame}
+
+
+
+\end{document}

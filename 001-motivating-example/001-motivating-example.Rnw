@@ -1,0 +1,162 @@
+\documentclass[11pt,letter]{article}    
+\usepackage[latin1]{inputenc}
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{amsmath,amsthm,amssymb,bbm} %math stuff
+\usepackage{ctable}
+\usepackage{placeins} % FloatBarrier
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{comment}
+\usepackage[numbers]{natbib}   % omit 'round' option if you prefer square brackets
+\bibliographystyle{plainnat}
+\usepackage{setspace} %Spacing
+\usepackage{graphicx,graphics}
+\usepackage{booktabs,tabularx}
+\usepackage{enumerate}
+\usepackage{makecell}
+\usepackage{xfrac}
+\usepackage{color, colortbl, xcolor}
+\usepackage{booktabs,dcolumn} % for use with texreg in R
+\usepackage[pagebackref=true,bookmarks]{hyperref}
+\hypersetup{
+    unicode=false,          
+    pdftoolbar=true,        
+    pdfmenubar=true,        
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={001-Motivating Example},    % title
+    pdfauthor={SRB},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={SRB},   % creator of the document
+    pdfproducer={SRB}, % producer of the document
+    pdfkeywords={}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% my commands
+\newcommand{\tm}[1]{\textrm{#1}}
+
+
+% fancy header commands
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\setlength{\textheight}{9.00in}
+\setlength{\textwidth}{7.00in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\oddsidemargin}{-0.25in}
+\renewcommand{\baselinestretch}{1.2}
+\makeatletter
+\makeatother
+\lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
+
+\begin{document}
+\pagestyle{fancy}
+
+\title{001-Motivating Example}
+\author{Body Fat Data}
+\maketitle
+
+
+<<packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE>>=
+library(knitr)
+library(data.table)
+library(lattice)
+library(splines)
+library(latticeExtra)
+library(nlme)
+library(xtable)
+library(geepack)
+library(gee)
+library(ggplot2)
+library(lme4)
+library(gridExtra)
+library(VGAM)
+library(dplyr)
+library(boot)
+library(ordinal)
+@
+
+
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=70, digits=2)
+set.seed(45)
+opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+#knit_hooks$set(crop = hook_pdfcrop)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'h'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'h'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'h')
+)
+knitr::read_chunk("fat-code.R")
+#knitr::read_chunk("compv2.R")
+#source("multiplot.R")
+#knitr:::knit_code$get()
+#devtools::install_github("rstudio/DT")
+#opts_knit$set(upload.fun = image_uri)
+@
+
+
+\begin{abstract}
+Identifying overweight populations is an important first step in fighting the obesity epidemic. However, accurate measure of body fat are costly and inconvenient. Therefore we are interested in determining predictors of body fat which require only a scale and a measuring tape. We analyze a dataset which contains percentage of body fat, age, weight, height and ten body circumference measurements for 251 men. We model the data using multiple linear regression and perform various model selection techniques.
+\end{abstract}
+
+
+\section{EDA}
+
+<<import-data>>=
+@
+
+<<fig-pairs, opts.label = 'fig.small'>>=
+@
+
+We will fit a model of the form
+\begin{multline}
+pbf1_i= \beta_0+\beta_1\tm{age}_i+\beta_2\tm{weight}_i+\beta_3\tm{height}_i+\beta_4\tm{neck}_i\\
++\beta_5\tm{chest}+\beta_6\tm{abdomen}_i+\beta_7\tm{hip}_i+\beta_8\tm{thigh}_i+\beta_9\tm{knee}_i \\
++\beta_{10}\tm{ankle}_i+ \beta_{11}\tm{bicep}_i +\beta_{12}\tm{forearm}_i +\beta_{13}\tm{wrist}_i ,  \label{eq:eq1}
+\end{multline}
+
+\FloatBarrier
+
+\section{Results}
+
+The parameter estimates of Model~\eqref{eq:eq1} and their standard errors are shown in Table~\ref{tab:results}
+<<linear-regression, results = 'asis'>>=
+@
+
+Model diagnostics are shown in Figures~\ref{fig:fig-diagnostics} and~\ref{fig:influence-plot}
+
+<<fig-diagnostics, opts.label = 'fig.large', fig.cap = 'Regression diagnostics for Model~\\eqref{eq:eq1}'>>=
+@
+
+<<influence-plot, results = 'hide', opts.label = 'fig.small',fig.cap = 'Regression influence plot for Model~\\eqref{eq:eq1}'>>=
+@
+\FloatBarrier
+Look more closely at observation 42:
+<<results = 'asis'>>=
+DT[42,.(pbf1,weight,height),] %>% xtable %>% print(include.rownames = FALSE)
+@
+
+\FloatBarrier
+\section{Sensitivity Analysis}
+
+We perform the same analysis as above, but with observation 42 removed
+
+<<linear-regression2, results = 'asis'>>=
+@
+
+<<fig-diagnostics2, opts.label = 'fig.large', fig.cap = 'Regression diagnostics for Model~\\eqref{eq:eq1}, with outliers removed'>>=
+@
+
+<<influence-plot2, opts.label = 'fig.small',fig.cap = 'Regression influence plot for Model~\\eqref{eq:eq1}, with outliers removed', results = 'hide'>>=
+@
+
+
+
+\end{document}
