@@ -19,3 +19,14 @@ Participants must bring their own laptops, with the following programs and packa
 * A working instance of `LaTeX`
 * [TeXStudio (optional)](http://texstudio.sourceforge.net/)
 
+
+----
+
+### Survey
+
+* [001-motivating-example](https://www.surveymonkey.com/s/CDVXW3C)
+
+
+
+
+
