@@ -586,6 +586,14 @@ hello world
 \end{frame}
 
 
+\section{Final Remarks}
+
+\begin{frame}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.30, keepaspectratio]{./leek}
+\end{figure}
+\end{frame}
 
 
 

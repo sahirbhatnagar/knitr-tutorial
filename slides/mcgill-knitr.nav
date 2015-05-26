@@ -108,8 +108,13 @@
 \headcommand {\beamer@subsectionentry {0}{5}{1}{44}{Introduction}}\headcommand {\beamer@subsectionpages {44}{43}}
 \headcommand {\slideentry {5}{1}{1}{44/44}{Introduction}{0}}
 \headcommand {\beamer@framepages {44}{44}}
-\headcommand {\beamer@partpages {1}{44}}
-\headcommand {\beamer@subsectionpages {44}{44}}
+\headcommand {\sectionentry {6}{Final Remarks}{45}{Final Remarks}{0}}
 \headcommand {\beamer@sectionpages {44}{44}}
-\headcommand {\beamer@documentpages {44}}
-\headcommand {\def \inserttotalframenumber {39}}
+\headcommand {\beamer@subsectionpages {44}{44}}
+\headcommand {\slideentry {6}{0}{2}{45/45}{}{0}}
+\headcommand {\beamer@framepages {45}{45}}
+\headcommand {\beamer@partpages {1}{45}}
+\headcommand {\beamer@subsectionpages {45}{45}}
+\headcommand {\beamer@sectionpages {45}{45}}
+\headcommand {\beamer@documentpages {45}}
+\headcommand {\def \inserttotalframenumber {40}}
