@@ -141,7 +141,7 @@
 \begin{itemize}
 %\scriptsize
 \item Dr. Erica Moodie
-\item Maxime Turgeon, Kevin McGregor
+\item Maxime Turgeon, Kevin McGregor, Greg Voisin
 \item You
 \end{itemize}
 
@@ -260,113 +260,439 @@
 
 \subsection{001-motivating-example}
 
-\begin{frame}
+\begin{frame}{A Motivating Example}
+\textit{Demonstrate:} \href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/001-motivating-example}{001-motivating-example}
+\end{frame}
 
-\begin{table}
-\begin{center}
-\begin{scriptsize}
-\begin{tabular}{l c c c }
-\hline
-                              & GLM & GLMM & GEE \\
-\hline
-Intercept                     & $\mathbf{2.64} \; [2.38;\ 2.90]^{*}$    & $\mathbf{2.20} \; [0.98;\ 3.41]^{*}$ & $\mathbf{3.55} \; [1.73;\ 5.36]^{*}$ \\
-progabide                     & $-0.02 \; [-0.23;\ 0.19]$               & $-0.23 \; [-0.76;\ 0.30]$            & $-0.15 \; [-1.17;\ 0.88]$            \\
-time                          & $-0.04 \; [-0.10;\ 0.01]$               & $-0.04 \; [-0.10;\ 0.01]$            & $-0.05 \; [-0.26;\ 0.16]$            \\
-age                           & $\mathbf{-0.01} \; [-0.02;\ -0.01]^{*}$ & $-0.01 \; [-0.05;\ 0.03]$            & $-0.05 \; [-0.10;\ 0.01]$            \\
-progabide:time                & $-0.03 \; [-0.11;\ 0.05]$               & $-0.03 \; [-0.11;\ 0.05]$            & $0.01 \; [-0.25;\ 0.26]$             \\
-\hline
-AIC                           & 3268.84                                 & 1403.91                              &                                      \\
-BIC                           & 3286.16                                 & 1424.69                              &                                      \\
-Log Likelihood                & -1629.42                                & -695.95                              &                                      \\
-Deviance                      & 2492.94                                 &                                      &                                      \\
-Num. obs.                     & 236                                     & 236                                  & 236                                  \\
-Num. groups: subject          &                                         & 59                                   &                                      \\
-Variance: subject.(Intercept) &                                         & 0.87                                 &                                      \\
-Variance: Residual            &                                         & 1.00                                 &                                      \\
-Num. clust.                   &                                         &                                      & 59                                   \\
-\hline
-\multicolumn{4}{l}{\tiny{$^*$ 0 outside the confidence interval}}
-\end{tabular}
-\end{scriptsize}
-\caption{Comparing model estimates}
-\label{table:coefficients}
+
+
+\section{Getting Started}
+
+\begin{frame}{Tools for Reproducible Research\footnote{\href{http://onepager.togaware.com/}{http://onepager.togaware.com/}}}
+
+
+\begin{block}{Free and Open Source Software}
+\begin{itemize}
+\item \texttt{RStudio}: Creating, managing, compiling documents
+\item \LaTeX: Markup language for typesetting a document
+\item \texttt{R}: Statistical analysis language
+\item \texttt{knitr}: Integrate \LaTeX and \texttt{R} code. Based on Prof. Friedrich Leisch's \href{https://www.statistik.lmu.de/~leisch/Sweave/}{\texttt{Sweave}}
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\subsection{\LaTeX}
+
+\begin{frame}\frametitle{Comparison}
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1, keepaspectratio]{./miktex}
+\caption{Comparison}
+\label{fig:word}
+\end{figure}
+
+\column{.5\textwidth} % Right column and width
+\begin{itemize}
+\item \LaTeX \, has a greater learning curve
+\item Many tasks are very tedious or impossible (most cases) to do in MS Word or Libre Office
+\end{itemize}
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}\frametitle{The Philosophy behind \LaTeX}
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6, keepaspectratio]{./smith}
+\small
+\caption{Adam Smith, author of \textit{The Wealth of Nations} (1776), in which he conceptualizes the notion of the division of labour}
+\label{fig:smith}
+\end{figure}
+
+\column{.5\textwidth} % Right column and width
+\small
+\begin{block}{Division of Labour}
+Composition and logical structuring of text is the author's specific contribution to the production of a printed text. Matters such as the choice of the font family, should section headings be in bold face or small capitals? Should they be flush left or centered? Should the text be justified or not? Should the notes appear at the foot of the page or at the end? Should the text be set in one column or two? and so on, is the typesetter's business
+\end{block}
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}\frametitle{The Genius Behind \LaTeX}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4, keepaspectratio]{./don}
+\small
+\caption{The \TeX~project was started in 1978 by Donald Knuth (Stanford). He planned for 6 months, but it took him nearly 10 years to complete. Coined the term ``Literate programming'': mixture of code and text segments that are ``human'' readable. Recipient of the Turing Award (1974) and the Kyoto Prize (1996).}
+\label{fig:don}
+\end{figure}
+
+\end{frame}
+
+
+
+\subsection{RStudio}
+
+\begin{frame}\frametitle{Integrated Development Environment (IDE)}
+\pause
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.25, keepaspectratio]{./RStudio-Screenshot}
+\end{figure}
+\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\end{frame}
+
+
+\subsection{\texttt{knitr}}
+
+\begin{frame}{What \texttt{knitr} does}
+\textbf{\LaTeX} example:
+
+\begin{tikzpicture}
+\scriptsize
+\node (expr) [startstop] {Report.Rnw (contains both code and markup)};
+\node (science) [decision, below of=expr, xshift=0cm, yshift=-2cm] {Report.tex};
+\draw [arrow] (expr) -- node[anchor=east]{\texttt{knitr::knit('Report.Rnw')}} (science);
+\pause \node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.pdf};
+\draw [arrow] (science) -- node[anchor=east]{\texttt{latex2pdf('Report.tex')}} (pdf);
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}\frametitle{Compiling a \texttt{.Rnw} document}
+
+\begin{block}{The two steps on previous slide can be executed in one command:}
+\[ \textrm{\texttt{knitr::knit2pdf()}} \]
+\end{block}
+
+or in \texttt{RStudio}:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5, keepaspectratio]{./Compile-pdf.jpg}
+\end{figure}
+%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\end{frame}
+
+\begin{frame}\frametitle{Incorporating \texttt{R} code}
+
+\begin{itemize}
+\item Insert \texttt{R} code in a \textbf{Code Chunk} starting with $$ << \quad >>= $$
+and ending with \begin{center}
+{@}
 \end{center}
+\end{itemize}
+
+In \texttt{RStudio}:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.35, keepaspectratio]{./sweave_chunk}
+\end{figure}
+%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\end{frame}
+
+\begin{frame}[fragile]{Example 1}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+<<example-code-chunk-name, echo=TRUE>>=
+library(magrittr)
+rnorm(50) %>% mean
+@
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+produces
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(magrittr)}
+\hlkwd{rnorm}\hlstd{(}\hlnum{50}\hlstd{)} \hlopt{%>%} \hlstd{mean}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.031
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+<<example-code-chunk-name2, echo=TRUE, tidy=TRUE>>=
+for(i in 1:5){ (i+3) %>% print}
+@
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+produces
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{5}\hlstd{) \{}
+    \hlstd{(i} \hlopt{+} \hlnum{3}\hlstd{)} \hlopt{%>%} \hlstd{print}
+\hlstd{\}}
+\end{alltt}
+\begin{verbatim}
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2.2}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+<<example-code-chunk-name3, echo=FALSE>>=
+for(i in 1:5){ (i+3) %>% print}
+@
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+produces
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2.3}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+<<example-code-chunk-name4, echo=FALSE, eval=FALSE>>=
+for(i in 1:5){ (i+3) %>% print}
+@
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+produces
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{\texttt{R} output within the text}
+\begin{itemize}
+\item Include \texttt{R} output within the text
+\item We can do that with ``S-expressions'' using the command \textbackslash \texttt{Sexpr}\{$\ldots$\}
+\end{itemize}
+\vspace{1cm}
+
+\textbf{Example:} \vspace{0.3cm}
+
+The iris dataset has \textbackslash \texttt{Sexpr}\{\texttt{nrow(iris)}\} rows and \textbackslash \texttt{Sexpr}\{\texttt{ncol(iris)}\} columns
+\vspace{0.5cm}
+
+produces \vspace{0.5cm}
+
+The iris dataset has 150 rows and 5 columns
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Include a Figure}
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+<<fig.ex, fig.cap='Linear Regression',fig.height=3,fig.width=3>>=
+plot(mtcars[ , c('disp','mpg')])
+lm(mpg ~ disp , data = mtcars) %>%
+abline(lwd=2)
+@
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+
+{\centering \includegraphics[width=\maxwidth]{figure/slr7-1} 
+
+}
+
+\caption[Linear regression]{Linear regression}\label{fig:slr7}
+\end{figure}
+
+
+\end{knitrout}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Include a Table}
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+<<table.ex, results='asis'>>=
+library(xtable)
+iris[1:5,1:5] %>% 
+xtable(caption='Sample of Iris data') %>%
+print(include.rownames=FALSE)
+@
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue May 26 01:04:56 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrl}
+  \hline
+Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\ 
+  \hline
+5.10 & 3.50 & 1.40 & 0.20 & setosa \\ 
+  4.90 & 3.00 & 1.40 & 0.20 & setosa \\ 
+  4.70 & 3.20 & 1.30 & 0.20 & setosa \\ 
+  4.60 & 3.10 & 1.50 & 0.20 & setosa \\ 
+  5.00 & 3.60 & 1.40 & 0.20 & setosa \\ 
+   \hline
+\end{tabular}
+\caption{Sample of Iris data} 
 \end{table}
 
 \end{frame}
 
 
-\section{002-tables}
-\begin{frame}
 
-% Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, May 25, 2015 - 11:32:33 AM
-\begin{table}[!htbp] \centering 
-  \caption{} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-2} 
-\\[-1.8ex] & mpg \\ 
-\hline \\[-1.8ex] 
- wt & $-$5.30$^{***}$ \\ 
-  & (0.56) \\ 
-  & \\ 
- Constant & 37.00$^{***}$ \\ 
-  & (1.90) \\ 
-  & \\ 
-\hline \\[-1.8ex] 
-Observations & 32 \\ 
-R$^{2}$ & 0.75 \\ 
-Adjusted R$^{2}$ & 0.74 \\ 
-Residual Std. Error & 3.00 (df = 30) \\ 
-F Statistic & 91.00$^{***}$ (df = 1; 30) \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-numeric(0)
+\section{Details}
 
+\subsection{Code Chunks}
+
+\begin{frame}{A selection of \texttt{knitr} code chunk options}
+content...
 \end{frame}
 
-\begin{frame}
 
-\begin{table}
-\begin{center}
-\begin{scriptsize}
-\begin{tabular}{l c c c }
-\hline
-                              & GLM & GLMM & GEE \\
-\hline
-Intercept                     & $\mathbf{2.64} \; [2.38;\ 2.90]^{*}$    & $\mathbf{2.20} \; [0.98;\ 3.41]^{*}$ & $\mathbf{3.55} \; [1.73;\ 5.36]^{*}$ \\
-progabide                     & $-0.02 \; [-0.23;\ 0.19]$               & $-0.23 \; [-0.76;\ 0.30]$            & $-0.15 \; [-1.17;\ 0.88]$            \\
-time                          & $-0.04 \; [-0.10;\ 0.01]$               & $-0.04 \; [-0.10;\ 0.01]$            & $-0.05 \; [-0.26;\ 0.16]$            \\
-age                           & $\mathbf{-0.01} \; [-0.02;\ -0.01]^{*}$ & $-0.01 \; [-0.05;\ 0.03]$            & $-0.05 \; [-0.10;\ 0.01]$            \\
-progabide:time                & $-0.03 \; [-0.11;\ 0.05]$               & $-0.03 \; [-0.11;\ 0.05]$            & $0.01 \; [-0.25;\ 0.26]$             \\
-\hline
-AIC                           & 3268.84                                 & 1403.91                              &                                      \\
-BIC                           & 3286.16                                 & 1424.69                              &                                      \\
-Log Likelihood                & -1629.42                                & -695.95                              &                                      \\
-Deviance                      & 2492.94                                 &                                      &                                      \\
-Num. obs.                     & 236                                     & 236                                  & 236                                  \\
-Num. groups: subject          &                                         & 59                                   &                                      \\
-Variance: subject.(Intercept) &                                         & 0.87                                 &                                      \\
-Variance: Residual            &                                         & 1.00                                 &                                      \\
-Num. clust.                   &                                         &                                      & 59                                   \\
-\hline
-\multicolumn{4}{l}{\tiny{$^*$ 0 outside the confidence interval}}
-\end{tabular}
-\end{scriptsize}
-\caption{Comparing model estimates}
-\label{table:coefficients}
-\end{center}
-\end{table}
-
+\begin{frame}{Set global chunk options}
+content...
 \end{frame}
+
+
+\begin{frame}{Option Aliases}
+see page 109 yihui
+\end{frame}
+
+
+\begin{frame}{Option Templates}
+see page 110 yihui
+\end{frame}
+
+\begin{frame}{Chunk References}
+see page 79 yihui
+\end{frame}
+
+
+\begin{frame}{Code in Appendix}
+see page 110 yihui
+\end{frame}
+
+
+
+\subsection{Hooks}
+\begin{frame}{A selection of \texttt{knitr} code chunk options}
+content...
+\end{frame}
+
+
+\subsection{Child Documents}
+\begin{frame}{A selection of \texttt{knitr} code chunk options}
+see 83
+\end{frame}
+
+
+
+\subsection{Custom Environments}
+\begin{frame}{Example Environment}
+see 120
+\end{frame}
+
+\section{Exercises}
+
+\subsection{002-minimum-working-example}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+
+\subsection{003-model-output}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+\subsection{004-beamer-presentation}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+\subsection{005-simulations}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+\subsection{006-sensitivity-analysis}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+
+
+\section{R Markdown}
+
+
+\subsection{Introduction}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
 
 
 
 \end{document}
+

@@ -1,5 +1,5 @@
 \documentclass[11pt,letter]{article}    
-\usepackage[latin1]{inputenc}
+%\usepackage[latin1]{inputenc}
 \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{amsmath,amsthm,amssymb,bbm} %math stuff
 \usepackage{ctable}
@@ -63,6 +63,24 @@
 \maketitle
 
 
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=60, digits=2)
+set.seed(45)
+opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+#knit_hooks$set(crop = hook_pdfcrop)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'h'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'h'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'h')
+)
+knitr::read_chunk("fat-code.R")
+#knitr::read_chunk("compv2.R")
+#source("multiplot.R")
+#knitr:::knit_code$get()
+#devtools::install_github("rstudio/DT")
+#opts_knit$set(upload.fun = image_uri)
+@
+
 <<packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE>>=
 library(knitr)
 library(data.table)
@@ -80,25 +98,6 @@ library(VGAM)
 library(dplyr)
 library(boot)
 library(ordinal)
-@
-
-
-<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
-options(width=70, digits=2)
-set.seed(45)
-opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
-#knit_hooks$set(crop = hook_pdfcrop)
-opts_template$set(
-    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'h'),
-    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'h'),
-    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'h')
-)
-knitr::read_chunk("fat-code.R")
-#knitr::read_chunk("compv2.R")
-#source("multiplot.R")
-#knitr:::knit_code$get()
-#devtools::install_github("rstudio/DT")
-#opts_knit$set(upload.fun = image_uri)
 @
 
 
@@ -139,7 +138,7 @@ Model diagnostics are shown in Figures~\ref{fig:fig-diagnostics} and~\ref{fig:in
 @
 \FloatBarrier
 Look more closely at observation 42:
-<<results = 'asis'>>=
+<<obs42, results = 'asis'>>=
 DT[42,.(pbf1,weight,height),] %>% xtable %>% print(include.rownames = FALSE)
 @
 
@@ -157,6 +156,12 @@ We perform the same analysis as above, but with observation 42 removed
 <<influence-plot2, opts.label = 'fig.small',fig.cap = 'Regression influence plot for Model~\\eqref{eq:eq1}, with outliers removed', results = 'hide'>>=
 @
 
+\appendix
 
+\FloatBarrier
+\newpage
+\section{R Code}
+<<show-code, ref.label=all_labels()[-1],echo=TRUE,eval=FALSE>>=
+@
 
 \end{document}

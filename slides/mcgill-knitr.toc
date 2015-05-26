@@ -3,4 +3,20 @@
 \beamer@subsectionintoc {1}{1}{What?}{6}{0}{1}
 \beamer@subsectionintoc {1}{2}{Why?}{10}{0}{1}
 \beamer@subsectionintoc {1}{3}{001-motivating-example}{12}{0}{1}
-\beamer@sectionintoc {2}{002-tables}{13}{0}{2}
+\beamer@sectionintoc {2}{Getting Started}{13}{0}{2}
+\beamer@subsectionintoc {2}{1}{\LaTeX }{14}{0}{2}
+\beamer@subsectionintoc {2}{2}{RStudio}{17}{0}{2}
+\beamer@subsectionintoc {2}{3}{\texttt {knitr}}{19}{0}{2}
+\beamer@sectionintoc {3}{Details}{30}{0}{3}
+\beamer@subsectionintoc {3}{1}{Code Chunks}{30}{0}{3}
+\beamer@subsectionintoc {3}{2}{Hooks}{36}{0}{3}
+\beamer@subsectionintoc {3}{3}{Child Documents}{37}{0}{3}
+\beamer@subsectionintoc {3}{4}{Custom Environments}{38}{0}{3}
+\beamer@sectionintoc {4}{Exercises}{39}{0}{4}
+\beamer@subsectionintoc {4}{1}{002-minimum-working-example}{39}{0}{4}
+\beamer@subsectionintoc {4}{2}{003-model-output}{40}{0}{4}
+\beamer@subsectionintoc {4}{3}{004-beamer-presentation}{41}{0}{4}
+\beamer@subsectionintoc {4}{4}{005-simulations}{42}{0}{4}
+\beamer@subsectionintoc {4}{5}{006-sensitivity-analysis}{43}{0}{4}
+\beamer@sectionintoc {5}{R Markdown}{44}{0}{5}
+\beamer@subsectionintoc {5}{1}{Introduction}{44}{0}{5}

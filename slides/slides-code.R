@@ -39,17 +39,4 @@ texreg(list(fit.glm,fit.glmm,fit.gee), custom.model.names = c("GLM","GLMM","GEE"
        bold = 0.05, ci.force = TRUE)
 
 
-# print(mytable)
-# 
-# ll <- extract(fit.gee)
-# ll@ci.low
-# ll@coef[1]
-# extract()
-# 
-# class(mytable)
-# 
-# cat(mytable)
-# 
-
-
 

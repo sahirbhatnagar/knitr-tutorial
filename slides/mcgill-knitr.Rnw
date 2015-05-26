@@ -84,7 +84,7 @@ library(ordinal)
 #setwd("~/Dropbox/Winter 2015/BIOS612/Assignments/A3/")
 options(width=60, digits=2)
 set.seed(45)
-opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+opts_chunk$set(echo = FALSE, tidy = FALSE, cache = FALSE, warning = FALSE, message = FALSE)
 knit_hooks$set(crop = hook_pdfcrop)
 opts_template$set(
     fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', crop = TRUE, fig.pos = 'h'),
@@ -127,7 +127,7 @@ knitr::read_chunk("slides-code.R")
 \begin{itemize}
 %\scriptsize
 \item Dr. Erica Moodie
-\item Maxime Turgeon, Kevin McGregor
+\item Maxime Turgeon, Kevin McGregor, Greg Voisin
 \item You
 \end{itemize}
 
@@ -246,23 +246,348 @@ knitr::read_chunk("slides-code.R")
 
 \subsection{001-motivating-example}
 
-\begin{frame}
-<<example-2, results = 'asis'>>=
+\begin{frame}{A Motivating Example}
+\textit{Demonstrate:} \href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/001-motivating-example}{001-motivating-example}
+\end{frame}
+
+
+
+\section{Getting Started}
+
+\begin{frame}{Tools for Reproducible Research\footnote{\href{http://onepager.togaware.com/}{http://onepager.togaware.com/}}}
+
+
+\begin{block}{Free and Open Source Software}
+\begin{itemize}
+\item \texttt{RStudio}: Creating, managing, compiling documents
+\item \LaTeX: Markup language for typesetting a document
+\item \texttt{R}: Statistical analysis language
+\item \texttt{knitr}: Integrate \LaTeX and \texttt{R} code. Based on Prof. Friedrich Leisch's \href{https://www.statistik.lmu.de/~leisch/Sweave/}{\texttt{Sweave}}
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\subsection{\LaTeX}
+
+\begin{frame}\frametitle{Comparison}
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1, keepaspectratio]{./miktex}
+\caption{Comparison}
+\label{fig:word}
+\end{figure}
+
+\column{.5\textwidth} % Right column and width
+\begin{itemize}
+\item \LaTeX \, has a greater learning curve
+\item Many tasks are very tedious or impossible (most cases) to do in MS Word or Libre Office
+\end{itemize}
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}\frametitle{The Philosophy behind \LaTeX}
+\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+
+\column{.45\textwidth} % Left column and width
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6, keepaspectratio]{./smith}
+\small
+\caption{Adam Smith, author of \textit{The Wealth of Nations} (1776), in which he conceptualizes the notion of the division of labour}
+\label{fig:smith}
+\end{figure}
+
+\column{.5\textwidth} % Right column and width
+\small
+\begin{block}{Division of Labour}
+Composition and logical structuring of text is the author's specific contribution to the production of a printed text. Matters such as the choice of the font family, should section headings be in bold face or small capitals? Should they be flush left or centered? Should the text be justified or not? Should the notes appear at the foot of the page or at the end? Should the text be set in one column or two? and so on, is the typesetter's business
+\end{block}
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}\frametitle{The Genius Behind \LaTeX}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.4, keepaspectratio]{./don}
+\small
+\caption{The \TeX~project was started in 1978 by Donald Knuth (Stanford). He planned for 6 months, but it took him nearly 10 years to complete. Coined the term ``Literate programming'': mixture of code and text segments that are ``human'' readable. Recipient of the Turing Award (1974) and the Kyoto Prize (1996).}
+\label{fig:don}
+\end{figure}
+
+\end{frame}
+
+
+
+\subsection{RStudio}
+
+\begin{frame}\frametitle{Integrated Development Environment (IDE)}
+\pause
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.25, keepaspectratio]{./RStudio-Screenshot}
+\end{figure}
+\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\end{frame}
+
+
+\subsection{\texttt{knitr}}
+
+\begin{frame}{What \texttt{knitr} does}
+\textbf{\LaTeX} example:
+
+\begin{tikzpicture}
+\scriptsize
+\node (expr) [startstop] {Report.Rnw (contains both code and markup)};
+\node (science) [decision, below of=expr, xshift=0cm, yshift=-2cm] {Report.tex};
+\draw [arrow] (expr) -- node[anchor=east]{\texttt{knitr::knit('Report.Rnw')}} (science);
+\pause \node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.pdf};
+\draw [arrow] (science) -- node[anchor=east]{\texttt{latex2pdf('Report.tex')}} (pdf);
+\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}\frametitle{Compiling a \texttt{.Rnw} document}
+
+\begin{block}{The two steps on previous slide can be executed in one command:}
+\[ \textrm{\texttt{knitr::knit2pdf()}} \]
+\end{block}
+
+or in \texttt{RStudio}:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5, keepaspectratio]{./Compile-pdf.jpg}
+\end{figure}
+%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\end{frame}
+
+\begin{frame}\frametitle{Incorporating \texttt{R} code}
+
+\begin{itemize}
+\item Insert \texttt{R} code in a \textbf{Code Chunk} starting with $$ << \quad >>= $$
+and ending with \begin{center}
+{@}
+\end{center}
+\end{itemize}
+
+In \texttt{RStudio}:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.35, keepaspectratio]{./sweave_chunk}
+\end{figure}
+%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\end{frame}
+
+\begin{frame}[fragile]{Example 1}
+<<out-first-code-chunk, echo=FALSE, comment=NA>>=
+cat(paste("<<example-code-chunk-name, echo=TRUE>>=","library(magrittr)","rnorm(50) %>% mean","@",sep="\n"))
+@
+produces
+<<echo=TRUE>>=
+library(magrittr)
+rnorm(50) %>% mean
 @
 \end{frame}
 
 
-\section{002-tables}
-\begin{frame}
-<<example, results = 'asis'>>=
+\begin{frame}[fragile]{Example 2}
+<<out-first-code-chunk2, echo=FALSE, comment=NA>>=
+cat(paste("<<example-code-chunk-name2, echo=TRUE, tidy=TRUE>>=","for(i in 1:5){ (i+3) %>% print}","@",sep="\n"))
+@
+produces
+<<echo=TRUE, tidy=TRUE>>=
+for(i in 1:5){ (i+3) %>% print}
+@
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2.2}
+<<out-first-code-chunk22, echo=FALSE, comment=NA>>=
+cat(paste("<<example-code-chunk-name3, echo=FALSE>>=","for(i in 1:5){ (i+3) %>% print}","@",sep="\n"))
+@
+produces
+<<echo=FALSE, tidy=TRUE>>=
+for(i in 1:5){ (i+3) %>% print}
+@
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Example 2.3}
+<<out-first-code-chunk23, echo=FALSE, comment=NA>>=
+cat(paste("<<example-code-chunk-name4, echo=FALSE, eval=FALSE>>=","for(i in 1:5){ (i+3) %>% print}","@",sep="\n"))
+@
+produces
+<<echo=FALSE, eval=FALSE, tidy=TRUE>>=
+for(i in 1:5){ (i+3) %>% print}
+@
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{\texttt{R} output within the text}
+\begin{itemize}
+\item Include \texttt{R} output within the text
+\item We can do that with ``S-expressions'' using the command \textbackslash \texttt{Sexpr}\{$\ldots$\}
+\end{itemize}
+\vspace{1cm}
+
+\textbf{Example:} \vspace{0.3cm}
+
+The iris dataset has \textbackslash \texttt{Sexpr}\{\texttt{nrow(iris)}\} rows and \textbackslash \texttt{Sexpr}\{\texttt{ncol(iris)}\} columns
+\vspace{0.5cm}
+
+produces \vspace{0.5cm}
+
+The iris dataset has \Sexpr{nrow(iris)} rows and \Sexpr{ncol(iris)} columns
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Include a Figure}
+\scriptsize
+<<out-first-code-chunk3, echo=FALSE, comment=NA>>=
+cat(paste("<<fig.ex, fig.cap='Linear Regression',fig.height=3,fig.width=3>>=","plot(mtcars[ , c('disp','mpg')])","lm(mpg ~ disp , data = mtcars) %>%", "abline(lwd=2)","@",sep="\n"))
+@
+<<slr7, fig.cap='Linear regression', echo=FALSE, fig.height=2.5,fig.width=4, fig.align='center', crop=TRUE>>=
+plot(mtcars[ , c("disp","mpg")])
+lm(mpg ~ disp , data = mtcars) %>% abline(lwd=2)
 @
 \end{frame}
 
-\begin{frame}
-<<example-2, results = 'asis'>>=
+
+
+\begin{frame}[fragile]
+\frametitle{Include a Table}
+\scriptsize
+<<out-first-code-chunk4, echo=FALSE, comment=NA>>=
+cat(paste("<<table.ex, results='asis'>>=","library(xtable)","iris[1:5,1:5] %>% ","xtable(caption='Sample of Iris data') %>%", "print(include.rownames=FALSE)","@",sep="\n"))
+@
+<<table-iris, results='asis'>>=
+iris[1:5,1:5] %>% xtable(caption='Sample of Iris data') %>% print(include.rownames=FALSE)
 @
 \end{frame}
+
+
+
+\section{Details}
+
+\subsection{Code Chunks}
+
+\begin{frame}{A selection of \texttt{knitr} code chunk options}
+content...
+\end{frame}
+
+
+\begin{frame}{Set global chunk options}
+content...
+\end{frame}
+
+
+\begin{frame}{Option Aliases}
+see page 109 yihui
+\end{frame}
+
+
+\begin{frame}{Option Templates}
+see page 110 yihui
+\end{frame}
+
+\begin{frame}{Chunk References}
+see page 79 yihui
+\end{frame}
+
+
+\begin{frame}{Code in Appendix}
+see page 110 yihui
+\end{frame}
+
+
+
+\subsection{Hooks}
+\begin{frame}{A selection of \texttt{knitr} code chunk options}
+content...
+\end{frame}
+
+
+\subsection{Child Documents}
+\begin{frame}{A selection of \texttt{knitr} code chunk options}
+see 83
+\end{frame}
+
+
+
+\subsection{Custom Environments}
+\begin{frame}{Example Environment}
+see 120
+\end{frame}
+
+\section{Exercises}
+
+\subsection{002-minimum-working-example}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+
+\subsection{003-model-output}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+\subsection{004-beamer-presentation}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+\subsection{005-simulations}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+\subsection{006-sensitivity-analysis}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
+
+
+\section{R Markdown}
+
+
+\subsection{Introduction}
+
+\begin{frame}
+hello world
+\end{frame}
+
+
 
 
 
 \end{document}
+

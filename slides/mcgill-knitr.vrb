@@ -1,0 +1,32 @@
+\frametitle{Include a Table}
+\scriptsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+<<table.ex, results='asis'>>=
+library(xtable)
+iris[1:5,1:5] %>%
+xtable(caption='Sample of Iris data') %>%
+print(include.rownames=FALSE)
+@
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue May 26 01:04:56 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrl}
+  \hline
+Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
+  \hline
+5.10 & 3.50 & 1.40 & 0.20 & setosa \\
+  4.90 & 3.00 & 1.40 & 0.20 & setosa \\
+  4.70 & 3.20 & 1.30 & 0.20 & setosa \\
+  4.60 & 3.10 & 1.50 & 0.20 & setosa \\
+  5.00 & 3.60 & 1.40 & 0.20 & setosa \\
+   \hline
+\end{tabular}
+\caption{Sample of Iris data}
+\end{table}
+

@@ -48,7 +48,7 @@
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}    
-\usepackage[latin1]{inputenc}
+%\usepackage[latin1]{inputenc}
 \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{amsmath,amsthm,amssymb,bbm} %math stuff
 \usepackage{ctable}
@@ -110,7 +110,6 @@
 \title{001-Motivating Example}
 \author{Body Fat Data}
 \maketitle
-
 
 
 
@@ -215,7 +214,7 @@ Model diagnostics are shown in Figures~\ref{fig:fig-diagnostics} and~\ref{fig:in
 \FloatBarrier
 Look more closely at observation 42:
 % latex table generated in R 3.2.0 by xtable 1.7-4 package
-% Mon May 25 16:35:48 2015
+% Mon May 25 17:54:47 2015
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -294,6 +293,65 @@ RMSE        & 3.98                 & 3.99                 \\
 
 \end{knitrout}
 
+\appendix
 
+\FloatBarrier
+\newpage
+\section{R Code}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(knitr)}
+\hlkwd{library}\hlstd{(data.table)}
+\hlkwd{library}\hlstd{(lattice)}
+\hlkwd{library}\hlstd{(splines)}
+\hlkwd{library}\hlstd{(latticeExtra)}
+\hlkwd{library}\hlstd{(nlme)}
+\hlkwd{library}\hlstd{(xtable)}
+\hlkwd{library}\hlstd{(geepack)}
+\hlkwd{library}\hlstd{(gee)}
+\hlkwd{library}\hlstd{(ggplot2)}
+\hlkwd{library}\hlstd{(lme4)}
+\hlkwd{library}\hlstd{(gridExtra)}
+\hlkwd{library}\hlstd{(VGAM)}
+\hlkwd{library}\hlstd{(dplyr)}
+\hlkwd{library}\hlstd{(boot)}
+\hlkwd{library}\hlstd{(ordinal)}
+\hlstd{DT[}\hlnum{42}\hlstd{,} \hlkwd{.}\hlstd{(pbf1, weight, height), ]} \hlopt{%>%} \hlstd{xtable} \hlopt{%>%} \hlkwd{print}\hlstd{(}\hlkwc{include.rownames} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlcom{# 1. Percent body fat using Method 1: 457/Density - 414.2 2.}
+\hlcom{# Age (yrs) 3. Weight (lbs) 4. Height (inches) 5. Neck}
+\hlcom{# circumference (cm) 6. Chest circumference (cm) 7. Abdomen}
+\hlcom{# circumference (cm) “at the umbilicus and level with the}
+\hlcom{# iliac crest” 8. Hip circumference (cm) 9. Thigh}
+\hlcom{# circumference (cm) 10. Knee circumference (cm) 11 Ankle}
+\hlcom{# circumference (cm) 12. Extended biceps circumference (cm)}
+\hlcom{# 13. Forearm circumference (cm) 14. Wrist circumference (cm)}
+\hlcom{# “distal to the styloid processes”}
+\hlstd{DT} \hlkwb{<-} \hlstd{data.table}\hlopt{::}\hlkwd{fread}\hlstd{(}\hlstr{"fat-data.csv"}\hlstd{)}
+\hlkwd{pairs}\hlstd{(}\hlopt{~}\hlstd{pbf1} \hlopt{+} \hlstd{age} \hlopt{+} \hlstd{weight} \hlopt{+} \hlstd{neck} \hlopt{+} \hlstd{abdomen} \hlopt{+} \hlstd{forearm} \hlopt{+} \hlstd{wrist,}
+    \hlkwc{data} \hlstd{= DT,} \hlkwc{main} \hlstd{=} \hlstr{"Simple Scatterplot Matrix of Fat data"}\hlstd{)}
+\hlstd{fit1} \hlkwb{<-} \hlkwd{lm}\hlstd{(pbf1} \hlopt{~} \hlstd{.,} \hlkwc{data} \hlstd{= DT)}
+\hlstd{texreg}\hlopt{::}\hlkwd{texreg}\hlstd{(fit1,} \hlkwc{digits} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{caption} \hlstd{=} \hlstr{"Multiple Linear Regression of the Body Fat Data"}\hlstd{,}
+    \hlkwc{label} \hlstd{=} \hlstr{"tab:results"}\hlstd{,} \hlkwc{booktabs} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{dcolumn} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{single.row} \hlstd{=} \hlnum{TRUE}\hlstd{,}
+    \hlkwc{use.packages} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{2}\hlstd{))}
+\hlkwd{plot}\hlstd{(fit1)}
+\hlstd{car}\hlopt{::}\hlkwd{influencePlot}\hlstd{(fit1)}
+
+
+\hlcom{# Sensitivity Analysis}
+\hlcom{# ----------------------------------------------------}
+\hlstd{DT} \hlkwb{<-} \hlstd{DT[}\hlopt{-}\hlkwd{c}\hlstd{(}\hlnum{42}\hlstd{), , ]}
+\hlstd{fit2} \hlkwb{<-} \hlkwd{lm}\hlstd{(pbf1} \hlopt{~} \hlstd{.,} \hlkwc{data} \hlstd{= DT)}
+\hlstd{texreg}\hlopt{::}\hlkwd{texreg}\hlstd{(}\hlkwd{list}\hlstd{(fit1, fit2),} \hlkwc{digits} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{custom.model.names} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"With obs. 42"}\hlstd{,}
+    \hlstr{"Without obs. 42"}\hlstd{),} \hlkwc{caption} \hlstd{=} \hlstr{"Sensitivity analsysis; Multiple Linear Regression of the Body Fat Data"}\hlstd{,}
+    \hlkwc{label} \hlstd{=} \hlstr{"tab:results2"}\hlstd{,} \hlkwc{booktabs} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{dcolumn} \hlstd{=} \hlnum{TRUE}\hlstd{,}
+    \hlkwc{single.row} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{use.packages} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{2}\hlstd{))}
+\hlkwd{plot}\hlstd{(fit2)}
+\hlstd{car}\hlopt{::}\hlkwd{influencePlot}\hlstd{(fit2)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 \end{document}
