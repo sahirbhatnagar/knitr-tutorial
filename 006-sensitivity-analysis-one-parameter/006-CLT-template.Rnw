@@ -1,0 +1,23 @@
+\newpage
+\subsection{$n$ = {{i}}}
+
+<<n-{{i}}, fig.cap = 'CLT in Action with $n$ = {{i}}', opts.label='fig.large'>>=
+n={{i}}
+#dev.off()
+par(mfrow=c(2,3))
+walk <- rnorm(n, 4,1);hist(walk, main="Normal(mean=4,sd=1)", freq=FALSE)
+bus <- runif(n, 4, 16); hist(bus, main="Uniform(a=4,b=16)", freq=FALSE)
+ride <- rpois(n, 8);hist(ride, main="Poisson(lambda=8)", freq=FALSE)
+climb <- rgamma(n, shape = 6, scale = 0.5);hist(climb, main="Gamma(shape=6, scale=0.5)", freq=FALSE)
+fall <- rexp(n, rate = 4);hist(fall, main="Exponential(rate=4)", freq=FALSE)
+mean.walk=4 ; mean.bus=(4+16)/2 ; mean.ride=8 ; mean.climb = 6*0.5 ; mean.fall=1/4
+var.walk=1;var.bus=(16-4)^2/12;var.ride=8;var.climb=6*0.5^2;var.fall = 1/4^2
+
+DT <- data.frame(walk, bus, ride, climb, fall)
+DT$sum <- apply(DT,1,sum)
+
+mean.sum <- mean.walk+mean.bus+mean.ride+mean.climb+mean.fall
+var.sum <- var.walk+var.bus+var.ride+var.climb+var.fall
+hist(DT$sum, xlab='Total time', main=paste("Distribution of Sum, n = ",n), freq=FALSE)
+curve(dnorm(x,mean=mean.sum,sd=sqrt(var.sum)),0,50,add=TRUE,lwd=2,col="red")
+@

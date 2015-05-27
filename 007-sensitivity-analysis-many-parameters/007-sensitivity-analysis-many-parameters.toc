@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {1}Method: ward.D, Filter: 95\%, Groups: 2}{2}{section.1}
+\contentsline {section}{\numberline {2}Method: single, Filter: 95\%, Groups: 2}{4}{section.2}
+\contentsline {section}{\numberline {3}Method: complete, Filter: 95\%, Groups: 2}{6}{section.3}
+\contentsline {section}{\numberline {4}Method: average, Filter: 95\%, Groups: 2}{8}{section.4}
+\contentsline {section}{\numberline {5}Method: mcquitty, Filter: 95\%, Groups: 2}{10}{section.5}
+\contentsline {section}{\numberline {6}Method: median, Filter: 95\%, Groups: 2}{12}{section.6}
+\contentsline {section}{\numberline {7}Method: centroid, Filter: 95\%, Groups: 2}{14}{section.7}

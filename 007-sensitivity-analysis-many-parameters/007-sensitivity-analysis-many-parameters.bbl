@@ -1,0 +1,24 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Chiaretti et~al.(2004)Chiaretti, Li, Gentleman, Vitale, Vignetti,
+  Mandelli, Ritz, and Foa]{chiaretti2004gene}
+Sabina Chiaretti, Xiaochun Li, Robert Gentleman, Antonella Vitale, Marco
+  Vignetti, Franco Mandelli, Jerome Ritz, and Robin Foa.
+\newblock Gene expression profile of adult t-cell acute lymphocytic leukemia
+  identifies distinct subsets of patients with different response to therapy
+  and survival.
+\newblock \emph{Blood}, 103\penalty0 (7):\penalty0 2771--2778, 2004.
+
+\bibitem[Dudoit and Gentleman(2002)]{cluster}
+Sandrine Dudoit and Robert Gentleman.
+\newblock {Cluster Analysis in DNA Microarray Experiments}.
+\newblock Technical report, 2002.
+\newblock URL
+  \url{http://www.bioconductor.org/help/course-materials/2002/Seattle02/Cluster/cluster.pdf}.
+
+\end{thebibliography}

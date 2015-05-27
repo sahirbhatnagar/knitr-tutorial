@@ -1,0 +1,52 @@
+\newpage
+\section{Method: {{method}}, Filter: {{filter}}\%, Groups: {{groups}}}
+
+<<{{method}}-{{filter}}-{{groups}}>>=
+# load data from the ALL package in Bioconductor
+data(ALL)
+
+# get tumor types 
+cl <- substr(as.character(ALL$BT), 1, 1)
+
+# get gene expression data
+dat <- Biobase::exprs(ALL)
+
+# variances across genes
+genes.var <- apply(dat, 1, var)
+
+# quantiles of variances
+var.quantiles <- quantile(genes.var, probs = seq(0,1,0.01))
+
+# filter out least variable genes based on user input
+dat.filter <- dat[which(genes.var>=var.quantiles[paste0({{filter}},"%")]),]
+
+# distance measure for clustering this returns an nxn matrix
+d.s <- dist(t(dat.filter))
+hc <- hclust(d.s, method = deparse(substitute({{method}})))
+groups <- cutree(hc, k = {{groups}})
+@
+
+<<echo=TRUE>>=
+dim(dat.filter)
+table(groups, cl)
+fisher.test(groups,cl)$p.value
+@
+
+<<hclust-plot-{{method}}-{{filter}}-{{groups}}, fig.cap='based on Method: {{method}}, Filter: {{filter}}\\%, Groups: {{groups}}',fig.subcap=c('Dendogram ','Distance Matrix'), out.width='.49\\linewidth', fig.pos='H'>>=
+plot(hc, labels = cl)
+rect.hclust(hc, k={{groups}}, border="red")
+image(as.matrix(d.s))
+@
+
+
+<<heatmap-{{method}}-{{filter}}-{{groups}}, opts.label = 'fig.large', eval = nrow(dat.filter)<=1500, fig.cap='Heatmap of Gene expression values for genes that survived a filter of {{filter}}\\%'>>=
+color.map <- function(class) { 
+  if (class=="T") "#FF0000" else "#0000FF" }
+patientcolors <- unlist(lapply(cl, color.map))
+gplots::heatmap.2(dat.filter,density.info="none",
+          ColSideColors=patientcolors,trace="none", 
+          cexRow=1,xlab="subjects (red=T-cell)",labRow = FALSE,
+          key=TRUE, symkey=FALSE,col=redgreen(75))
+@
+
+

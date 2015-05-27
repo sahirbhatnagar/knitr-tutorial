@@ -27,6 +27,10 @@ Participants must bring their own laptops, with the following programs and packa
 * [001-motivating-example](https://www.surveymonkey.com/s/CDVXW3C)
 
 
+----
 
+### Resources
+
+* [Vanderbilt University](http://biostat.mc.vanderbilt.edu/wiki/Main/KnitrHowto)
 
 

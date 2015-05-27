@@ -73,31 +73,13 @@ opts_template$set(
     fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'h'),
     fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'h')
 )
+knitr::read_chunk("001-packages.R")
 knitr::read_chunk("fat-code.R")
-#knitr::read_chunk("compv2.R")
 #source("multiplot.R")
 #knitr:::knit_code$get()
-#devtools::install_github("rstudio/DT")
-#opts_knit$set(upload.fun = image_uri)
 @
 
-<<packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE>>=
-library(knitr)
-library(data.table)
-library(lattice)
-library(splines)
-library(latticeExtra)
-library(nlme)
-library(xtable)
-library(geepack)
-library(gee)
-library(ggplot2)
-library(lme4)
-library(gridExtra)
-library(VGAM)
-library(dplyr)
-library(boot)
-library(ordinal)
+<<required-packages,echo=FALSE,warning=FALSE,message=FALSE,eval=TRUE, results='hide'>>=
 @
 
 
@@ -138,6 +120,7 @@ Model diagnostics are shown in Figures~\ref{fig:fig-diagnostics} and~\ref{fig:in
 @
 \FloatBarrier
 Look more closely at observation 42:
+
 <<obs42, results = 'asis'>>=
 DT[42,.(pbf1,weight,height),] %>% xtable %>% print(include.rownames = FALSE)
 @

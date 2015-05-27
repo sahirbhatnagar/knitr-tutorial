@@ -567,7 +567,13 @@ hello world
 \end{frame}
 
 
-\subsection{006-sensitivity-analysis}
+\subsection{006-sensitivity-analysis-one-parameter}
+
+\begin{frame}
+hello world
+\end{frame}
+
+\subsection{007-sensitivity-analysis-many-parameters}
 
 \begin{frame}
 hello world

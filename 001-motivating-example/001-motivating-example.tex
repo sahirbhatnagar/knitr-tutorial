@@ -213,8 +213,9 @@ Model diagnostics are shown in Figures~\ref{fig:fig-diagnostics} and~\ref{fig:in
 \end{knitrout}
 \FloatBarrier
 Look more closely at observation 42:
+
 % latex table generated in R 3.2.0 by xtable 1.7-4 package
-% Mon May 25 17:54:47 2015
+% Tue May 26 21:20:22 2015
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -301,23 +302,58 @@ RMSE        & 3.98                 & 3.99                 \\
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{library}\hlstd{(knitr)}
-\hlkwd{library}\hlstd{(data.table)}
-\hlkwd{library}\hlstd{(lattice)}
-\hlkwd{library}\hlstd{(splines)}
-\hlkwd{library}\hlstd{(latticeExtra)}
-\hlkwd{library}\hlstd{(nlme)}
-\hlkwd{library}\hlstd{(xtable)}
-\hlkwd{library}\hlstd{(geepack)}
-\hlkwd{library}\hlstd{(gee)}
-\hlkwd{library}\hlstd{(ggplot2)}
-\hlkwd{library}\hlstd{(lme4)}
-\hlkwd{library}\hlstd{(gridExtra)}
-\hlkwd{library}\hlstd{(VGAM)}
-\hlkwd{library}\hlstd{(dplyr)}
-\hlkwd{library}\hlstd{(boot)}
-\hlkwd{library}\hlstd{(ordinal)}
 \hlstd{DT[}\hlnum{42}\hlstd{,} \hlkwd{.}\hlstd{(pbf1, weight, height), ]} \hlopt{%>%} \hlstd{xtable} \hlopt{%>%} \hlkwd{print}\hlstd{(}\hlkwc{include.rownames} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlstd{getPckg} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{pckg}\hlstd{)} \hlkwd{install.packages}\hlstd{(pckg,} \hlkwc{repos} \hlstd{=} \hlstr{"http://cran.r-project.org"}\hlstd{)}
+
+\hlstd{pckg} \hlkwb{=} \hlkwd{try}\hlstd{(}\hlkwd{require}\hlstd{(knitr))}
+\hlkwa{if} \hlstd{(}\hlopt{!}\hlstd{pckg) \{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"Installing 'knitr' from CRAN\textbackslash{}n"}\hlstd{)}
+    \hlkwd{getPckg}\hlstd{(}\hlstr{"knitr"}\hlstd{)}
+    \hlkwd{require}\hlstd{(knitr)}
+\hlstd{\}}
+
+\hlstd{pckg} \hlkwb{=} \hlkwd{try}\hlstd{(}\hlkwd{require}\hlstd{(data.table))}
+\hlkwa{if} \hlstd{(}\hlopt{!}\hlstd{pckg) \{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"Installing 'data.table' from CRAN\textbackslash{}n"}\hlstd{)}
+    \hlkwd{getPckg}\hlstd{(}\hlstr{"data.table"}\hlstd{)}
+    \hlkwd{require}\hlstd{(data.table)}
+\hlstd{\}}
+
+\hlstd{pckg} \hlkwb{=} \hlkwd{try}\hlstd{(}\hlkwd{require}\hlstd{(dplyr))}
+\hlkwa{if} \hlstd{(}\hlopt{!}\hlstd{pckg) \{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"Installing 'dplyr' from CRAN\textbackslash{}n"}\hlstd{)}
+    \hlkwd{getPckg}\hlstd{(}\hlstr{"dplyr"}\hlstd{)}
+    \hlkwd{require}\hlstd{(dplyr)}
+\hlstd{\}}
+
+\hlstd{pckg} \hlkwb{=} \hlkwd{try}\hlstd{(}\hlkwd{require}\hlstd{(texreg))}
+\hlkwa{if} \hlstd{(}\hlopt{!}\hlstd{pckg) \{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"Installing 'texreg' from CRAN\textbackslash{}n"}\hlstd{)}
+    \hlkwd{getPckg}\hlstd{(}\hlstr{"texreg"}\hlstd{)}
+    \hlkwd{require}\hlstd{(texreg)}
+\hlstd{\}}
+
+\hlstd{pckg} \hlkwb{=} \hlkwd{try}\hlstd{(}\hlkwd{require}\hlstd{(car))}
+\hlkwa{if} \hlstd{(}\hlopt{!}\hlstd{pckg) \{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"Installing 'car' from CRAN\textbackslash{}n"}\hlstd{)}
+    \hlkwd{getPckg}\hlstd{(}\hlstr{"car"}\hlstd{)}
+    \hlkwd{require}\hlstd{(car)}
+\hlstd{\}}
+
+
+\hlstd{pckg} \hlkwb{=} \hlkwd{try}\hlstd{(}\hlkwd{require}\hlstd{(MASS))}
+\hlkwa{if} \hlstd{(}\hlopt{!}\hlstd{pckg) \{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"Installing 'MASS' from CRAN\textbackslash{}n"}\hlstd{)}
+    \hlkwd{getPckg}\hlstd{(}\hlstr{"MASS"}\hlstd{)}
+    \hlkwd{require}\hlstd{(MASS)}
+\hlstd{\}}
+
+\hlstd{pckg} \hlkwb{=} \hlkwd{try}\hlstd{(}\hlkwd{require}\hlstd{(xtable))}
+\hlkwa{if} \hlstd{(}\hlopt{!}\hlstd{pckg) \{}
+    \hlkwd{cat}\hlstd{(}\hlstr{"Installing 'xtable' from CRAN\textbackslash{}n"}\hlstd{)}
+    \hlkwd{getPckg}\hlstd{(}\hlstr{"xtable"}\hlstd{)}
+    \hlkwd{require}\hlstd{(xtable)}
+\hlstd{\}}
 \hlcom{# 1. Percent body fat using Method 1: 457/Density - 414.2 2.}
 \hlcom{# Age (yrs) 3. Weight (lbs) 4. Height (inches) 5. Neck}
 \hlcom{# circumference (cm) 6. Chest circumference (cm) 7. Abdomen}
