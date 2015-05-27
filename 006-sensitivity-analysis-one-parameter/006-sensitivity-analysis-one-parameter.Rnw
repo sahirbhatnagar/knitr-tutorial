@@ -7,7 +7,7 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{comment}
-\usepackage[numbers]{natbib}   % omit 'round' option if you prefer square brackets
+\usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
 \bibliographystyle{plainnat}
 \usepackage{setspace} %Spacing
 \usepackage{graphicx,graphics}
@@ -74,12 +74,6 @@ opts_template$set(
     fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'h')
 )
 knitr::read_chunk("006-packages.R")
-#knitr::read_chunk("fat-code.R")
-#knitr::read_chunk("compv2.R")
-#source("multiplot.R")
-#knitr:::knit_code$get()
-#devtools::install_github("rstudio/DT")
-#opts_knit$set(upload.fun = image_uri)
 @
 
 <<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
@@ -87,9 +81,11 @@ knitr::read_chunk("006-packages.R")
 
 
 \begin{abstract}
-Often in statistics, we are required to perform sensitivity analyses to see the effect of parameters on inference. Here I provide a simple illustration of performing such a task in an efficient and reproducible way using the function \texttt{knitr::knit\_expand}. We use the demonstration of the Central Limit Theorem (CLT) in action as an example.
+Often in statistics, we are required to perform sensitivity analyses to see the effect of parameters on inference. Here I provide a simple illustration of performing such a task in an efficient and reproducible way using the function \texttt{knitr::knit\_expand}~\citep{k1,k2,k3}. We use the demonstration of the Central Limit Theorem (CLT) in action~\citep{joseph} as an example.
 \end{abstract}
 
+
+\tableofcontents
 
 \section{Lawrence Joseph's Trip to Purvis Hall}
 \begin{figure}[h!]
@@ -112,8 +108,15 @@ src <- mapply(knitr::knit_expand, file = "006-CLT-template.Rnw", i = seq(10,2010
 
 
 
+\FloatBarrier
+\bibliography{006-bibliography}
 
-
+\newpage
+\appendix
+\section{Session Information}
+<<echo=TRUE>>=
+sessionInfo()
+@
 
 
 \end{document}

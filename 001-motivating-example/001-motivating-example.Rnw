@@ -7,7 +7,7 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{comment}
-\usepackage[numbers]{natbib}   % omit 'round' option if you prefer square brackets
+\usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
 \bibliographystyle{plainnat}
 \usepackage{setspace} %Spacing
 \usepackage{graphicx,graphics}
@@ -74,9 +74,7 @@ opts_template$set(
     fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'h')
 )
 knitr::read_chunk("001-packages.R")
-knitr::read_chunk("fat-code.R")
-#source("multiplot.R")
-#knitr:::knit_code$get()
+knitr::read_chunk("001-fat-code.R")
 @
 
 <<required-packages,echo=FALSE,warning=FALSE,message=FALSE,eval=TRUE, results='hide'>>=
@@ -84,7 +82,7 @@ knitr::read_chunk("fat-code.R")
 
 
 \begin{abstract}
-Identifying overweight populations is an important first step in fighting the obesity epidemic. However, accurate measure of body fat are costly and inconvenient. Therefore we are interested in determining predictors of body fat which require only a scale and a measuring tape. We analyze a dataset which contains percentage of body fat, age, weight, height and ten body circumference measurements for 251 men. We model the data using multiple linear regression and perform various model selection techniques.
+Identifying overweight populations is an important first step in fighting the obesity epidemic. However, accurate measure of body fat are costly and inconvenient. Therefore we are interested in determining predictors of body fat which require only a scale and a measuring tape. We analyze a dataset which contains percentage of body fat, age, weight, height and ten body circumference measurements for 251 men~\citep{penrose1985generalized,johnson1996fitting,mfp}. We model the data using multiple linear regression and perform various model selection techniques.
 \end{abstract}
 
 
@@ -139,12 +137,25 @@ We perform the same analysis as above, but with observation 42 removed
 <<influence-plot2, opts.label = 'fig.small',fig.cap = 'Regression influence plot for Model~\\eqref{eq:eq1}, with outliers removed', results = 'hide'>>=
 @
 
-\appendix
 
 \FloatBarrier
+\nocite{k1,k2,k3}
+\bibliography{001-bibliography}
+
 \newpage
+
+\appendix
+
 \section{R Code}
 <<show-code, ref.label=all_labels()[-1],echo=TRUE,eval=FALSE>>=
 @
+
+\newpage
+\section{Session Information}
+<<echo=TRUE>>=
+sessionInfo()
+@
+
+
 
 \end{document}

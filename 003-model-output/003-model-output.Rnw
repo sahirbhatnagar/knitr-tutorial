@@ -1,0 +1,157 @@
+\documentclass[11pt,letter]{article}    
+%\usepackage[latin1]{inputenc}
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{amsmath,amsthm,amssymb,bbm} %math stuff
+\usepackage{ctable}
+\usepackage{placeins} % FloatBarrier
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{float}    % for fig.pos='H'
+\usepackage{rotfloat} % for sidewaysfigure
+%\usepackage{subfig}   % for subfigure
+\usepackage{subcaption}  % an alternative package for sub figures
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+\usepackage{comment}
+\usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
+\bibliographystyle{plainnat}
+\usepackage{setspace} %Spacing
+\usepackage{graphicx,graphics}
+\usepackage{booktabs,tabularx}
+\usepackage{enumerate}
+\usepackage{makecell}
+\usepackage{xfrac}
+\usepackage{color, colortbl, xcolor}
+\usepackage{booktabs,dcolumn} % for use with texreg in R
+\usepackage[pagebackref=true,bookmarks]{hyperref}
+\hypersetup{
+    unicode=false,          
+    pdftoolbar=true,        
+    pdfmenubar=true,        
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={003-Model Output},    % title
+    pdfauthor={SRB},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={SRB},   % creator of the document
+    pdfproducer={SRB}, % producer of the document
+    pdfkeywords={}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% my commands
+\newcommand{\tm}[1]{\textrm{#1}}
+
+
+% fancy header commands
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\setlength{\textheight}{9.00in}
+\setlength{\textwidth}{7.00in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\oddsidemargin}{-0.25in}
+\renewcommand{\baselinestretch}{1.2}
+\makeatletter
+\makeatother
+\lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
+
+\begin{document}
+\pagestyle{fancy}
+
+\title{003-Model Output}
+\author{Randomized Control Trial on Epileptic Seizures}
+\maketitle
+
+
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=60, digits=2)
+set.seed(45)
+opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'H'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'H'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'H')
+)
+opts_knit$set(eval.after = 'fig.cap') # for captions to be evaluated after R objects are available 
+knitr::read_chunk("003-packages.R")
+knitr::read_chunk("003-seizure-rct-code.R")
+knitr::read_chunk("003-texreg-geepack.R")
+@
+
+<<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+<<texreg-extractor-geeglm,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+\begin{abstract}
+Outputting regression estimates to \LaTeX tables is one of the most tedious tasks an analyst has to perform. If an error is made during the data-cleaning or analysis steps, one is forced to manually re-enter the parameter estimates and their standard errors. Furthermore, manual entry of so many numbers is prone to error. In this example, we illustrate how to automate the task of creating tables from model output using the \texttt{xtable::xtable}~\citep{xtable} and \texttt{texreg::texreg}~\citep{texreg} functions. We illustrate this task using the epileptic seizures data in 59 individuals randomized to the anti-epileptic drug progabide or placebo~\citep{thall1990some}. For each patient, the number of epileptic seizures was recorded during a baseline period of 8 weeks, and then for 4 consecutive 2-week periods post-randomization. 
+\end{abstract}
+
+
+\section{The Models}
+Let $Y_{ij}$ be the number of seizures on patient $i$ during period $j$ for $i=1,\ldots, 59$ and $j=0,1,2,3,4$, and $T_j$ is the observation time during period $j$, for $j=0,1,2,3,4$ with $T_0=8 \tm{ weeks}$ and $T_j=2\tm{ weeks}$ for $j=1,2,3,4$.   
+
+
+
+\subsection{GLM}
+
+The response model is $Y_{ij}|\boldsymbol{\beta},\mu_{ij} \sim_{ind} \tm{Poisson}(\mu_{ij})$ with
+\begin{align}
+\log \left(\mu_{ij} \right)  = &\log(T_{j}) + \beta_0 + \beta_1 \cdot  \mathbbm{1}_{\left\lbrace \tm{progabide} \right\rbrace }(\mbox{treatment}_{i}) + \nonumber \\ 
+& \beta_2 \cdot  \mathbbm{1}_{\left\lbrace \tm{post} \right\rbrace }(\mbox{randomization}_{i}) + \nonumber \\ 
+& \beta_3 \cdot \mathbbm{1}_{\left\lbrace \tm{progabide} \right\rbrace }(\mbox{treatment}_{i})  \times \mathbbm{1}_{\left\lbrace \tm{post} \right\rbrace }(\mbox{randomization}_{i})   \label{eq:eq1}
+\end{align}
+
+
+\subsection{GLMM}
+
+We consider the following two-stage model~\citep{wakefield2013bayesian}:\\
+\textit{Stage One}: The response model is $Y_{ij}|\boldsymbol{\beta},\mu_{ij},b_i \sim_{ind} \tm{Poisson}(\mu_{ij})$ with
+\begin{align}
+\log \left(\mu_{ij} \right)  = &\log(T_{j}) + \beta_0 + \beta_1 \cdot  \mathbbm{1}_{\left\lbrace \tm{progabide} \right\rbrace }(\mbox{treatment}_{i}) + \nonumber \\ 
+& \beta_2 \cdot  \mathbbm{1}_{\left\lbrace \tm{post} \right\rbrace }(\mbox{randomization}_{i}) + \nonumber \\ 
+& \beta_3 \cdot \mathbbm{1}_{\left\lbrace \tm{progabide} \right\rbrace }(\mbox{treatment}_{i})  \times \mathbbm{1}_{\left\lbrace \tm{post} \right\rbrace }(\mbox{randomization}_{i}) + b_i  \label{eq:eq2}
+\end{align}
+
+\textit{Stage Two}: The random effects model is $b_i\, |\, \sigma_0^2 \sim_{iid} \mathcal{N}(0,\sigma_0^2)$.
+
+\subsection{GEE}
+Marginal mean is given by~\eqref{eq:eq1}, and variance model $var(Y_{ij}) = \alpha \mu_{ij}$. We consider various forms for the working correlation.
+
+
+\section{Results}
+
+<<import-data,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+<<fit-models,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='asis'>>=
+@
+
+
+\FloatBarrier
+\nocite{k1,k2,k3}
+\bibliography{003-bibliography}
+
+
+\newpage
+\appendix
+
+\section{R Code}
+<<show-code, ref.label=all_labels()[-1],echo=TRUE,eval=FALSE>>=
+@
+
+\newpage
+
+\section{Session Information}
+<<echo=TRUE>>=
+sessionInfo()
+@
+
+
+\end{document}

@@ -39,11 +39,12 @@ image(as.matrix(d.s))
 @
 
 
-<<heatmap-{{method}}-{{filter}}-{{groups}}, opts.label = 'fig.large', eval = nrow(dat.filter)<=1500, fig.cap='Heatmap of Gene expression values for genes that survived a filter of {{filter}}\\%'>>=
+<<heatmap-{{method}}-{{filter}}-{{groups}}, opts.label = 'fig.large', eval = nrow(dat.filter)<=1500, fig.cap=paste('Heatmap of Gene expression values for genes that survived a filter of {{filter}}\\% and the {{method}} clustering algoritm. Rows are genes and columns are subjects. There are a total of ', nrow(dat.filter), 'genes and ', ncol(dat.filter), 'subjects in this plot.')>>=
 color.map <- function(class) { 
   if (class=="T") "#FF0000" else "#0000FF" }
 patientcolors <- unlist(lapply(cl, color.map))
 gplots::heatmap.2(dat.filter,density.info="none",
+                  hclustfun = function(x) hclust(x, method = deparse(substitute({{method}}))),
           ColSideColors=patientcolors,trace="none", 
           cexRow=1,xlab="subjects (red=T-cell)",labRow = FALSE,
           key=TRUE, symkey=FALSE,col=redgreen(75))

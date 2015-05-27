@@ -29,7 +29,7 @@
     pdfmenubar=true,        
     pdffitwindow=false,     % window fit to page when opened
     pdfstartview={FitH},    % fits the width of the page to the window
-    pdftitle={006-Sensitivity Analysis of One Parameter},    % title
+    pdftitle={007-Sensitivity Analysis of Many Parameters},    % title
     pdfauthor={SRB},     % author
     pdfsubject={Subject},   % subject of the document
     pdfcreator={SRB},   % creator of the document
@@ -77,6 +77,7 @@ opts_template$set(
     fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'H'),
     fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'H')
 )
+opts_knit$set(eval.after = 'fig.cap') # for captions to be evaluated after R objects are available 
 knitr::read_chunk("007-packages.R")
 @
 
@@ -85,7 +86,7 @@ knitr::read_chunk("007-packages.R")
 
 
 \begin{abstract}
-DNA microarrays may be used to characterize the molecular variations among tumors by monitoring gene expression profiles on a genomic scale. This may lead to a finer and more reliable classification of tumors, and to the identification of marker genes that distinguish among these classes. Eventual clinical implications include an improved ability to understand and predict cancer survival~\citep{cluster}. Therefore, a common task is to determine whether or not gene expression data can reliably identify or classify different types of a disease. We consider gene expression data from patients with acute lymphoblastic leukemia (ALL) that were investigated using HGU95AV2 Affymetrix GeneChip arrays~\citep{chiaretti2004gene}. The data consist of 128 patients with 12,625 genes. A number of additional covariates are available such as the type and stage of the disease; ``B'' indicates B-cell ALL, while a ``T'' indicates T-cell ALL. Several clustering procedures require user imputs such as the type of clustering and the number of clusters. Pre-filtering the data based on the most variable genes can also lead to increased power. We are interested in the effect these parameters have on the clustering results. Here I provide an illustration of performing such a task in an efficient and reproducible way using the function \texttt{knitr::knit\_expand}.
+DNA microarrays may be used to characterize the molecular variations among tumors by monitoring gene expression profiles on a genomic scale. This may lead to a finer and more reliable classification of tumors, and to the identification of marker genes that distinguish among these classes. Eventual clinical implications include an improved ability to understand and predict cancer survival~\citep{cluster}. Therefore, a common task is to determine whether or not gene expression data can reliably identify or classify different types of a disease. We consider gene expression data from patients with acute lymphoblastic leukemia (ALL) that were investigated using HGU95AV2 Affymetrix GeneChip arrays~\citep{chiaretti2004gene}. The data consist of 128 patients with 12,625 genes. A number of additional covariates are available such as the type and stage of the disease; ``B'' indicates B-cell ALL, while a ``T'' indicates T-cell ALL. Several clustering procedures require user imputs such as the type of clustering and the number of clusters. Pre-filtering the data based on the most variable genes can also lead to increased power. We are interested in the effect these parameters have on the clustering results. Here I provide an illustration of performing such a task in an efficient and reproducible way using the function \texttt{knitr::knit\_expand}~\citep{k1,k2,k3} with the ALL dataset~\citep{all}.
 \end{abstract}
 
 
@@ -98,12 +99,10 @@ methods.list <- list("ward.D","single","complete","average","mcquitty","median",
 src <- mapply(knitr::knit_expand, 
               file = "007-cluster-template.Rnw", 
               method = methods.list,
-              #method = "complete",
-              filter = c(#rep(10,length(methods.list)),
-                         #rep(50,length(methods.list)),
-                         #rep(90,length(methods.list)),
+              filter = c(rep(10,length(methods.list)),
+                         rep(50,length(methods.list)),
+                         rep(90,length(methods.list)),
                          rep(95,length(methods.list))),
-              #filter = c(rep(10,1)),
               MoreArgs = list(groups=2))
 @
 
@@ -113,6 +112,14 @@ src <- mapply(knitr::knit_expand,
 
 \FloatBarrier
 \bibliography{007-bibliography}
+
+
+\newpage
+\appendix
+\section{Session Information}
+<<echo=TRUE>>=
+sessionInfo()
+@
 
 
 \end{document}

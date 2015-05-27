@@ -31,6 +31,12 @@ Participants must bring their own laptops, with the following programs and packa
 
 ### Resources
 
+* [knitr chunk options](http://yihui.name/knitr/options/)
 * [Vanderbilt University](http://biostat.mc.vanderbilt.edu/wiki/Main/KnitrHowto)
+* [Jennifer Bryan (UBC)](https://github.com/jennybc/2015-02-23_bryan-fields-talk)
+* [Data Science with R by Graham Williams](http://handsondatascience.com/KnitRO.pdf)
+* [knitr showcase](http://yihui.name/knitr/demo/showcase/)
+* [Karl Broman's Tools for RR](http://kbroman.org/Tools4RR/)
+* [Editors for knitr](http://yihui.name/knitr/demo/editors/)
 
 
