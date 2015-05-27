@@ -4,4 +4,11 @@
 *.aux
 *.log
 *.out
-figure/*
+001-motivating-example/figure/*
+006-sensitivity-analysis-one-parameter/figure/*
+007-sensitivity-analysis-many-parameters/figure/*
+*.bbl
+*.brf
+*.toc
+*.synctex.gz
+*.tex
