@@ -1,0 +1,47 @@
+
+
+
+\section{Description of Data}
+Information was obtained on 4,831 car accidents. The first dataset consists of four binary variables: the \ttt{weight} of the car involved in the accident (levels: \ttt{small, standard}), whether or not the driver was \ttt{ejected} (\ttt{no, yes}), the \ttt{severity} of the collision (\ttt{no, severe}), and the accident \ttt{type} (\ttt{collision, rollover}). The second dataset consisted of the same four variables, however three of them were polytomous instead of binary: \ttt{weight} (\ttt{small, compact, standard}), \ttt{severity} (\ttt{no, moderately severe, severe}) and \ttt{type} (\ttt{collision vehicle, collision object, rollover without collision, other rollover}). 
+
+Since we are primarily interested in factors affecting severity of car injuries, we construct a doubledecker plot (figure \ref{fig:doubledecker}) which is constructed as a mosaic plot showing the conditional distribution of \ttt{severity} while simultaneously controlling for \ttt{type, eject, weight}. This plot shows the influence of the explanatory variables on \ttt{severity}, with severity being highlighted in dark grey. In figure \ref{fig:doubledecker1} there is a very clear pattern i.e. the highest proportion of severe accidents is occurring in rollovers that were ejected from a standard car and then severity decreases  all the way down to if the person was not ejected from a small car involved in a collision. We see a similar trend of the doubledecker plot of the more detailed dataset (figure \ref{fig:doubledecker2}), the only difference being that some of the severe accidents have been re-classified as moderately severe as noted earlier. We note that a higher proportion of moderately severe and severe accidents occur in rollovers than in collisions.
+
+
+<<doubledecker,fig.cap='Doubledecker plot for the Car Accident data showing the conditional distribution of car weight, given ejected, given type, and with severity highlighted', fig.subcap=c('Simple Version of Data','Detailed Version'), opts.label='fig.small'>>=
+<<figure-1>>
+<<figure-2>>
+@
+
+\section{Analysis}
+For each of the datasets we fitted two models. For the simple dataset we fit a log-linear model and a logistic regression model with binary \ttt{severity}. For the more detailed dataset we again fit a log-linear model as well as a multinomial logistic regression to model \ttt{severity} which now has three response levels.
+
+
+\subsection{Simple Dataset}
+\subsubsection{Log-Linear Model}
+We are interested in the association among the four variables, accident type $(W)$, severity of accident $(X)$, car weight $(Y)$ and whether or not the driver was ejected $(Z)$. The saturated log-linear model which fits the data perfectly, is given by \eqref{eq:saturated1}
+\begin{multline}
+\log \mu_{ijkl} = \gamma + \gamma_i^W +  \gamma_j^X +  \gamma_k^Y +  \gamma_l^Z 
++ \gamma_{ij}^{WX} + \gamma_{ik}^{WY} + \gamma_{il}^{WZ} + \gamma_{jk}^{YZ} + \gamma_{jl}^{XZ} + \gamma_{kl}^{YZ} \\
++ \gamma_{ijk}^{WXY} + \gamma_{ijl}^{WXZ} + \gamma_{ikl}^{WYZ} + \gamma_{jkl}^{XYZ}  + \gamma_{ijkl}^{WXYZ}  \label{eq:saturated1}
+\end{multline}
+
+We seek to find a simpler representation of the relationship between the 4 variables. To do this, we first fit the saturated model, and then compare it to a model without the 4th level interaction term using the likelihood ratio test (LRT). We continue in this manner by removing the 3rd and 2nd level interaction terms until we find the simplest model possible without significant loss of quality of fit. Table \ref{tab:lrtsimple} summaries the four LRTs performed at $\alpha=0.05$
+
+\begin{table}[h!]
+\centering
+\caption{Likelihood Ratio Tests for Log linear models on Car Accident data}
+%\resizebox{\linewidth}{!}{%
+\begin{tabular}{ccccc}
+\hline Model & Form & Residual Deviance & Residual d.f. & $P(\chi^2_{df}>\Delta D)$ \\ 
+\hline 0 &  (WXYZ)		&	0 		& 		0 		& 		NA \\ 
+1 &  (WXY,WXZ,WYZ,XYZ)	&	0.67 		& 	1 		& 		0.41 (vs. Model 0) \\ 
+2 &  (WX,WY,WZ,XY,XZ,YZ) &		7.33 		& 		5 		&  0.20 (vs. Model 1) \\ 
+3 & (W,X,Y,Z) 			& 1193.11 			&    11    &  0 (vs. Model 2) \\ 
+4 & (WX,WY,WZ,XY,XZ) 			& 9.02 			&    6    &  0.19 (vs. Model 2) \\ 
+\hline 
+\end{tabular} 
+%}
+\label{tab:lrtsimple}
+\end{table}
+
+From table \ref{tab:lrtsimple}, we can see that there is no significant loss of information in the model when removing the 3rd and 4th level interaction terms, however there is a significant difference between the model with 2 level interaction and the model with no interaction. We further test to see if any of the 2nd order interactions can be dropped from the model and find that there is no interaction between car weight and whether the driver was ejected. We conclude that Model 4 provides the best fit to the data. This indicates these pairs of variables are conditionally independent i.e. they are associated in a pairwise fashion, but this degree of association does not depend on the level of the 3rd or 4th variable \cite{jiang}.

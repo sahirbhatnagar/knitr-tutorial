@@ -1,0 +1,193 @@
+\documentclass[11pt,letter]{article}    
+%\usepackage[latin1]{inputenc}
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{amsmath,amsthm,amssymb,bbm} %math stuff
+\usepackage{ctable}
+\usepackage{placeins} % FloatBarrier
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{float}    % for fig.pos='H'
+\usepackage{rotfloat} % for sidewaysfigure
+%\usepackage{subfig}   % for subfigure
+\usepackage{subcaption}  % an alternative package for sub figures
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+\usepackage{comment}
+\usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
+\bibliographystyle{plainnat}
+\usepackage{setspace} %Spacing
+\usepackage{graphicx,graphics}
+\usepackage{booktabs,tabularx}
+\usepackage{enumerate}
+\usepackage{makecell}
+\usepackage{xfrac}
+\usepackage{color, colortbl, xcolor}
+\usepackage{booktabs,dcolumn} % for use with texreg in R
+\usepackage[pagebackref=true,bookmarks]{hyperref}
+\hypersetup{
+    unicode=false,          
+    pdftoolbar=true,        
+    pdfmenubar=true,        
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={008-Large Documents},    % title
+    pdfauthor={SRB},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={SRB},   % creator of the document
+    pdfproducer={SRB}, % producer of the document
+    pdfkeywords={}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% my commands
+\newcommand{\tm}[1]{\textrm{#1}}
+
+
+% fancy header commands
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\setlength{\textheight}{9.00in}
+\setlength{\textwidth}{7.00in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\oddsidemargin}{-0.25in}
+\renewcommand{\baselinestretch}{1.2}
+\makeatletter
+\makeatother
+\lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
+
+\begin{document}
+\pagestyle{fancy}
+
+\title{008-\texttt{knitr} and Large Documents}
+\author{Thesis type projects}
+\maketitle
+
+
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=60, digits=2)
+set.seed(45)
+opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'H'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'H'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'H')
+)
+opts_knit$set(eval.after = 'fig.cap') # for captions to be evaluated after R objects are available 
+knitr::read_chunk("008-packages.R")
+@
+
+<<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+
+\begin{abstract}
+When writing large documents such as a thesis, book, or even a manuscript, it is recommended to split the markup document into several smaller ones. I will show how this is accomplished with \texttt{knitr}~\citep{k1,k2,k3,chris}.
+\end{abstract}
+
+
+\tableofcontents
+
+
+\section{How it is done traditionally in \LaTeX}
+
+Suppose we have a file structure as shown in Figure~\ref{fig:file}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.7, keepaspectratio]{./files}
+\caption{Thesis file structure. (source: \href{https://www.sharelatex.com/blog/2013/08/02/thesis-series-pt1.html}{sharelatex.com})}
+\label{fig:file}
+\end{figure}
+
+Then to add these chapters into the document we use the \texttt{$\backslash$input} command in the root document:
+
+\begin{verbatim}
+\chapter*{Abstract}
+
+\tableofcontents
+
+\chapter{Introduction}
+\input{chapters/introduction}
+
+\chapter{Chapter Two Title}
+\input{chapters/chapter02}
+
+\chapter{Chapter Three Title}
+\input{chapters/chapter03}
+
+\chapter{Chapter Four Title}
+\input{chapters/chapter04}
+
+\chapter{Conclusion}
+\input{chapters/conclusion}
+
+\bibliographystyle{apa}
+\bibliography{main.bib}
+
+\appendix
+\chapter{Appendix Title}
+\input{chapters/appendix}
+\end{verbatim}
+
+
+\section{Large documents with \texttt{knitr}}
+
+For knittable documents we need to use \texttt{knitr}'s parent-child options. It allows us to include knittable children in parent documents, and to \texttt{knit} each child document separately~\citep{chris}. Rather than use the \texttt{$\backslash$input} commands, we use the \texttt{child} code chunk option which takes as its value the file path of the child document. See below for an example, and \texttt{008-final-report.Rnw} for the source code. (please ignore the single quote placed before the $<<$ below, as this was only placed to avoid compiling errors)
+
+\newpage
+
+\begin{verbatim}
+'<<set-parent, echo=FALSE>>=
+knitr::set_parent("008-parent.Rnw")
+@
+
+\title{008-Example of \texttt{knitr} and Large Documents}
+\author{Car accident data}
+\maketitle
+
+'<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=60, digits=2)
+opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+knitr::read_chunk("008-packages.R")
+knitr::read_chunk("008-analysis.R")
+@
+
+'<<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+'<<intro, child='008-intro.Rnw'>>=
+@
+
+'<<model, child='008-model.Rnw'>>=
+@
+
+\bibliography{008-bibliography}
+
+\newpage
+\appendix
+\section{Session Information}
+'<<echo=TRUE>>=
+sessionInfo()
+@
+\end{verbatim}
+
+
+
+\newpage
+\bibliography{008-bibliography}
+
+
+\newpage
+\appendix
+\section{Session Information}
+<<echo=TRUE>>=
+sessionInfo()
+@
+
+
+\end{document}

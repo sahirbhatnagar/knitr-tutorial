@@ -1,0 +1,42 @@
+<<set-parent, echo=FALSE>>=
+knitr::set_parent("008-parent.Rnw")
+@
+
+\title{008-Example of \texttt{knitr} and Large Documents}
+\author{Car accident data}
+\maketitle
+
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=60, digits=2)
+set.seed(45)
+opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'H'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'H'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'H')
+)
+opts_knit$set(eval.after = 'fig.cap') # for captions to be evaluated after R objects are available 
+knitr::read_chunk("008-packages.R")
+knitr::read_chunk("008-analysis.R")
+@
+
+<<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+<<intro, child='008-intro.Rnw'>>=
+@
+
+<<model, child='008-model.Rnw'>>=
+@
+
+
+\FloatBarrier
+\bibliography{008-bibliography}
+
+
+\newpage
+\appendix
+\section{Session Information}
+<<echo=TRUE>>=
+sessionInfo()
+@

@@ -11,117 +11,119 @@
 \headcommand {\beamer@framepages {5}{5}}
 \headcommand {\slideentry {0}{0}{6}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\sectionentry {1}{Reproducible Research}{7}{Reproducible Research}{0}}
-\headcommand {\beamer@sectionpages {1}{6}}
-\headcommand {\beamer@subsectionpages {1}{6}}
-\headcommand {\beamer@subsectionentry {0}{1}{1}{7}{What?}}\headcommand {\beamer@subsectionpages {7}{6}}
-\headcommand {\slideentry {1}{1}{1}{7/8}{What?}{0}}
-\headcommand {\beamer@framepages {7}{8}}
-\headcommand {\slideentry {1}{1}{2}{9/10}{What?}{0}}
-\headcommand {\beamer@framepages {9}{10}}
-\headcommand {\beamer@subsectionentry {0}{1}{2}{11}{Why?}}\headcommand {\beamer@subsectionpages {7}{10}}
-\headcommand {\slideentry {1}{2}{1}{11/12}{Why?}{0}}
-\headcommand {\beamer@framepages {11}{12}}
-\headcommand {\beamer@subsectionentry {0}{1}{3}{13}{001-motivating-example}}\headcommand {\beamer@subsectionpages {11}{12}}
-\headcommand {\slideentry {1}{3}{1}{13/13}{001-motivating-example}{0}}
-\headcommand {\beamer@framepages {13}{13}}
-\headcommand {\sectionentry {2}{Getting Started}{14}{Getting Started}{0}}
-\headcommand {\beamer@sectionpages {7}{13}}
-\headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\slideentry {2}{0}{2}{14/14}{}{0}}
+\headcommand {\slideentry {0}{0}{7}{7/7}{}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\sectionentry {1}{Reproducible Research}{8}{Reproducible Research}{0}}
+\headcommand {\beamer@sectionpages {1}{7}}
+\headcommand {\beamer@subsectionpages {1}{7}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{8}{What?}}\headcommand {\beamer@subsectionpages {8}{7}}
+\headcommand {\slideentry {1}{1}{1}{8/9}{What?}{0}}
+\headcommand {\beamer@framepages {8}{9}}
+\headcommand {\slideentry {1}{1}{2}{10/11}{What?}{0}}
+\headcommand {\beamer@framepages {10}{11}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{12}{Why?}}\headcommand {\beamer@subsectionpages {8}{11}}
+\headcommand {\slideentry {1}{2}{1}{12/13}{Why?}{0}}
+\headcommand {\beamer@framepages {12}{13}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{14}{001-motivating-example}}\headcommand {\beamer@subsectionpages {12}{13}}
+\headcommand {\slideentry {1}{3}{1}{14/14}{001-motivating-example}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{15}{\LaTeX }}\headcommand {\beamer@subsectionpages {14}{14}}
-\headcommand {\slideentry {2}{1}{1}{15/15}{\LaTeX }{0}}
+\headcommand {\sectionentry {2}{Getting Started}{15}{Getting Started}{0}}
+\headcommand {\beamer@sectionpages {8}{14}}
+\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {2}{0}{2}{15/15}{}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {2}{1}{2}{16/16}{\LaTeX }{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{16}{\LaTeX }}\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\slideentry {2}{1}{1}{16/16}{\LaTeX }{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\slideentry {2}{1}{3}{17/17}{\LaTeX }{0}}
+\headcommand {\slideentry {2}{1}{2}{17/17}{\LaTeX }{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{18}{RStudio}}\headcommand {\beamer@subsectionpages {15}{17}}
-\headcommand {\slideentry {2}{2}{1}{18/19}{RStudio}{0}}
-\headcommand {\beamer@framepages {18}{19}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{20}{\texttt {knitr}}}\headcommand {\beamer@subsectionpages {18}{19}}
-\headcommand {\slideentry {2}{3}{1}{20/21}{\texttt {knitr}}{0}}
-\headcommand {\beamer@framepages {20}{21}}
-\headcommand {\slideentry {2}{3}{2}{22/22}{\texttt {knitr}}{0}}
-\headcommand {\beamer@framepages {22}{22}}
-\headcommand {\slideentry {2}{3}{3}{23/23}{\texttt {knitr}}{0}}
+\headcommand {\slideentry {2}{1}{3}{18/18}{\LaTeX }{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{19}{RStudio}}\headcommand {\beamer@subsectionpages {16}{18}}
+\headcommand {\slideentry {2}{2}{1}{19/20}{RStudio}{0}}
+\headcommand {\beamer@framepages {19}{20}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{21}{\texttt {knitr}}}\headcommand {\beamer@subsectionpages {19}{20}}
+\headcommand {\slideentry {2}{3}{1}{21/22}{\texttt {knitr}}{0}}
+\headcommand {\beamer@framepages {21}{22}}
+\headcommand {\slideentry {2}{3}{2}{23/23}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\slideentry {2}{3}{4}{24/24}{\texttt {knitr}}{0}}
+\headcommand {\slideentry {2}{3}{3}{24/24}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {24}{24}}
-\headcommand {\slideentry {2}{3}{5}{25/25}{\texttt {knitr}}{0}}
+\headcommand {\slideentry {2}{3}{4}{25/25}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {25}{25}}
-\headcommand {\slideentry {2}{3}{6}{26/26}{\texttt {knitr}}{0}}
+\headcommand {\slideentry {2}{3}{5}{26/26}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {26}{26}}
-\headcommand {\slideentry {2}{3}{7}{27/27}{\texttt {knitr}}{0}}
+\headcommand {\slideentry {2}{3}{6}{27/27}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {27}{27}}
-\headcommand {\slideentry {2}{3}{8}{28/28}{\texttt {knitr}}{0}}
+\headcommand {\slideentry {2}{3}{7}{28/28}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {28}{28}}
-\headcommand {\slideentry {2}{3}{9}{29/29}{\texttt {knitr}}{0}}
+\headcommand {\slideentry {2}{3}{8}{29/29}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {29}{29}}
-\headcommand {\slideentry {2}{3}{10}{30/30}{\texttt {knitr}}{0}}
+\headcommand {\slideentry {2}{3}{9}{30/30}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {30}{30}}
-\headcommand {\sectionentry {3}{Details}{31}{Details}{0}}
-\headcommand {\beamer@sectionpages {14}{30}}
-\headcommand {\beamer@subsectionpages {20}{30}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{31}{Code Chunks}}\headcommand {\beamer@subsectionpages {31}{30}}
-\headcommand {\slideentry {3}{1}{1}{31/31}{Code Chunks}{0}}
+\headcommand {\slideentry {2}{3}{10}{31/31}{\texttt {knitr}}{0}}
 \headcommand {\beamer@framepages {31}{31}}
-\headcommand {\slideentry {3}{1}{2}{32/32}{Code Chunks}{0}}
+\headcommand {\sectionentry {3}{Details}{32}{Details}{0}}
+\headcommand {\beamer@sectionpages {15}{31}}
+\headcommand {\beamer@subsectionpages {21}{31}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{32}{Code Chunks}}\headcommand {\beamer@subsectionpages {32}{31}}
+\headcommand {\slideentry {3}{1}{1}{32/32}{Code Chunks}{0}}
 \headcommand {\beamer@framepages {32}{32}}
-\headcommand {\slideentry {3}{1}{3}{33/33}{Code Chunks}{0}}
+\headcommand {\slideentry {3}{1}{2}{33/33}{Code Chunks}{0}}
 \headcommand {\beamer@framepages {33}{33}}
-\headcommand {\slideentry {3}{1}{4}{34/34}{Code Chunks}{0}}
+\headcommand {\slideentry {3}{1}{3}{34/34}{Code Chunks}{0}}
 \headcommand {\beamer@framepages {34}{34}}
-\headcommand {\slideentry {3}{1}{5}{35/35}{Code Chunks}{0}}
+\headcommand {\slideentry {3}{1}{4}{35/35}{Code Chunks}{0}}
 \headcommand {\beamer@framepages {35}{35}}
-\headcommand {\slideentry {3}{1}{6}{36/36}{Code Chunks}{0}}
+\headcommand {\slideentry {3}{1}{5}{36/36}{Code Chunks}{0}}
 \headcommand {\beamer@framepages {36}{36}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{37}{Hooks}}\headcommand {\beamer@subsectionpages {31}{36}}
-\headcommand {\slideentry {3}{2}{1}{37/37}{Hooks}{0}}
+\headcommand {\slideentry {3}{1}{6}{37/37}{Code Chunks}{0}}
 \headcommand {\beamer@framepages {37}{37}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{38}{Child Documents}}\headcommand {\beamer@subsectionpages {37}{37}}
-\headcommand {\slideentry {3}{3}{1}{38/38}{Child Documents}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{38}{Hooks}}\headcommand {\beamer@subsectionpages {32}{37}}
+\headcommand {\slideentry {3}{2}{1}{38/38}{Hooks}{0}}
 \headcommand {\beamer@framepages {38}{38}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{39}{Custom Environments}}\headcommand {\beamer@subsectionpages {38}{38}}
-\headcommand {\slideentry {3}{4}{1}{39/39}{Custom Environments}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{39}{Child Documents}}\headcommand {\beamer@subsectionpages {38}{38}}
+\headcommand {\slideentry {3}{3}{1}{39/39}{Child Documents}{0}}
 \headcommand {\beamer@framepages {39}{39}}
-\headcommand {\sectionentry {4}{Exercises}{40}{Exercises}{0}}
-\headcommand {\beamer@sectionpages {31}{39}}
-\headcommand {\beamer@subsectionpages {39}{39}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{40}{002-minimum-working-example}}\headcommand {\beamer@subsectionpages {40}{39}}
-\headcommand {\slideentry {4}{1}{1}{40/40}{002-minimum-working-example}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{40}{Custom Environments}}\headcommand {\beamer@subsectionpages {39}{39}}
+\headcommand {\slideentry {3}{4}{1}{40/40}{Custom Environments}{0}}
 \headcommand {\beamer@framepages {40}{40}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{41}{003-model-output}}\headcommand {\beamer@subsectionpages {40}{40}}
-\headcommand {\slideentry {4}{2}{1}{41/41}{003-model-output}{0}}
+\headcommand {\sectionentry {4}{Exercises}{41}{Exercises}{0}}
+\headcommand {\beamer@sectionpages {32}{40}}
+\headcommand {\beamer@subsectionpages {40}{40}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{41}{002-minimum-working-example}}\headcommand {\beamer@subsectionpages {41}{40}}
+\headcommand {\slideentry {4}{1}{1}{41/41}{002-minimum-working-example}{0}}
 \headcommand {\beamer@framepages {41}{41}}
-\headcommand {\beamer@subsectionentry {0}{4}{3}{42}{004-figures}}\headcommand {\beamer@subsectionpages {41}{41}}
-\headcommand {\slideentry {4}{3}{1}{42/42}{004-figures}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{42}{003-model-output}}\headcommand {\beamer@subsectionpages {41}{41}}
+\headcommand {\slideentry {4}{2}{1}{42/42}{003-model-output}{0}}
 \headcommand {\beamer@framepages {42}{42}}
-\headcommand {\beamer@subsectionentry {0}{4}{4}{43}{005-beamer-presentation}}\headcommand {\beamer@subsectionpages {42}{42}}
-\headcommand {\slideentry {4}{4}{1}{43/43}{005-beamer-presentation}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{43}{004-figures}}\headcommand {\beamer@subsectionpages {42}{42}}
+\headcommand {\slideentry {4}{3}{1}{43/43}{004-figures}{0}}
 \headcommand {\beamer@framepages {43}{43}}
-\headcommand {\beamer@subsectionentry {0}{4}{5}{44}{006-sensitivity-analysis-one-parameter}}\headcommand {\beamer@subsectionpages {43}{43}}
-\headcommand {\slideentry {4}{5}{1}{44/44}{006-sensitivity-analysis-one-parameter}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{44}{005-beamer-presentation}}\headcommand {\beamer@subsectionpages {43}{43}}
+\headcommand {\slideentry {4}{4}{1}{44/44}{005-beamer-presentation}{0}}
 \headcommand {\beamer@framepages {44}{44}}
-\headcommand {\beamer@subsectionentry {0}{4}{6}{45}{007-sensitivity-analysis-many-parameters}}\headcommand {\beamer@subsectionpages {44}{44}}
-\headcommand {\slideentry {4}{6}{1}{45/45}{007-sensitivity-analysis-many-parameters}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{5}{45}{006-sensitivity-analysis-one-parameter}}\headcommand {\beamer@subsectionpages {44}{44}}
+\headcommand {\slideentry {4}{5}{1}{45/45}{006-sensitivity-analysis-one-parameter}{0}}
 \headcommand {\beamer@framepages {45}{45}}
-\headcommand {\sectionentry {5}{R Markdown}{46}{R Markdown}{0}}
-\headcommand {\beamer@sectionpages {40}{45}}
-\headcommand {\beamer@subsectionpages {45}{45}}
-\headcommand {\beamer@subsectionentry {0}{5}{1}{46}{Introduction}}\headcommand {\beamer@subsectionpages {46}{45}}
-\headcommand {\slideentry {5}{1}{1}{46/46}{Introduction}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{6}{46}{007-sensitivity-analysis-many-parameters}}\headcommand {\beamer@subsectionpages {45}{45}}
+\headcommand {\slideentry {4}{6}{1}{46/46}{007-sensitivity-analysis-many-parameters}{0}}
 \headcommand {\beamer@framepages {46}{46}}
-\headcommand {\sectionentry {6}{Final Remarks}{47}{Final Remarks}{0}}
-\headcommand {\beamer@sectionpages {46}{46}}
+\headcommand {\sectionentry {5}{R Markdown}{47}{R Markdown}{0}}
+\headcommand {\beamer@sectionpages {41}{46}}
 \headcommand {\beamer@subsectionpages {46}{46}}
-\headcommand {\slideentry {6}{0}{2}{47/47}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{47}{Introduction}}\headcommand {\beamer@subsectionpages {47}{46}}
+\headcommand {\slideentry {5}{1}{1}{47/47}{Introduction}{0}}
 \headcommand {\beamer@framepages {47}{47}}
-\headcommand {\slideentry {6}{0}{3}{48/48}{}{0}}
+\headcommand {\sectionentry {6}{Final Remarks}{48}{Final Remarks}{0}}
+\headcommand {\beamer@sectionpages {47}{47}}
+\headcommand {\beamer@subsectionpages {47}{47}}
+\headcommand {\slideentry {6}{0}{2}{48/48}{}{0}}
 \headcommand {\beamer@framepages {48}{48}}
-\headcommand {\beamer@partpages {1}{48}}
-\headcommand {\beamer@subsectionpages {47}{48}}
-\headcommand {\beamer@sectionpages {47}{48}}
-\headcommand {\beamer@documentpages {48}}
-\headcommand {\def \inserttotalframenumber {43}}
+\headcommand {\slideentry {6}{0}{3}{49/49}{}{0}}
+\headcommand {\beamer@framepages {49}{49}}
+\headcommand {\beamer@partpages {1}{49}}
+\headcommand {\beamer@subsectionpages {48}{49}}
+\headcommand {\beamer@sectionpages {48}{49}}
+\headcommand {\beamer@documentpages {49}}
+\headcommand {\def \inserttotalframenumber {44}}

@@ -1,24 +1,24 @@
 \beamer@endinputifotherversion {3.24pt}
-\beamer@sectionintoc {1}{Reproducible Research}{7}{0}{1}
-\beamer@subsectionintoc {1}{1}{What?}{7}{0}{1}
-\beamer@subsectionintoc {1}{2}{Why?}{11}{0}{1}
-\beamer@subsectionintoc {1}{3}{001-motivating-example}{13}{0}{1}
-\beamer@sectionintoc {2}{Getting Started}{14}{0}{2}
-\beamer@subsectionintoc {2}{1}{\LaTeX }{15}{0}{2}
-\beamer@subsectionintoc {2}{2}{RStudio}{18}{0}{2}
-\beamer@subsectionintoc {2}{3}{\texttt {knitr}}{20}{0}{2}
-\beamer@sectionintoc {3}{Details}{31}{0}{3}
-\beamer@subsectionintoc {3}{1}{Code Chunks}{31}{0}{3}
-\beamer@subsectionintoc {3}{2}{Hooks}{37}{0}{3}
-\beamer@subsectionintoc {3}{3}{Child Documents}{38}{0}{3}
-\beamer@subsectionintoc {3}{4}{Custom Environments}{39}{0}{3}
-\beamer@sectionintoc {4}{Exercises}{40}{0}{4}
-\beamer@subsectionintoc {4}{1}{002-minimum-working-example}{40}{0}{4}
-\beamer@subsectionintoc {4}{2}{003-model-output}{41}{0}{4}
-\beamer@subsectionintoc {4}{3}{004-figures}{42}{0}{4}
-\beamer@subsectionintoc {4}{4}{005-beamer-presentation}{43}{0}{4}
-\beamer@subsectionintoc {4}{5}{006-sensitivity-analysis-one-parameter}{44}{0}{4}
-\beamer@subsectionintoc {4}{6}{007-sensitivity-analysis-many-parameters}{45}{0}{4}
-\beamer@sectionintoc {5}{R Markdown}{46}{0}{5}
-\beamer@subsectionintoc {5}{1}{Introduction}{46}{0}{5}
-\beamer@sectionintoc {6}{Final Remarks}{47}{0}{6}
+\beamer@sectionintoc {1}{Reproducible Research}{8}{0}{1}
+\beamer@subsectionintoc {1}{1}{What?}{8}{0}{1}
+\beamer@subsectionintoc {1}{2}{Why?}{12}{0}{1}
+\beamer@subsectionintoc {1}{3}{001-motivating-example}{14}{0}{1}
+\beamer@sectionintoc {2}{Getting Started}{15}{0}{2}
+\beamer@subsectionintoc {2}{1}{\LaTeX }{16}{0}{2}
+\beamer@subsectionintoc {2}{2}{RStudio}{19}{0}{2}
+\beamer@subsectionintoc {2}{3}{\texttt {knitr}}{21}{0}{2}
+\beamer@sectionintoc {3}{Details}{32}{0}{3}
+\beamer@subsectionintoc {3}{1}{Code Chunks}{32}{0}{3}
+\beamer@subsectionintoc {3}{2}{Hooks}{38}{0}{3}
+\beamer@subsectionintoc {3}{3}{Child Documents}{39}{0}{3}
+\beamer@subsectionintoc {3}{4}{Custom Environments}{40}{0}{3}
+\beamer@sectionintoc {4}{Exercises}{41}{0}{4}
+\beamer@subsectionintoc {4}{1}{002-minimum-working-example}{41}{0}{4}
+\beamer@subsectionintoc {4}{2}{003-model-output}{42}{0}{4}
+\beamer@subsectionintoc {4}{3}{004-figures}{43}{0}{4}
+\beamer@subsectionintoc {4}{4}{005-beamer-presentation}{44}{0}{4}
+\beamer@subsectionintoc {4}{5}{006-sensitivity-analysis-one-parameter}{45}{0}{4}
+\beamer@subsectionintoc {4}{6}{007-sensitivity-analysis-many-parameters}{46}{0}{4}
+\beamer@sectionintoc {5}{R Markdown}{47}{0}{5}
+\beamer@subsectionintoc {5}{1}{Introduction}{47}{0}{5}
+\beamer@sectionintoc {6}{Final Remarks}{48}{0}{6}

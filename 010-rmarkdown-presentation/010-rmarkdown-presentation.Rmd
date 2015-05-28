@@ -1,0 +1,287 @@
+---
+title: "Imputing the epigenome"
+author: "http://sahirbhatnagar.com/talks/"
+date: "March 12, 2015"
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    keep_md: yes
+    widescreen: yes
+bibliography: "010-bibliography.bib"
+---
+
+```{r packages,echo=FALSE}
+knitr::read_chunk("010-packages.R")
+```
+
+```{r required-packages, echo=FALSE, warning=FALSE,message=FALSE,results='hide'}
+```
+
+
+```{r setup,echo=FALSE,warning=FALSE,message=FALSE}
+cleanbib()
+options("citation_format" = "pandoc")
+data("Hitters")
+bib <- read.bibtex("010-bibliography.bib")
+```
+
+
+--- 
+
+<div class="centered">
+<img src="intro.png" alt="intro" style="width: 800px;"/>
+</div>
+`r citep(bib[["epi"]])`
+
+## Main Idea {.emphasized}
+
+<div class="red2", size="10">
+Exploit the correlated nature of epigenetic signals, across both
+marks and samples, for large-scale prediction of additional
+datasets
+</div>
+
+## Matrix of Observed and Imputed Data
+
+<div class="centered">
+<img src="tablea.png" alt="tablea" style="width: 800px;"/>
+</div>
+
+## 1. Leverage other marks in same sample
+
+<div class="centered">
+<img src="cor1.png" alt="test" style="width: 850px;"/>
+</div>
+
+## 2. Leverage same mark in different sample
+
+<div class="centered">
+<img src="cor2.png" alt="test" style="width: 850px;"/>
+</div>
+
+## Types of data used to impute
+
+<div class="centered">
+<img src="used.png" alt="used" style="width: 500px;"/>
+</div>
+
+
+## Advantages of Imputation
+
+> * Beneficial even if observed data is available
+    + Combining information --> robust to experimental noise, confounders
+    + Achieve a higher sequencing depth --> higher signal to noise ratio
+> * Improve GWAS enrichments --> epigenomic maps as an unbiased approach for discovering disease-relevant tissues and cell types
+> * Quality Control --> Are there discrepancies between imputed and observed datasets
+> * Feature importance 
+> * Chromatin state annotation
+
+## Limitations
+
+> -  If the presence of mark signal is highly specific to one or a
+few samples, and it does not correlate with other marks mapped in the
+sample or has a different correlation structure than in samples used for
+training, then it would not be possible to accurately impute the mark at
+those locations
+
+> - When the target mark has been mapped in only a few
+samples, the features pertaining to the same mark in other samples may
+be less informative or more biased e.g. TFBS
+
+> -  For tissue samples that reflect mixtures of
+multiple cell types, our imputed maps will most likely reflect the same
+mixture as the observed data, though deconvolution of mixed samples
+is a potentially important direction for future work
+
+
+## ChromImpute Software
+
+<img src="chromimpute.png" alt="test" style="width: 900px;"/>
+
+* Command line tool written in `JAVA`
+* [http://www.biolchem.ucla.edu/labs/ernst/ChromImpute/](http://www.biolchem.ucla.edu/labs/ernst/ChromImpute/)
+
+
+# Not a new idea
+
+## Leo Breiman (1928-2005)
+
+<img src="rf.png" alt="test" style="width: 600px;"/>
+
+<img src="rf2.png" alt="test" style="width: 600px;"/>
+
+`r citep(bib[["rf"]])`
+
+[`randomForest` package in `R`](http://cran.r-project.org/package=randomForest)
+
+## MissForest
+
+<img src="peter.png" alt="test" style="width: 900px;"/>
+
+`r citep(bib[["peter"]])`
+
+[`missForest` package in `R`](http://cran.r-project.org/package=missForest)
+
+
+# Introduction to Regression Trees
+
+## Some intuition behind the imputation approach
+
+<center><img src="linear.png" alt="test" style="width: 600px;"></center>
+
+`total sales = 7.1 + 0.0475 x # of TV's sold`
+
+
+## Tree-based Methods
+
+* Involves _splitting_ the predictor space into simple regions
+* Since the set of splitting rules used to segment the
+predictor space can be summarized in a tree, these types of
+approaches are known as decision-tree methods [@islr]
+
+## Baseball Data
+
+```{r , echo=FALSE}
+DT.hit <- as.data.table(Hitters)
+datatable(Hitters[,c("Years","Hits","Salary")], options = list(iDisplayLength = 5))
+```
+
+
+## Predict salary based on Hits and Years Played
+
+```{r, fig.align='center', echo=FALSE, warning=FALSE}
+p <- ggplot(DT.hit, aes(Years, Hits))
+p + theme_bw()+geom_point(aes(size = Salary))+scale_size_area()
+```
+
+
+## How to split the data
+
+```{r, fig.align='center', echo=FALSE, warning=FALSE, cache=TRUE}
+p <- ggplot(DT.hit, aes(Years, Hits))
+p + theme_bw()+annotate("rect",xmin = 4.5, xmax = Inf, ymin = 0,    ymax = Inf, fill="red", alpha=0.5)+ geom_point(aes(size = Salary))+scale_size_area()+ annotate("text", label = "R2\n mean=697", x = 22, y = 220, size = 5)+annotate("text", label = "R1\n mean=226", x = 2, y = 220, size = 5)
+```
+
+
+## How to split the data
+
+```{r p2, fig.align='center', echo=FALSE, warning=FALSE, cache=TRUE}
+p <- ggplot(DT.hit, aes(Years, Hits))
+p + theme_bw()+annotate("rect",xmin = 4.5, xmax = Inf, ymin = 118, ymax = Inf, fill="red", alpha=0.5)+annotate("rect", xmin = 4.5, xmax = Inf, ymin = 0, ymax = 118, fill="green", alpha=0.5)+geom_point(aes(size = Salary))+scale_size_area()+ annotate("text", label = "R2\n mean=949", x = 22, y = 235, size = 4)+annotate("text", label = "R1\n mean=226", x = 2, y = 235, size = 4)+annotate("text", label = "R3\n mean=465", x = 22, y = 10, size = 4)
+```
+
+
+## How to split the data
+
+```{r p4, fig.align='center', echo=FALSE, warning=FALSE, cache=TRUE}
+p <- ggplot(DT.hit, aes(Years, Hits))
+p + theme_bw()+annotate("rect",xmin = 4.5, xmax = Inf, ymin = 118, ymax = Inf, fill="red", alpha=0.5)+annotate("rect", xmin = 15, xmax = Inf, ymin = 0, ymax = 118, fill="green", alpha=0.5)+annotate("rect", xmin = 4.5, xmax = 15, ymin = 0, ymax = 118, fill="blue", alpha=0.5)+
+    geom_point(aes(size = Salary))+scale_size_area()+ annotate("text", label = "R2\n mean=949", x = 22, y = 235, size = 4)+annotate("text", label = "R1\n mean=226", x = 2, y = 235, size = 4)+annotate("text", label = "R3\n mean=332", x = 8, y = 10, size = 4)+annotate("text", label = "R4\n mean=615", x = 22, y = 10, size = 4)
+```
+
+## How to split the data
+
+```{r p5, fig.align='center', echo=FALSE, warning=FALSE, cache=TRUE}
+p <- ggplot(DT.hit, aes(Years, Hits))
+p + theme_bw()+annotate("rect",xmin = 4.5, xmax = Inf, ymin = 118, ymax = Inf, fill="red", alpha=0.5)+annotate("rect", xmin = 15, xmax = Inf, ymin = 0, ymax = 118, fill="green", alpha=0.5)+annotate("rect", xmin = 4.5, xmax = 15, ymin = 0, ymax = 118, fill="blue", alpha=0.5)+annotate("rect", xmin = 17.5, xmax = Inf, ymin = 118, ymax = Inf, fill="yellow", alpha=0.5)+annotate("rect", xmin = 22, xmax = Inf, ymin = 0, ymax = 58, fill="purple", alpha=0.5)+geom_point(aes(size = Salary))+scale_size_area()+ annotate("text", label = "R2\n mean=975", x = 22, y = 235, size = 4)+annotate("text", label = "R1\n mean=226", x = 2, y = 235, size = 4)+annotate("text", label = "R3\n mean=332", x = 8, y = 10, size = 4)+annotate("text", label = "R4\n mean=504", x = 17, y = 10, size = 4)+annotate("text", label = "R5\n mean=1100", x = 23, y = 10, size = 4)+annotate("text", label = "R6\n mean=862", x = 10, y = 235, size = 4)
+```
+
+
+## Regression Tree for Baseball data
+<div class="columns-2">
+
+```{r p3,echo=FALSE,fig.align='center',fig.keep='high',cache=TRUE, fig.width=5}
+bag2 <- rpart::rpart(Salary ~ Hits + Years, data=DT.hit[!is.na(Salary)], method="anova")
+# prune the tree 
+pfit<- prune(bag2, cp=   bag2$cptable[which.min(bag2$cptable[,"xerror"]),"CP"])
+
+# plot the pruned tree 
+rpart.plot(pfit, type=1, extra=1, uniform = FALSE)
+```
+
+    - Years is the most important factor in 
+    determining Salary
+    - Given that a player is less 
+    experienced, the number of Hits that 
+    he made in the previous year seems 
+    to play little role in his Salary
+    - Among players who have been in 
+    the major leagues for five or more years, 
+    the number of Hits made in the previous 
+    year does affect Salary
+    
+</div>
+
+## Decision Tree
+
+<div class="columns-2">
+
+<img src="slides_files/figure-html/p2-1.png" alt="test" style="width: 500px;"/>
+
+<img src="slides_files/figure-html/p3-1.png" alt="test" style="width: 500px;"/>
+
+</div>
+
+## More Details of Tree Building
+
+> - The goal is to find boxes $R_1,\ldots, R_J$ that minimize the residual sum of squares give by
+
+> - $$ \sum_{j=1}^J \sum_{i \in R_j} (y_i - \hat{y}_{Rj}) $$
+
+> - $y_i$ is the subjects response, $\hat{y}_{Rj}$ is the mean in box $j$
+
+> - Computationally infeasible to consider every single partition of the feature space into J boxes
+
+> - Solution: take a top-down, greedy approach
+
+> - Begins at the top, and never looks back
+    
+## Pros and Cons
+
+> - Tree-based methods are simple and useful for interpretation
+> - Highly sensity to the first split
+> - Solution: Combining a large number of trees can often result in
+dramatic improvements in prediction accuracy, at the
+expense of some loss interpretation.
+
+# Bagging
+
+## The Bootstrap
+
+<img src="bootstrap.png" alt="test" style="width: 550px;"/>
+`r citep(bib[["islr"]])`
+
+## Pull yourself up by your bootstraps
+
+<div class="centered">
+<img src="bootstrap2.jpg" alt="test" style="width: 350px;"/>
+</div>
+
+## Random Forests
+
+<img src="intuition.png" alt="test" style="width: 750px;"/>
+[ETH Zurich Slides](http://stat.ethz.ch/education/semesters/ss2012/ams/slides/v10.2.pdf)
+
+
+
+
+# Acknowledgements
+
+## Regression tree slides are based on 
+
+<img src="islr.png" alt="test" style="width: 300px;"/>
+[Free PDF book](http://stat.ethz.ch/education/semesters/ss2012/ams/slides/v10.2.pdf)
+
+## Leo Breiman (1928-2005)
+
+<div class="centered">
+<img src="leo.jpg" alt="test" style="width: 450px;"/>
+</div>
+
+# References
+
+---
+
+```{r , echo=FALSE, results='hide',warning=FALSE}
+bibliography()
+```

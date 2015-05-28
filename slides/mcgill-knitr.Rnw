@@ -194,6 +194,16 @@ knitr::read_chunk("slides-code.R")
 \end{frame}
 
 
+
+\begin{frame}{Main objective for today}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.40, keepaspectratio]{./juice}
+\end{figure}
+\end{frame}
+
+
+
 \section{Reproducible Research}
 
 \subsection{What?}
@@ -608,7 +618,10 @@ hello world
 \end{figure}
 \end{frame}
 
-\begin{frame}
+
+
+
+\begin{frame}{Is the juice worth the squeeze?}
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.40, keepaspectratio]{./juice}

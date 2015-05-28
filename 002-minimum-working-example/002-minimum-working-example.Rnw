@@ -108,7 +108,10 @@ fit <- lm(dist ~ speed, data=cars)
 abline(fit, lwd = 2)
 @
 
-
+<<fig3, rexample = TRUE, eval=FALSE>>=
+par(mfrow=c(2,2))
+plot(fit)
+@
 
 
 \section{Tables}
