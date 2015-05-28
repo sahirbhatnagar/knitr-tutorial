@@ -32,6 +32,8 @@ table(groups, cl)
 fisher.test(groups,cl)$p.value
 @
 
+\ref{fig:hclust-plot-{{method}}-{{filter}}-{{groups}}} and \ref{fig:hclust-plot-{{method}}-{{filter}}-{{groups}}1} and \ref{fig:hclust-plot-{{method}}-{{filter}}-{{groups}}2}.
+
 <<hclust-plot-{{method}}-{{filter}}-{{groups}}, fig.cap='based on Method: {{method}}, Filter: {{filter}}\\%, Groups: {{groups}}',fig.subcap=c('Dendogram ','Distance Matrix'), out.width='.49\\linewidth', fig.pos='H'>>=
 plot(hc, labels = cl)
 rect.hclust(hc, k={{groups}}, border="red")
