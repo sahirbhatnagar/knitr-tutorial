@@ -7,18 +7,14 @@
 \beamer@subsectionintoc {2}{1}{\LaTeX }{16}{0}{2}
 \beamer@subsectionintoc {2}{2}{RStudio}{19}{0}{2}
 \beamer@subsectionintoc {2}{3}{\texttt {knitr}}{21}{0}{2}
-\beamer@sectionintoc {3}{Details}{32}{0}{3}
-\beamer@subsectionintoc {3}{1}{Code Chunks}{32}{0}{3}
-\beamer@subsectionintoc {3}{2}{Hooks}{38}{0}{3}
-\beamer@subsectionintoc {3}{3}{Child Documents}{39}{0}{3}
-\beamer@subsectionintoc {3}{4}{Custom Environments}{40}{0}{3}
-\beamer@sectionintoc {4}{Exercises}{41}{0}{4}
-\beamer@subsectionintoc {4}{1}{002-minimum-working-example}{41}{0}{4}
-\beamer@subsectionintoc {4}{2}{003-model-output}{42}{0}{4}
-\beamer@subsectionintoc {4}{3}{004-figures}{43}{0}{4}
-\beamer@subsectionintoc {4}{4}{005-beamer-presentation}{44}{0}{4}
-\beamer@subsectionintoc {4}{5}{006-sensitivity-analysis-one-parameter}{45}{0}{4}
-\beamer@subsectionintoc {4}{6}{007-sensitivity-analysis-many-parameters}{46}{0}{4}
-\beamer@sectionintoc {5}{R Markdown}{47}{0}{5}
-\beamer@subsectionintoc {5}{1}{Introduction}{47}{0}{5}
-\beamer@sectionintoc {6}{Final Remarks}{48}{0}{6}
+\beamer@sectionintoc {3}{Examples}{32}{0}{3}
+\beamer@subsectionintoc {3}{1}{002-minimum-working-example}{32}{0}{3}
+\beamer@subsectionintoc {3}{2}{003-model-output}{33}{0}{3}
+\beamer@subsectionintoc {3}{3}{004-figures}{34}{0}{3}
+\beamer@subsectionintoc {3}{4}{005-beamer-presentation}{35}{0}{3}
+\beamer@subsectionintoc {3}{5}{006-sensitivity-analysis-one-parameter}{36}{0}{3}
+\beamer@subsectionintoc {3}{6}{007-sensitivity-analysis-many-parameters}{37}{0}{3}
+\beamer@subsectionintoc {3}{7}{008-large-documents}{38}{0}{3}
+\beamer@subsectionintoc {3}{8}{009-rmarkdown}{39}{0}{3}
+\beamer@subsectionintoc {3}{9}{010-rmarkdown-presentation}{40}{0}{3}
+\beamer@sectionintoc {4}{Final Remarks}{41}{0}{4}

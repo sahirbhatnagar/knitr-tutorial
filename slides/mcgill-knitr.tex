@@ -113,11 +113,6 @@
 
 
 
-
-
-
-
-
 \title[RR: Intro to \texttt{knitr}]{Reproducible Research}
 \subtitle{An Introduction to \texttt{knitr}}
 
@@ -141,7 +136,12 @@
 \begin{itemize}
 %\scriptsize
 \item Dr. Erica Moodie
-\item Maxime Turgeon, Kevin McGregor, Greg Voisin
+\item Maxime Turgeon (Windows)
+\item Kevin McGregor (Mac)
+\item Greg Voisin
+\item Don Knuth (\TeX)
+\item Friedrich Leisch (Sweave)
+\item Yihui Xie (knitr)
 \item You
 \end{itemize}
 
@@ -202,7 +202,7 @@
 
 \begin{itemize}
 \item These slides are reproducible
-\item Source code: \href{https://github.com/sahirbhatnagar/knitr-tutorial}{https://github.com/sahirbhatnagar/knitr-tutorial}
+\item Source code: \href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/slides}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/slides}
 \end{itemize}
 
 \end{frame}
@@ -212,7 +212,7 @@
 \begin{frame}{Main objective for today}
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.40, keepaspectratio]{./juice}
+\includegraphics[scale=0.60, keepaspectratio]{./juice}
 \end{figure}
 \end{frame}
 
@@ -279,7 +279,10 @@
 \subsection{001-motivating-example}
 
 \begin{frame}{A Motivating Example}
-\textit{Demonstrate:} \href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/001-motivating-example}{001-motivating-example}
+\textit{Demonstrate:} \href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/001-motivating-example}{001-motivating-example}\\
+
+\textit{Survey:}
+\href{https://www.surveymonkey.com/s/CDVXW3C}{https://www.surveymonkey.com/s/CDVXW3C}
 \end{frame}
 
 
@@ -369,7 +372,7 @@ Composition and logical structuring of text is the author's specific contributio
 \centering
 \includegraphics[scale=0.25, keepaspectratio]{./RStudio-Screenshot}
 \end{figure}
-\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\textit{Demonstrate:} Explore \texttt{RStudio} 
 \end{frame}
 
 
@@ -516,6 +519,7 @@ for(i in 1:5){ (i+3) %>% print}
 produces
 
 
+\textit{Demonstrate:} Try it yourself
 \end{frame}
 
 
@@ -586,7 +590,7 @@ print(include.rownames=FALSE)
 \end{kframe}
 \end{knitrout}
 % latex table generated in R 3.2.0 by xtable 1.7-4 package
-% Thu May 28 11:09:05 2015
+% Thu May 28 12:28:33 2015
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrl}
@@ -606,7 +610,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{frame}
 
 
-
+\begin{comment}
 \section{Details}
 
 \subsection{Code Chunks}
@@ -658,60 +662,70 @@ see 83
 \begin{frame}{Example Environment}
 see 120
 \end{frame}
+\end{comment}
 
-\section{Exercises}
+
+\section{Examples}
 
 \subsection{002-minimum-working-example}
 
-\begin{frame}
-hello world
+\begin{frame}{Minimum Working Example}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/002-minimum-working-example}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/002-minimum-working-example}
 \end{frame}
 
 
 \subsection{003-model-output}
 
-\begin{frame}
-hello world
+\begin{frame}{Extracting output from Regression Models}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/003-model-output}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/003-model-output}
 \end{frame}
 
 
 \subsection{004-figures}
 
-\begin{frame}
-hello world
+\begin{frame}{Figures}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/004-figures}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/004-figures}
 \end{frame}
 
 
 \subsection{005-beamer-presentation}
 
-\begin{frame}
-hello world
+\begin{frame}{Beamer Presentations}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/005-beamer-presentation}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/005-beamer-presentation}
 \end{frame}
 
 
 \subsection{006-sensitivity-analysis-one-parameter}
 
-\begin{frame}
-hello world
+\begin{frame}{Changing one Parameter in an Analysis}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/006-sensitivity-analysis-one-parameter}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/006-sensitivity-analysis-one-parameter}
 \end{frame}
 
 \subsection{007-sensitivity-analysis-many-parameters}
 
-\begin{frame}
-hello world
+\begin{frame}{Changing Many Parameters in an Analysis}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/007-sensitivity-analysis-many-parameters}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/007-sensitivity-analysis-many-parameters}
 \end{frame}
 
 
+\subsection{008-large-documents}
 
-
-\section{R Markdown}
-
-
-\subsection{Introduction}
-
-\begin{frame}
-hello world
+\begin{frame}{Large Documents}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/008-large-documents}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/008-large-documents}
 \end{frame}
+
+\subsection{009-rmarkdown}
+
+\begin{frame}{HTML Reports}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/009-rmarkdown}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/009-rmarkdown}
+\end{frame}
+
+\subsection{010-rmarkdown-presentation}
+
+\begin{frame}{HTML Presentations}
+\href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/010-rmarkdown-presentation}{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/010-rmarkdown-presentation}
+\end{frame}
+
 
 
 \section{Final Remarks}
@@ -722,8 +736,6 @@ hello world
 \includegraphics[scale=0.30, keepaspectratio]{./leek}
 \end{figure}
 \end{frame}
-
-
 
 
 \begin{frame}{Is the juice worth the squeeze?}
