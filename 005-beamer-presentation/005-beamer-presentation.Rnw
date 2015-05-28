@@ -1,0 +1,256 @@
+%\documentclass[10pt,handout]{beamer}
+\documentclass[10pt]{beamer}
+\usepackage{etex} % helps fix \newdimen error which is cause when ctable is loaded with other packages
+\usepackage{comment}
+\usepackage{ctable}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{url}
+\usepackage{color, colortbl}
+
+%\usepackage{subcaption}
+\usepackage{subfig}
+%\usepackage{caption}
+\usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
+\bibliographystyle{plainnat}
+
+
+\mode<presentation>
+\usetheme{Hannover}
+\usecolortheme{rose}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{frametitle}[default][left]
+
+\usepackage[]{hyperref}
+\hypersetup{
+    unicode=false,          
+    pdftoolbar=true,        
+    pdfmenubar=true,        
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Reproducible Research},    % title
+    pdfauthor={Sahir Rai Bhatnagar},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Sahir Rai Bhatnagar},   % creator of the document
+    pdfproducer={Sahir Rai Bhatnagar}, % producer of the document
+    pdfkeywords={}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\begin{document}
+
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=48, digits=2)
+set.seed(49)
+opts_chunk$set(echo = TRUE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', crop = TRUE, fig.pos = 'h'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', crop = TRUE, fig.pos = 'h'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', crop = TRUE, fig.pos = 'h')
+)
+knitr::read_chunk("005-packages.R")
+@
+
+
+<<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+
+\title[005-beamer-presentations]{005-beamer-presentations}
+\subtitle{Forced Expiratory Volume and Smoking}
+
+\author[]{Sahir Rai Bhatnagar%
+\thanks{\href{https://github.com/sahirbhatnagar/knitr-tutorial}{https://github.com/sahirbhatnagar/knitr-tutorial}%
+}}
+
+\date{May 28, 2014}
+
+%\makebeamertitle
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Abstract}
+
+\begin{frame}{Abstract}
+\begin{exampleblock}{Forced Expiratory Volume and Smoking}
+Presenting research is an important part of a statisticians life. We illustrate the use of Beamer presentations and \texttt{knitr}~\citep{k1,k2,k3} using data from a study that aimed to assess the relationship between subjects forced expiratory volume (FEV) and their current smoking status. In this problem the measured outcome of interest is forced expiratory volume (FEV), which is, essentially, the amount of air an individual can exhale in the first second of a forceful breath. The data recorded in the dataset include the following: FEV (liters), AGE (years), HEIGHT (inches), GENDER (M/F), SMOKE (Y/N)~\citep{kahn2005exhalent}. 
+\end{exampleblock}
+\end{frame}
+
+\section{Fivenumber Summary}
+
+\begin{frame}[fragile]{Fivenumber Summary of Sex-Education Combinations}
+
+A very powerful way of getting \textcolor{blue}{custom summary information} by \textcolor{red}{multiple categories} is via the \texttt{plyr} package~\citep{plyr}.\\
+\vspace{0.1in}
+\pause
+It allows you to subset the data and perform the operations in \textcolor{blue}{a single step}
+\vspace{0.1in}
+\pause
+
+<<echo=TRUE, tidy=TRUE, eval=FALSE, size='small'>>=
+fev <- read.csv("lung.csv")
+
+fev$edu <- cut(fev$age, breaks = c(2, 5, 10, 13, Inf),
+labels = c("preschool", "primary", "middle", "highschool"))
+
+ddply(fev, .(edu,sex), summarise, min=min(fev), 
+"1st"=quantile(fev, 1/4), median=median(fev), mean=mean(fev), 
+"3rd"=quantile(fev,3/4), max=max(fev))
+@
+
+\end{frame}
+
+\begin{frame}[fragile]{Fivenumber Summary of Sex-Education Combinations}
+
+<<echo=FALSE>>=
+fev <- read.csv("~/Dropbox/Fall 2014/EPIB607/Assignments/A1/lung.csv")
+fev$edu <- cut(fev$age, breaks = c(2, 5, 10, 13, Inf), labels = c("preschool", 
+    "primary", "middle", "highschool"))
+plyr::ddply(fev,.(edu,sex),summarise,min=min(fev),"1st"=quantile(fev, 1/4),median=median(fev), mean=mean(fev),"3rd"=quantile(fev,3/4),max=max(fev))
+@
+
+\end{frame}
+
+
+
+\section{Boxplots}
+
+
+\begin{frame}[fragile]{The Power of \texttt{R} Graphics}
+A very powerful graphics package in \texttt{R} is \texttt{ggplot2}~\citep{ggplot2}. 
+
+\pause
+\vspace{0.2in}
+Similar in spirit to the \texttt{plyr} package, \textcolor{blue}{subsetting} and \textcolor{red}{plotting} are done simultaneously.
+\pause
+\vspace{0.2in}
+
+See \href{http://docs.ggplot2.org/current/}{\underline{\textcolor{blue}{http://docs.ggplot2.org/current/}}} for documentation
+
+\vspace{0.2in}
+
+\href{http://www.cookbook-r.com/Graphs/}{\underline{\textcolor{blue}{http://www.cookbook-r.com/Graphs/}}} is also a very good resource with examples
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Boxplots of Sex-Education Combinations}
+<<>>=
+# change 0/1 to male / female
+fev$gender <- sapply(fev$sex, function(i) if (i == 1) "Male" else "Female")
+
+# check that edu and gender are Binary/Factor/Character variables
+str(fev)
+@
+
+\end{frame}
+
+\begin{frame}[fragile]{Boxplots of Sex-Education Combinations}
+<<fig.align='center', out.height='.6\\linewidth', size='small'>>=
+p <- ggplot(fev, aes(x=gender, y=fev)) + geom_boxplot()
+p + facet_grid(~edu)
+@
+\end{frame}
+
+
+
+\section{Histograms}
+
+\begin{frame}[fragile]{Histograms by Gender}
+<<eval=FALSE, size='footnotesize'>>=
+# initiate ggplot, specify breaks
+m <- ggplot(fev, aes(x = fev)) + 
+geom_histogram(colour = "black", 
+fill = "white", breaks=seq(0,6,0.2))
+@
+\pause
+<<eval=FALSE>>=
+# plot FEV by gender
+m + facet_grid(~gender)
+@
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Histograms by Gender}
+
+<<fig.align='center', out.height='.6\\linewidth',echo=c(-1,-2), size='footnotesize'>>=
+# change 0/1 to male / female
+fev$gender <- sapply(fev$sex, function(i) if (i == 1) "Male" else "Female")
+m <- ggplot(fev, aes(x = fev)) + geom_histogram(colour = "black", fill = "white", breaks=seq(0,6,0.2))
+m + facet_grid(~gender)
+@
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Histograms by Gender-Education Combinations}
+
+<<fig.align='center', out.height='.6\\linewidth'>>=
+# where 'm' is the same as previous slide
+m+facet_grid(gender~edu) 
+@
+\pause
+\textcolor{red}{Question:} \textit{What is the problem with this plot?}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Table of Gender-Education Combinations Counts}
+
+<<fig.align='center', out.height='.6\\linewidth'>>=
+xtabs(~edu+gender, data=fev)
+@
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Density of Gender-Education Combinations}
+To make the plots more comparable \textcolor{red}{plot their densities}
+\pause
+<<fig.align='center', out.height='.6\\linewidth'>>=
+# where 'm' is the same as previous slides
+m + aes(y = ..density..)+ facet_grid(gender~edu) 
+@
+
+\end{frame}
+
+\begin{frame}[fragile]{Histogram vs. Density of FEV}
+
+<<fig.align='center', out.height='.4\\linewidth', echo=FALSE>>=
+m + facet_grid(gender~edu) 
+@
+
+<<fig.align='center', out.height='.4\\linewidth', echo=FALSE>>=
+m + aes(y = ..density..)+ facet_grid(gender~edu) 
+@
+
+
+\end{frame}
+
+
+\begin{frame}{References}
+\small
+\bibliography{005-bibliography}
+\end{frame}
+
+
+\begin{frame}[fragile]{Session Info}
+<<echo=TRUE, size='footnotesize'>>=
+print(sessionInfo(), locale = FALSE)
+@
+\end{frame}
+
+
+
+\end{document}

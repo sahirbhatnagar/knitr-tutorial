@@ -1,0 +1,155 @@
+\documentclass[11pt,letter]{article}    
+%\usepackage[latin1]{inputenc}
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{amsmath,amsthm,amssymb,bbm} %math stuff
+\usepackage{ctable}
+\usepackage{placeins} % FloatBarrier
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{float}    % for fig.pos='H'
+\usepackage{rotfloat} % for sidewaysfigure
+%\usepackage{subfig}   % for subfigure
+\usepackage{subcaption}  % an alternative package for sub figures
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+\usepackage{comment}
+\usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
+\bibliographystyle{plainnat}
+\usepackage{setspace} %Spacing
+\usepackage{graphicx,graphics}
+\usepackage{booktabs,tabularx}
+\usepackage{enumerate}
+\usepackage{makecell}
+\usepackage{xfrac}
+\usepackage{color, colortbl, xcolor}
+\usepackage{booktabs,dcolumn} % for use with texreg in R
+\usepackage[pagebackref=true,bookmarks]{hyperref}
+\hypersetup{
+    unicode=false,          
+    pdftoolbar=true,        
+    pdfmenubar=true,        
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={004-Figures},    % title
+    pdfauthor={SRB},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={SRB},   % creator of the document
+    pdfproducer={SRB}, % producer of the document
+    pdfkeywords={}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% my commands
+\newcommand{\tm}[1]{\textrm{#1}}
+\newtheorem{rexample}{R Example}[section]
+
+
+% fancy header commands
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\setlength{\textheight}{9.00in}
+\setlength{\textwidth}{7.00in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\oddsidemargin}{-0.25in}
+\renewcommand{\baselinestretch}{1.2}
+\makeatletter
+\makeatother
+\lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
+
+\begin{document}
+\pagestyle{fancy}
+
+\title{002-Minimum Working Example}
+\author{}
+\maketitle
+
+
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=60, digits=2)
+set.seed(45)
+opts_chunk$set(echo = TRUE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'H'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'H'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'H')
+)
+opts_knit$set(eval.after = 'fig.cap') # for captions to be evaluated after R objects are available 
+knit_hooks$set(rexample = function(before, options, envir) {
+	if (before) { sprintf("\\begin{rexample}\\label{%s}\\hfill{}", options$label) } else "\\end{rexample}" })
+knitr::read_chunk("002-packages.R")
+#knitr::read_chunk("004-analysis.R")
+@
+
+<<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+\begin{abstract}
+We familiarize ourselves with the basics of \texttt{knitr}~\citep{k1,k2,k3}; including plots, tables and code. 
+\end{abstract}
+
+\section{Figures}
+
+<<fig1, rexample = TRUE, eval=FALSE>>=
+par(mar=c(4,4,.1,.1))
+x = rnorm(100)
+hist(x, main= "", col = "lightblue", border = "white")
+rug(x)
+@
+
+
+<<fig2, rexample = TRUE, eval=FALSE>>=
+plot(cars, pch=20, col='darkgray')
+fit <- lm(dist ~ speed, data=cars)
+abline(fit, lwd = 2)
+@
+
+
+
+
+\section{Tables}
+
+<<table-1, rexample = TRUE, eval = FALSE>>=
+fit <- lm(dist ~ speed, data = cars)
+summary(fit)
+xtable::xtable(fit, digits = 2)
+@
+
+
+<<table-2, rexample = TRUE, eval = FALSE>>=
+# %>% is the pipe operator from the magrittr library
+cars %>% summary() %>% xtable
+@
+
+
+
+
+
+
+
+
+\newpage
+\nocite{xtable,mag}
+\bibliography{002-bibliography}
+
+
+\newpage
+\appendix
+
+\section{R Code}
+<<show-code, ref.label=all_labels()[-1],echo=TRUE,eval=FALSE>>=
+@
+
+\newpage
+
+\section{Session Information}
+<<echo=TRUE>>=
+sessionInfo()
+@
+
+
+\end{document}

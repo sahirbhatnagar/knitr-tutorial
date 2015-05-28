@@ -64,7 +64,7 @@
 \pagestyle{fancy}
 
 \title{004-Figures}
-\author{Randomized Control Trial on Epileptic Seizures}
+\author{Attitudes Towards Abortion\thanks{Thanks to Gillian Ainsworth, Zhuoyu Wang and Yishu Wang for providing this example}}
 \maketitle
 
 
@@ -78,31 +78,74 @@ opts_template$set(
     fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'H')
 )
 opts_knit$set(eval.after = 'fig.cap') # for captions to be evaluated after R objects are available 
-#knitr::read_chunk("003-packages.R")
-#knitr::read_chunk("003-seizure-rct-code.R")
-#knitr::read_chunk("003-texreg-geepack.R")
+knitr::read_chunk("004-packages.R")
+knitr::read_chunk("004-analysis.R")
 @
 
 <<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
 @
 
-<<texreg-extractor-geeglm,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
-@
+
 
 \begin{abstract}
-Exploratory data analysis is a crucial first step in answering a scientific question. In this document I provide some examples of how to dynamically include figures in reports. Several figure chunk options that \texttt{knitr}~\citep{k1,k2,k3} provides are discussed. We illustrate these options along with the plotting capabilities of \texttt{ggplot2}~\citep{ggplot2}, using data from a study that aimed to assess the relationship between subjects forced expiratory volume (FEV) and their current smoking status. In this problem the measured outcome of interest is forced expiratory volume (FEV), which is, essentially, the amount of air an individual can exhale in the first second of a forceful breath. The data recorded in the dataset include the following: FEV (liters), AGE (years), HEIGHT (inches), GENDER (M/F), SMOKE (Y/N)~\citep{kahn2005exhalent}. 
+Exploratory data analysis is a crucial first step in answering a scientific question. In this document I provide some examples of how to dynamically include figures in reports. Several figure chunk options that \texttt{knitr}~\citep{k1,k2,k3} provides are discussed. We illustrate these options along with the plotting capabilities of \texttt{ggplot2}~\citep{ggplot2} and \texttt{lattice}~\citep{lattice}. The data come from part of an investigation of British Social Attitudes (BSA) Survey~\citep{mcgrath1986british} started in 1983. Every participant was asked whether they supported or opposed a woman's right to have an abortion under seven different circumstances each year from 1983 to 1986. We are interested in assessing the impact of gender, age, self assessed social class, political party, and religion on one's attitude towards abortion, and find out what are the main factors that affect people's attitude towards abortion.  We are also interested in assessing whether people's attitude towards abortion have changed over the years, and whether these changes are due to time or the change of some other factors.  
 \end{abstract}
 
 
+\section{Background}
+
+The respondents were asked if they supported or opposed a woman's right to have an abortion under seven different circumstances.   The same seven circumstances were presented in each of the four years of the study, and show different situations. A higher score indicates a more positive attitude towards abortion. The seven circumstances are as follows:
+
+\begin{itemize}
+\item[1] The woman decides on her own she does not wish to have the child.  
+\item[2] The couple agree they do not wish to have the child.  
+\item[3] The woman is not married and does not wish to marry the man.  
+\item[4] The couple cannot afford any more children.  
+\item[5] There is a strong chance of a defect in the baby.  
+\item[6] The woman's health is seriously endangered by the pregnancy.  
+\item[7] The woman became pregnant as a result of rape.  
+\end{itemize}
 
 
 
+\section{Exploratory Analysis}
+
+<<multiplot-fun, echo=FALSE>>=
+@
+
+<<data-clean-1, echo=FALSE, results = 'hide'>>=
+@
 
 
+Figure~\ref{fig:figure-1} shows the response by each variable, ignoring the repeated measurement structure in the data set.  The plot of response by age suggests that the association between the response and age is not linear.  Basically, younger group tends to have higher scores than older group.  We also see a big drop in positive attitudes towards abortion in 1984 and then an increase in subsequent years.  There also seems to be quite a bit of variability in the scores as a function of religion.  No difference was observed between males and females, between political party or social class.
+
+<<figure-1, echo=FALSE, fig.cap='The response by each variable, ignoring the repeated measurement structure in the data set',fig.align='center', fig.pos='H'>>=
+@
+
+<<data-clean-2, echo=FALSE, results = 'hide'>>=
+@
 
 
+Figure~\ref{fig:figure-2} shows the observed response profiles of a random sample of 30 subjects (Figure~\ref{fig:figure-21}) with the corresponding OLS fits (Figure~\ref{fig:figure-22}) as a function of year.  Much variation can be observed in the initial scores, but on average, the scores decrease from 1983 to 1984, and then increase in the last two years.   We should keep in mind that there are some ties in the plot.
 
-\FloatBarrier
+<<figure-2,fig.subcap=c('scores for a random sample of 30 subjects','Least squares fits (with year) for same random sample of 30'),fig.cap='Selected individual score profiles from the British Social Attitudes (BSA) Survey',out.width='.49\\linewidth', fig.pos='H'>>=
+@
+
+In Figures~\ref{fig:figure-31}, \ref{fig:figure-32} and~\ref{fig:figure-33} we present the densities of the response by year and political party, self assessed social class and religion, respectively.  Figure~\ref{fig:figure-31} does not show any noticeable change across time and political party though there is an empty cell in 1986.  In Figure~\ref{fig:figure-32}, we observe lower scores in 1984, but the pattern across years and social classes looks similar.  Considering Figure ~\ref{fig:figure-33}, those subject who did not identify with a particular religion tended to answer more positively toward abortion when compared to those subject who were religious. This difference was consistent across all years of the study. 
+
+<<figure-3,echo=FALSE,fig.cap=c('Histogram of responses, stratified by year and political party','The response by year and SES', 'The response by year and religion'),fig.align='center',opts.label = 'fig.large', fig.pos='H'>>=
+@
+
+
+We plot answers as a function of age (Figure~\ref{f:figure-61}) with a loess smoothed line (Figure~\ref{f:figure-62}) 
+
+<<figure-6, fig.keep='all', fig.pos='H', opts.label='fig.small', fig.cap='Answers vs. Age', fig.lp='f:'>>=
+plot(DT$age,DT$answers)
+lines(stats::lowess(DT$age,DT$answers), col='red', lwd=3)
+@
+
+
+\newpage
 \bibliography{004-bibliography}
 
 

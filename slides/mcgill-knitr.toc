@@ -15,8 +15,8 @@
 \beamer@sectionintoc {4}{Exercises}{40}{0}{4}
 \beamer@subsectionintoc {4}{1}{002-minimum-working-example}{40}{0}{4}
 \beamer@subsectionintoc {4}{2}{003-model-output}{41}{0}{4}
-\beamer@subsectionintoc {4}{3}{004-beamer-presentation}{42}{0}{4}
-\beamer@subsectionintoc {4}{4}{005-simulations}{43}{0}{4}
+\beamer@subsectionintoc {4}{3}{004-figures}{42}{0}{4}
+\beamer@subsectionintoc {4}{4}{005-beamer-presentation}{43}{0}{4}
 \beamer@subsectionintoc {4}{5}{006-sensitivity-analysis-one-parameter}{44}{0}{4}
 \beamer@subsectionintoc {4}{6}{007-sensitivity-analysis-many-parameters}{45}{0}{4}
 \beamer@sectionintoc {5}{R Markdown}{46}{0}{5}

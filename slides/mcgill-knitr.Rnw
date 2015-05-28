@@ -107,8 +107,8 @@ knitr::read_chunk("slides-code.R")
 \title[RR: Intro to \texttt{knitr}]{Reproducible Research}
 \subtitle{An Introduction to \texttt{knitr}}
 
-\author[]{Sahir Bhatnagar%
-\thanks{sahir.bhatnagar@mail.mcgill.ca%
+\author[]{Sahir Rai Bhatnagar%
+\thanks{\href{https://github.com/sahirbhatnagar/knitr-tutorial}{https://github.com/sahirbhatnagar/knitr-tutorial}%
 }}
 
 \date{May 28, 2014}
@@ -553,7 +553,6 @@ hello world
 \end{frame}
 
 
-
 \subsection{003-model-output}
 
 \begin{frame}
@@ -561,14 +560,14 @@ hello world
 \end{frame}
 
 
-\subsection{004-beamer-presentation}
+\subsection{004-figures}
 
 \begin{frame}
 hello world
 \end{frame}
 
 
-\subsection{005-simulations}
+\subsection{005-beamer-presentation}
 
 \begin{frame}
 hello world
