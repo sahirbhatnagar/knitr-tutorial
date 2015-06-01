@@ -30,9 +30,9 @@ knitr::read_chunk("008-analysis.R")
 @
 
 
+
 \FloatBarrier
 \bibliography{008-bibliography}
-
 
 \newpage
 \appendix

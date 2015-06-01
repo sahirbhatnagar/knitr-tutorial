@@ -72,17 +72,22 @@
 <<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
 options(width=60, digits=2)
 set.seed(45)
+# set defaults
 opts_chunk$set(echo = TRUE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+
 opts_template$set(
     fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'H'),
     fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'H'),
     fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'H')
 )
+
 opts_knit$set(eval.after = 'fig.cap') # for captions to be evaluated after R objects are available 
+
 knit_hooks$set(rexample = function(before, options, envir) {
 	if (before) { sprintf("\\begin{rexample}\\label{%s}\\hfill{}", options$label) } else "\\end{rexample}" })
+
+
 knitr::read_chunk("002-packages.R")
-#knitr::read_chunk("004-analysis.R")
 @
 
 <<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
@@ -93,6 +98,8 @@ We familiarize ourselves with the basics of \texttt{knitr}~\citep{k1,k2,k3}; inc
 \end{abstract}
 
 \section{Figures}
+
+The first example is given by~\ref{fig1}
 
 <<fig1, rexample = TRUE, eval=FALSE>>=
 par(mar=c(4,4,.1,.1))
@@ -128,6 +135,9 @@ xtable::xtable(fit, digits = 2)
 cars %>% summary() %>% xtable
 @
 
+<<figure-1, opts.label='fig.large'>>=
+plot(mtcars)
+@
 
 
 

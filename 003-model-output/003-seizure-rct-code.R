@@ -34,12 +34,20 @@ fit.gee.unst <- geepack::geeglm(y ~ trt*post, id = subject, offset = log(tj),
 fit.gee.ar1 <- geepack::geeglm(y ~ trt*post, id = subject, offset = log(tj),
                                 data = DT.epil, family = "poisson", corstr = "ar1")
 
-#source("003-texreg-geepack.R")
 texreg::texreg(list(fit.glm,fit.glmm,fit.gee.ind,fit.gee.ex,fit.gee.unst,fit.gee.ar1), 
                custom.model.names = c("GLM","GLMM","GEE Ind","GEE Ex.","GEE Unst.","GEE AR1"), 
        custom.coef.names = c("$\\beta_0$", "$\\beta_1$","$\\beta_2$","$\\beta_3$"),
        fontsize = "scriptsize", caption = "Comparing model estimates", single.row = T,
        bold = 0.05, float.pos = 'H')
+
+
+
+
+
+
+
+
+
 
 
 

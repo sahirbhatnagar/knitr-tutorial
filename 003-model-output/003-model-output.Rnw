@@ -134,6 +134,11 @@ Marginal mean is given by~\eqref{eq:eq1}, and variance model $var(Y_{ij}) = \alp
 @
 
 
+
+
+
+
+
 \FloatBarrier
 \nocite{k1,k2,k3}
 \bibliography{003-bibliography}

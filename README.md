@@ -3,7 +3,8 @@
 A workshop presented by	[Sahir Bhatnagar](http://sahirbhatnagar.com/) (McGill University)
   
 **Date**: Thursday,	May 28, 2015, 13:00-­‐16:00  
-**Location**: Purvis Hall, Room 25, McGill University
+**Location**: Purvis Hall, Room 25, McGill University  
+**Slides**: The slides used for this presentation can be found [here](https://github.com/sahirbhatnagar/knitr-tutorial/blob/master/slides/mcgill-knitr.pdf)
 
 Sponsored by the CRM Statistics	Laboratory and the Montreal Biostatistics Seminar Series
 
@@ -22,9 +23,24 @@ Participants must bring their own laptops, with the following programs and packa
 
 ----
 
-### Survey
+## Reproducible Examples
 
-* [001-motivating-example](https://www.surveymonkey.com/s/CDVXW3C)
+All the examples in this repository are reproducible. To compile please follow these instructions:
+
+1. For a given directory, open the associated `.Rproj` file in RStudio
+2. Open the `.Rnw` corresponding to the name of the folder
+3. In RStudio, make sure files are weaved using `knitr` (Tools -> Global Options -> Sweave -> Weave .Rnw files using: select knitr in the dropdown menu)
+4. In RStudio, click on `Compile PDF` or in the `R` console enter `knitr::knit2pdf("*.Rnw")` where * is the name of the `.Rnw` to compile
+
+----
+
+## How Does it work?
+
+* In each of the folders there is a `packages.R` file, which automatically tests for required packages, and install them if they are missing from your library
+* There is no need to set any working directories, since you have opened the `.Rproj` file
+* To be able to compile the [slides](https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/slides), you need to have a Perl interpreter installed. If you do not have one, simply comment out `knit_hooks$set(crop = hook_pdfcrop)` in the setup chunk of the [`mcgill-knitr.Rnw`](https://github.com/sahirbhatnagar/knitr-tutorial/blob/master/slides/mcgill-knitr.Rnw) file
+
+
 
 
 ----
@@ -47,5 +63,5 @@ Participants must bring their own laptops, with the following programs and packa
 * [knitr showcase](http://yihui.name/knitr/demo/showcase/)
 * [Karl Broman's Tools for RR](http://kbroman.org/Tools4RR/)
 * [Editors for knitr](http://yihui.name/knitr/demo/editors/)
-
+* [What is an R-Project?](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
 

@@ -112,7 +112,7 @@ ddply(fev, .(edu,sex), summarise, min=min(fev),
 \begin{frame}[fragile]{Fivenumber Summary of Sex-Education Combinations}
 
 <<echo=FALSE>>=
-fev <- read.csv("~/Dropbox/Fall 2014/EPIB607/Assignments/A1/lung.csv")
+fev <- read.csv("lung.csv")
 fev$edu <- cut(fev$age, breaks = c(2, 5, 10, 13, Inf), labels = c("preschool", 
     "primary", "middle", "highschool"))
 plyr::ddply(fev,.(edu,sex),summarise,min=min(fev),"1st"=quantile(fev, 1/4),median=median(fev), mean=mean(fev),"3rd"=quantile(fev,3/4),max=max(fev))

@@ -35,9 +35,9 @@ approaches are known as decision-tree methods [@islr]
 
 ## Baseball Data
 
-```{r , echo=FALSE}
+```{r test, echo=FALSE}
 DT.hit <- as.data.table(Hitters)
-datatable(Hitters[,c("Years","Hits","Salary")], options = list(iDisplayLength = 5))
+datatable(Hitters[,c("Years","Hits","Salary")], options = list(iDisplayLength = 10))
 ```
 
 

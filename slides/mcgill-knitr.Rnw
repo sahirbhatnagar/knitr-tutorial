@@ -70,7 +70,7 @@ opts_template$set(
     fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', crop = TRUE, fig.pos = 'h'),
     fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', crop = TRUE, fig.pos = 'h')
 )
-knitr::read_chunk("slides-code.R")
+knitr::read_chunk("slides-packages.R")
 @
 
 <<required-packages,echo=FALSE,warning=FALSE,message=FALSE>>=
@@ -607,6 +607,14 @@ see 120
 \centering
 \includegraphics[scale=0.30, keepaspectratio]{./leek}
 \end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Always Remember ...}
+
+\[ \textrm{Reproducibility} \propto \frac{1}{\textrm{copy paste}}  \]
+
+
 \end{frame}
 
 

@@ -1,6 +1,3 @@
-
-
-
 \section{Description of Data}
 Information was obtained on 4,831 car accidents. The first dataset consists of four binary variables: the \ttt{weight} of the car involved in the accident (levels: \ttt{small, standard}), whether or not the driver was \ttt{ejected} (\ttt{no, yes}), the \ttt{severity} of the collision (\ttt{no, severe}), and the accident \ttt{type} (\ttt{collision, rollover}). The second dataset consisted of the same four variables, however three of them were polytomous instead of binary: \ttt{weight} (\ttt{small, compact, standard}), \ttt{severity} (\ttt{no, moderately severe, severe}) and \ttt{type} (\ttt{collision vehicle, collision object, rollover without collision, other rollover}). 
 

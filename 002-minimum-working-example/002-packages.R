@@ -32,5 +32,7 @@ if(!pckg) {
     require(data.table)
 }
 
+## ---- dont-run ----
 
+head(mtcars)
 
