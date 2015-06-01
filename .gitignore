@@ -12,3 +12,8 @@
 *.toc
 *.synctex.gz
 *.tex
+*figure
+*.snm
+*_cache
+*_files
+*.md
