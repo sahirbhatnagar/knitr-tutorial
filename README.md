@@ -65,3 +65,6 @@ All the examples in this repository are reproducible. To compile please follow t
 * [Editors for knitr](http://yihui.name/knitr/demo/editors/)
 * [What is an R-Project?](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
 
+----
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
