@@ -1,0 +1,236 @@
+\documentclass[11pt,letter]{article}    
+%\usepackage[latin1]{inputenc}
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{amsmath,amsthm,amssymb,bbm} %math stuff
+\usepackage{ctable}
+\usepackage{placeins} % FloatBarrier
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{float}    % for fig.pos='H'
+\usepackage{rotfloat} % for sidewaysfigure
+%\usepackage{subfig}   % for subfigure
+%\usepackage{subcaption}  % an alternative package for sub figures
+\newcommand{\subfloat}[2][need a sub-caption]{\subcaptionbox{#1}{#2}}
+\usepackage{comment}
+\usepackage{natbib}   % omit 'round' option if you prefer square brackets
+\bibliographystyle{plainnat}
+\usepackage{setspace} %Spacing
+\usepackage{graphicx,graphics}
+\usepackage{booktabs,tabularx}
+\usepackage{enumerate}
+\usepackage{makecell}
+%\usepackage{xfrac}
+\usepackage{color, colortbl, xcolor}
+\usepackage{booktabs,dcolumn} % for use with texreg in R
+\usepackage[pagebackref=true,bookmarks]{hyperref}
+\hypersetup{
+    unicode=false,          
+    pdftoolbar=true,        
+    pdfmenubar=true,        
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={007-Sensitivity Analysis of Many Parameters},    % title
+    pdfauthor={SRB},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={SRB},   % creator of the document
+    pdfproducer={SRB}, % producer of the document
+    pdfkeywords={}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% my commands
+\newcommand{\tm}[1]{\textrm{#1}}
+
+
+% fancy header commands
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\setlength{\textheight}{9.00in}
+\setlength{\textwidth}{7.00in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\oddsidemargin}{-0.25in}
+\renewcommand{\baselinestretch}{1.2}
+\makeatletter
+\makeatother
+\lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
+
+\begin{document}
+\pagestyle{fancy}
+
+\title{Simulation results for PCEV}
+\author{Maxime Turgeon}
+\maketitle
+
+
+<<setup, echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE, results='hide'>>=
+options(width=60, digits=2)
+set.seed(45)
+library(knitr)
+opts_chunk$set(echo = FALSE, tidy = TRUE, cache = FALSE, warning = FALSE, message = FALSE)
+opts_template$set(
+    fig.large = list(fig.width = 7, fig.height = 5, fig.align = 'center', fig.pos = 'H'),
+    fig.small = list(fig.width = 6, fig.height = 4, fig.align = 'center', fig.pos = 'H'),
+    fig.full = list(fig.width = 8, fig.height = 6, fig.align = 'center', fig.pos = 'H')
+)
+opts_knit$set(eval.after = 'fig.cap') # for captions to be evaluated after R objects are available 
+knitr::read_chunk("011-packages.R")
+
+load("011-simulation-results.RData")
+@
+
+<<required-packages,echo=FALSE,warning=FALSE,message=FALSE, eval=TRUE, results='hide'>>=
+@
+
+\tableofcontents
+
+\section*{Introduction}
+
+We simulated 1000 datasets of size $n=500$. The general model is given by the following multivariate linear model:
+$$\mathbf{Y} = \beta X + \mathbf{E},$$
+where $\mathbf{Y}$ is of dimension $p$, $X\sim N(0,1)$ and $\mathbf{E}\sim N(0,\Sigma)$. The goal of the simulations is to compare three different approaches to a multivariate association test between $\mathbf{Y}$ and $X$.
+\begin{itemize}
+  \item Univariate approach: a p-value $\mathfrak{p}_j$ is computed for the association between $Y_j$ and $X$, for $j=1,\ldots,p$. The overall p-value is given by
+  $$\mathfrak{p}_{univ} := \min(\mathfrak{p}_1,\ldots,\mathfrak{p}_p)\cdot p,$$
+  where the multiplication by $p$ is a Bonferroni correction for multiple testing.
+  \item Principal components regression (PCR): a principal components analysis is performed on the vector $\mathbf{Y}$ to extract the linear combination $\tilde{Y}$ of the components with the largest variance. The p-value $\mathfrak{p}_{PCR}$ is simply the p-value for the (univariate) association between $\tilde{Y}$ and $X$.
+  \item Principal components of explained variance (PCEV): very similar to PCR, but the linear combination $\tilde{Y}$ is defined such that it maximizes the proportion of variance of $\tilde{Y}$ being explained by the covariate $X$ (this methodology was first introduced by~\cite{ott1999principal}). The p-value $\mathfrak{p}_{PCEV}$ is based on Wilk's lambda, which tests whether this proportion of explained variance is 0.
+\end{itemize}
+
+The dimension $p$ of $\mathbf{Y}$ takes the values $4,10,20,100,200,300,400$. These $p$ phenotypes are splitted in $b$ blocks of equal size (with $b$ equal to $2,5,10,20$). The covariance structure $\Sigma$ depends on two parameters: the within-block correlation $\rho_w$ and the between-block correlation $\rho_b$. Both quantities take value in $\{0, 0.5, 0.7\}$, with the convention that the between-block variance is never larger than the within-block variance, i.e. $\rho_w \geq \rho_b$. Finally, the association between $X$ and a component of $\mathbf{Y}$ is given in terms of the heritability $h^2$; this is related to the more familiar linear regression coefficient $\beta$ via
+$$h^2=\frac{\beta^2}{1 + \beta^2}.$$
+
+The data is available in the \texttt{R} object \texttt{011-simulation-results.RData}. There is a different matrix for each significance level $\alpha=0.01, 0.05, 0.1$, each of the same form: the first six columns respectively correspond to 1) the simulation scenario, 2) the heritability $h^2$, 3) the number of phenotypes $p$, 4) the number of blocks $b$, 5) the within-block correlation $\rho_w$, and 6) the between-block correlation $\rho_b$. The last four columns correspond to the four methods considered (we will ignore Hotteling's method).
+
+\newpage
+
+\section{Simulation scenario 1}
+
+We simulated no association between the continuous covariate $x$ and the multivariate phenotype $\mathbf{Y}$.
+
+\newpage
+
+<<TypeI-source, tidy.opts=list(width.cutoff=55), echo=FALSE, warning=FALSE>>=
+# apply knit_expand to each value of n
+src <- mapply(knitr::knit_expand, 
+              file = "011-typeI-template.Rnw",
+              alpha = rep(c(0.01, 0.05, 0.1), each=4),
+              b = rep(c(2, 5, 10, 20), times=3))
+@
+
+
+\Sexpr{knit(text = unlist(src))}
+
+\section{Simulation scenario 2}
+
+We simulated an association between the continuous covariate $x$ and the first component of the multivariate phenotype $\mathbf{Y}$.
+
+\newpage
+
+<<Power2-source, tidy.opts=list(width.cutoff=55), echo=FALSE, warning=FALSE>>=
+# apply knit_expand to each value of n
+src <- mapply(knitr::knit_expand, 
+              file = "011-power-template.Rnw", 
+              alpha = rep(c(0.01, 0.05, 0.1), each=12),
+              h2 = rep(rep(c(0.5, 1, 1.5), each = 4), times = 3),
+              b = rep(c(2, 5, 10, 20), times=9),
+              MoreArgs = list(scenario=2))
+@
+
+
+\Sexpr{knit(text = unlist(src))}
+
+\section{Simulation scenario 3}
+
+We simulated an association between the continuous covariate $x$ and two components of the multivariate phenotype $\mathbf{Y}$: the associations are of the same size, in the same direction, and the two components lie in the same block.
+
+\newpage
+
+<<Power3-source, tidy.opts=list(width.cutoff=55), echo=FALSE, warning=FALSE>>=
+# apply knit_expand to each value of n
+src <- mapply(knitr::knit_expand, 
+              file = "011-power-template.Rnw", 
+              alpha = rep(c(0.01, 0.05, 0.1), each=12),
+              h2 = rep(rep(c(0.5, 1, 1.5), each = 4), times = 3),
+              b = rep(c(2, 5, 10, 20), times=9),
+              MoreArgs = list(scenario=3))
+@
+
+
+\Sexpr{knit(text = unlist(src))}
+
+\section{Simulation scenario 4}
+
+We simulated an association between the continuous covariate $x$ and two components of the multivariate phenotype $\mathbf{Y}$: the associations are of the same size, in the opposite direction, and the two components lie in the same block.
+
+\newpage
+
+<<Power4-source, tidy.opts=list(width.cutoff=55), echo=FALSE, warning=FALSE>>=
+# apply knit_expand to each value of n
+src <- mapply(knitr::knit_expand, 
+              file = "011-power-template.Rnw", 
+              alpha = rep(c(0.01, 0.05, 0.1), each=12),
+              h2 = rep(rep(c(0.5, 1, 1.5), each = 4), times = 3),
+              b = rep(c(2, 5, 10, 20), times=9),
+              MoreArgs = list(scenario=4))
+@
+
+
+\Sexpr{knit(text = unlist(src))}
+
+\section{Simulation scenario 5}
+
+We simulated an association between the continuous covariate $x$ and two components of the multivariate phenotype $\mathbf{Y}$: the associations are of the same size, in the same direction, and the two components lie in different blocks.
+
+\newpage
+
+<<Power5-source, tidy.opts=list(width.cutoff=55), echo=FALSE, warning=FALSE>>=
+# apply knit_expand to each value of n
+src <- mapply(knitr::knit_expand, 
+              file = "011-power-template.Rnw", 
+              alpha = rep(c(0.01, 0.05, 0.1), each=12),
+              h2 = rep(rep(c(0.5, 1, 1.5), each = 4), times = 3),
+              b = rep(c(2, 5, 10, 20), times=9),
+              MoreArgs = list(scenario=5))
+@
+
+
+\Sexpr{knit(text = unlist(src))}
+
+\section{Simulation scenario 6}
+
+We simulated an association between the continuous covariate $x$ and two components of the multivariate phenotype $\mathbf{Y}$: the associations are of the same size, in the opposite direction, and the two components lie in different blocks.
+
+\newpage
+
+<<Power6-source, tidy.opts=list(width.cutoff=55), echo=FALSE, warning=FALSE>>=
+# apply knit_expand to each value of n
+src <- mapply(knitr::knit_expand, 
+              file = "011-power-template.Rnw", 
+              alpha = rep(c(0.01, 0.05, 0.1), each=12),
+              h2 = rep(rep(c(0.5, 1, 1.5), each = 4), times = 3),
+              b = rep(c(2, 5, 10, 20), times=9),
+              MoreArgs = list(scenario=6))
+@
+
+
+\Sexpr{knit(text = unlist(src))}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+\newpage
+\appendix
+\section{Session Information}
+<<echo=TRUE>>=
+sessionInfo()
+@
+
+
+\end{document}

@@ -1,0 +1,39 @@
+\subsection{Significance level: {{alpha}}, Heritability: {{h2}}\%, Number of blocks: {{b}}}
+
+<<{{scenario}}-{{alpha}}-{{h2}}-{{b}}, fig.height=8>>=
+if({{alpha}} == 0.01) subres <- results0.01
+if({{alpha}} == 0.05) subres <- results0.05
+if({{alpha}} == 0.1) subres <- results0.1
+
+subres <- subres[which(subres[,1] == {{scenario}} & subres[,2] == {{h2}} & subres[,4] == {{b}}),]
+
+par(mfrow=c(3,3))
+for(rho.b in c(0, 50, 70)){
+  for(rho.w in c(0, 50, 70)){
+    if(rho.w < rho.b){
+      if(rho.b == 70 & rho.w == 0){
+        plot(0, 0, type='n', bty='n', xaxt='n', yaxt='n',
+             xlab="", ylab="")
+        legend("bottomleft", legend=c("PCEV", "PCR", "Univariate"),
+               col=c("black", "blue", "red"), lwd=2)
+      }else{
+        plot.new()
+      }
+    }else{
+      data <- subres[which(subres[,5] == rho.w & subres[,6] == rho.b),]
+      data <- data[order(data[,3]),]
+      plot(x = data[,3], y= data[,7], type='b', pch=19, cex=0.5, col='black',
+           xlim=c(0,400), xlab="Number of responses",
+           ylim=pmin(c(0,1), range(subres[subres[,6] == rho.b, 7:10])), ylab="Power",
+           main=bquote(paste(rho[w] == .(rho.w/100), "; ", rho[b] == .(rho.b/100))))
+      abline(h=0, lty=2)
+      for(i in 1:2){
+        lines(x = data[,3], y= data[,7+i], type='b', pch=19, cex=0.5, 
+              col=c("blue", "red")[i])
+      }
+    }
+  }
+}
+@
+
+\newpage
