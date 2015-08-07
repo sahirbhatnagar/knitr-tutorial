@@ -70,6 +70,7 @@ All the examples in this repository are reproducible. To compile please follow t
 ### En fran&ccedil;ais
 * [&Eacute;laboration et conversion de documents avec Markdown et Pandoc](http://enacit1.epfl.ch/markdown-pandoc/)
 * [Le langage R Markdown](https://www.france-universite-numerique-mooc.fr/c4x/UPSUD/42001S02/asset/RMarkdown.pdf)
+* [Un guide pour bien commencer avec markdown](http://blog.wax-o.com/2014/04/tutoriel-un-guide-pour-bien-commencer-avec-markdown/)
 
 
 ----
