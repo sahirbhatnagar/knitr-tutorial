@@ -68,6 +68,7 @@ All the examples in this repository are reproducible. To compile please follow t
 * [What is an R-Project?](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
 
 ### En fran&ccedil;ais
+* [knitr: Produire des documents dynamiques](http://rug.mnhn.fr/semin-r/PDF/semin-R_knitr_PBessonneau_240513.pdf)
 * [&Eacute;laboration et conversion de documents avec Markdown et Pandoc](http://enacit1.epfl.ch/markdown-pandoc/)
 * [Le langage R Markdown](https://www.france-universite-numerique-mooc.fr/c4x/UPSUD/42001S02/asset/RMarkdown.pdf)
 * [Un guide pour bien commencer avec markdown](http://blog.wax-o.com/2014/04/tutoriel-un-guide-pour-bien-commencer-avec-markdown/)
