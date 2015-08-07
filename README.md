@@ -57,6 +57,7 @@ All the examples in this repository are reproducible. To compile please follow t
 
 * [CRAN Reproducible Research Task View](http://cran.r-project.org/web/views/ReproducibleResearch.html)
 * [knitr chunk options](http://yihui.name/knitr/options/)
+* [&Eacute;laboration et conversion de documents avec Markdown et Pandoc](http://enacit1.epfl.ch/markdown-pandoc/)
 * [Vanderbilt University](http://biostat.mc.vanderbilt.edu/wiki/Main/KnitrHowto)
 * [Jennifer Bryan (UBC)](https://github.com/jennybc/2015-02-23_bryan-fields-talk)
 * [Data Science with R by Graham Williams](http://handsondatascience.com/KnitRO.pdf)
