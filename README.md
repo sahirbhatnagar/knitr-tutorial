@@ -59,6 +59,7 @@ All the examples in this repository are reproducible. To compile please follow t
 * [knitr chunk options](http://yihui.name/knitr/options/)
 * [Markdown](http://daringfireball.net/projects/markdown/syntax)
 * [RMarkdown](http://rmarkdown.rstudio.com/)
+* [WYSIWYG editor for markdown](http://socrates.io/)
 * [Vanderbilt University](http://biostat.mc.vanderbilt.edu/wiki/Main/KnitrHowto)
 * [Jennifer Bryan (UBC)](https://github.com/jennybc/2015-02-23_bryan-fields-talk)
 * [Data Science with R by Graham Williams](http://handsondatascience.com/KnitRO.pdf)
