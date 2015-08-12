@@ -1,0 +1,71 @@
+---
+title: "Testing Knitr Bootstrap"
+author: "sahir"
+date: "August 12, 2015"
+output: html_document
+---
+# Testing `knitrBootstrap`
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+This example shows how you can render R Markdown documents using other styles such as [knitrBootstrap](https://github.com/jimhester/knitrBootstrap).   
+
+To install this package:
+```{r eval=FALSE}
+library(devtools)
+devtools::install_github('jimhester/knitrBootstrap')
+```
+
+To render the file:
+
+```{r eval=FALSE}
+rmarkdown::render("012-knitr-bootstrap.Rmd", "knitrBootstrap::bootstrap_document")
+```
+
+
+## Cars data set summary
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+summary(cars)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Linear Regression model
+
+```{r}
+df <- mtcars
+# voir les variables en df
+str(df)
+```
+
+### Histogram of `mpg`
+
+```{r}
+# histogram de mpg
+hist(mtcars[,"mpg"])
+```
+
+
+### Linear Regression Summary
+
+```{r}
+# régression linéaire
+fit <- lm(mpg ~ disp, data=df)
+
+# sommaire des résultat
+summary(fit)
+```
+
+
+
+
+
+

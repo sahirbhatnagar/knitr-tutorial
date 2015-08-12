@@ -1,5 +1,5 @@
 \documentclass[10pt]{beamer}
-\usetheme[numbering = fraction, progressbar = frametitle, titleformat = regular]{m}
+\usetheme[numbering = fraction, progressbar = frametitle, everytitleformat = regular]{m}
 
 \usepackage{etex} % helps fix \newdimen error which is cause when ctable is loaded with other packages
 \usepackage{comment}
@@ -18,8 +18,9 @@
 
 \usetikzlibrary{shapes.geometric, arrows,shapes.symbols,decorations.pathreplacing}
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, fill=pinkish,text width=3.5cm]
-\tikzstyle{startstop2} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, fill=background,text width=2.5cm]
+\tikzstyle{startstop2} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, fill=background,text width=4.5cm]
 \tikzstyle{startstop3} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, fill=beige,text width=3.0cm]
+\tikzstyle{startstop4} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, fill=pinkish,text width=4.5cm]
 \tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30,text width=1.5cm]
 \tikzstyle{process} = [rectangle, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=orange!30,text width=2cm]
 \tikzstyle{decision} = [diamond, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=green!30]
@@ -168,6 +169,7 @@ knitr::read_chunk("slides-packages.R")
 \item \href{http://www.statistik.lmu.de/~leisch/}{Friedrich Leisch} (Sweave)
 \item \href{http://yihui.name/knitr/}{Yihui Xie} (knitr)
 \item \href{http://daringfireball.net/projects/markdown/}{John Gruber} (Markdown)
+\item \href{http://pandoc.org/}{John MacFarlane} (Pandoc)
 \item You
 \end{itemize}
 
@@ -343,7 +345,7 @@ knitr::read_chunk("slides-packages.R")
 \begin{center}
 \begin{tikzpicture}
 \scriptsize
-\node (expr) [startstop] {Report.Rnw (contains both code and markup)};
+\node (expr) [startstop] {Report.Rnw (contains both code and LaTeX)};
 \node (science) [decision, below of=expr, xshift=0cm, yshift=-2cm] {Report.tex};
 \draw [arrow] (expr) -- node[anchor=east]{\texttt{knitr::knit('Report.Rnw')}} (science);
 \pause \node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.pdf};
@@ -601,7 +603,87 @@ see 120
 \end{comment}
 
 
+\section{RMarkdown}
+
+\begin{frame}{Markdown: HTML without knowing HTML}
+\begin{center}
+\includegraphics[scale=0.45, keepaspectratio]{markdown}
+\end{center}
+\end{frame}
+
+\begin{frame}{R + Markdown = RMarkdown}
+\begin{center}
+\includegraphics[scale=0.36, keepaspectratio]{rmarkdown}
+\end{center}
+\end{frame}
+
+\begin{frame}{What \texttt{rmarkdown} does}
+\textbf{\code{RMarkdown}} example:
+
+\begin{center}
+\begin{tikzpicture}
+\scriptsize
+\node (expr) [startstop] {Report.Rmd (contains both code and markdown)};
+\node (science) [decision, below of=expr, xshift=0cm, yshift=-2cm] {Report.md};
+\draw [arrow] (expr) -- node[anchor=east]{\texttt{knitr::knit('Report.Rmd')}} (science);
+\pause \node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.html, Report.pdf, Report.doc};
+\draw [arrow] (science) -- node[anchor=east]{\texttt{pandoc}} (pdf);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+
+\begin{frame}\frametitle{Compiling a \texttt{.Rmd} document}
+
+\begin{block}{The two steps on previous slide can be executed in one command:}
+\[ \textrm{\texttt{rmarkdown::render()}} \]
+\end{block}
+
+or in \texttt{RStudio}:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.21, keepaspectratio]{rmddrop.png}
+\end{figure}
+%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\end{frame}
+
+
 \section{Final Remarks}
+
+\begin{frame}{How to choose between \LaTeX\mbox{ }and Markdown ?}
+ %\hspace*{-1.9cm}\parbox[t]{\textwidth}{
+\begin{tikzpicture}
+\node (expr) [startstop4] {math/stat symbols \textcolor{pinkish}{tecccccc}
+beamer presentations \textcolor{pinkish}{teccccc}
+customized documents \textcolor{pinkish}{tecccc}
+publish to journals, arXiv 
+%\code{getwd()}\textcolor{pinkish}{teccc}
+%\code{rm()}\textcolor{pinkish}{tevvvvvvv}
+ };
+\node (fat) [startstop2, below of=expr, xshift=-.0cm, yshift=-2.0cm] {quick and easy reports\textcolor{background}{tkkk} 
+use javascript libraries \textcolor{background}{tekkt}
+interactive plots \textcolor{background}{texkkkkjjt}
+publish to websites};
+%\node (script) [startstop3, below of=fat, xshift=.1cm, yshift=-1.5cm] {
+%\code{read.table()}
+%\code{write.table()}
+%\code{load()}
+%\code{save()}\textcolor{beige}{text}
+%\code{source()}};
+\draw[decoration={brace,raise=5pt, amplitude=10pt},decorate,line width=1pt] 
+  ([yshift=-1pt]expr.south west) -- ([yshift=1pt]expr.north west) node [black,midway,xshift=-1.5cm] 
+{ \LaTeX};
+\draw[decoration={brace,raise=5pt,amplitude=10pt},decorate,line width=1pt] 
+  ([yshift=-1pt]fat.south west) -- ([yshift=1pt]fat.north west) node [black,midway,xshift=-1.5cm] 
+{Markdown};
+%\draw[decoration={brace,raise=5pt,amplitude=10pt},decorate,line width=1pt] 
+%  ([yshift=-1pt]script.south west) -- ([yshift=1pt]script.north west) node [black,midway,xshift=-3cm] 
+{\footnotesize Accéder les données et scripts R};
+\end{tikzpicture}
+%}
+\end{frame}
+
+
 
 \begin{frame}
 \begin{figure}[h!]

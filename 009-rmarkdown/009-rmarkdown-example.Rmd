@@ -4,13 +4,13 @@ author: "sahir"
 date: "May 28, 2015"
 output:
   html_document:
-    theme: united
     highlight: tango
-    toc: true
+    theme: united
+    toc: yes
     toc_depth: 2
 ---
 
-```{r packages}
+```{r packages, echo=FALSE}
 knitr::read_chunk("009-packages.R")
 ```
 
@@ -35,7 +35,7 @@ approaches are known as decision-tree methods [@islr]
 
 ## Baseball Data
 
-```{r test, echo=FALSE}
+```{r test, echo=FALSE, eval=1}
 DT.hit <- as.data.table(Hitters)
 datatable(Hitters[,c("Years","Hits","Salary")], options = list(iDisplayLength = 10))
 ```
