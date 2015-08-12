@@ -29,11 +29,11 @@
     pdfmenubar=true,        
     pdffitwindow=false,     % window fit to page when opened
     pdfstartview={FitH},    % fits the width of the page to the window
-    pdftitle={007-Sensitivity Analysis of Many Parameters},    % title
-    pdfauthor={SRB},     % author
+    pdftitle={011-simulation-report},    % title
+    pdfauthor={MT},     % author
     pdfsubject={Subject},   % subject of the document
-    pdfcreator={SRB},   % creator of the document
-    pdfproducer={SRB}, % producer of the document
+    pdfcreator={MT},   % creator of the document
+    pdfproducer={MT}, % producer of the document
     pdfkeywords={}, % list of keywords
     pdfnewwindow=true,      % links in new window
     colorlinks=true,       % false: boxed links; true: colored links
@@ -61,6 +61,7 @@
 \lfoot{} \cfoot{ } \rfoot{{\small{\em Page \thepage \ of \pageref{LastPage}}}}
 
 \begin{document}
+
 \pagestyle{fancy}
 
 \title{Simulation results for PCEV}
@@ -222,8 +223,7 @@ src <- mapply(knitr::knit_expand,
 \Sexpr{knit(text = unlist(src))}
 
 \FloatBarrier
-\bibliographystyle{plain}
-\bibliography{bibliography}
+\bibliography{011-bibliography}
 
 \newpage
 \appendix
@@ -231,6 +231,5 @@ src <- mapply(knitr::knit_expand,
 <<echo=TRUE>>=
 sessionInfo()
 @
-
 
 \end{document}
