@@ -1,6 +1,6 @@
 # Reproducible research: An introduction to [knitr](http://yihui.name/knitr/) and [RMarkdown](http://rmarkdown.rstudio.com/)
 
-A short talk presented by [Sahir Bhatnagar](http://sahirbhatnagar.com/) (McGill University)
+A short talk presented by [Sahir Bhatnagar](http://sahirbhatnagar.com/) (McGill University) at the [Montr&eacute;al useR group](http://www.meetup.com/Montreal-R-User-Group/)
   
 **Date**: Wednesday August 12, 18:00  
 **Location**: [Notman House](https://www.google.com/maps?f=q&hl=en&q=51+Sherbrooke+W.,+Montreal,+QC,+ca)  
