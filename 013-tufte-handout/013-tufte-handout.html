@@ -94,7 +94,7 @@ Check out a <a href="http://rmarkdown.rstudio.com/examples/tufte-handout.pdf">pd
 <p>To create sidenotes in html, some raw html is required. We make use of the <code>aside</code> tag. Place the sidenote content between the tags <code>&lt;aside&gt;&lt;/aside&gt;</code> to place them in the sidebar. In the pdf version, simply use the pandoc footnote format <code>^[Content]</code>. Anything can be enclosed in the <code>aside</code> tag, even code!</p>
 <aside>
 <pre class="r"><code>rnorm(1)</code></pre>
-<pre><code>## [1] -0.603763</code></pre>
+<pre><code>## [1] 0.2162962</code></pre>
 </aside>
 <p>The package provides two custom hooks for figure placement. The first is <code>marginfigure</code>. Set <code>marginfigure = TRUE</code> in a chuck option to place a figure in the right margin. Optionally, specify the figure size and include a caption. Captions are passed as strings through <code>fig.cap</code> in the chunk options.</p>
 <p>We would like change the default ggplot2 theme before to plot:</p>
