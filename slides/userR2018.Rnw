@@ -1,5 +1,5 @@
 \documentclass[10pt]{beamer}
-\usetheme[numbering = fraction, progressbar = frametitle, everytitleformat = regular]{metropolis}
+\usetheme[numbering = fraction, progressbar = frametitle]{metropolis}
 
 \usepackage{etex} % helps fix \newdimen error which is cause when ctable is loaded with other packages
 \usepackage{comment}
@@ -15,6 +15,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{ae}
 %\usepackage{aeguill}
+
+%\usepackage{xpatch}
+%\renewcommand{\ttdefault}{ul9}
+%\xpatchcmd{\ttfamily}{\selectfont}{\fontencoding{T1}\selectfont}{}{}
+%\DeclareTextCommand{\nobreakspace}{T1}{\leavevmode\nobreak\ }
 
 \usetikzlibrary{shapes.geometric, arrows,shapes.symbols,decorations.pathreplacing}
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, fill=pinkish,text width=3.5cm]
@@ -49,7 +54,7 @@
     pdfmenubar=true,        
     pdffitwindow=false,     % window fit to page when opened
     pdfstartview={FitH},    % fits the width of the page to the window
-    pdftitle={useR Montreal August 12, 2015},    % title
+    pdftitle={useR Montreal July 4, 2018},    % title
     pdfauthor={Sahir Rai Bhatnagar},     % author
     pdfsubject={Subject},   % subject of the document
     pdfcreator={Sahir Rai Bhatnagar},   % creator of the document
@@ -60,7 +65,7 @@
     linkcolor=red,          % color of internal links (change box color with linkbordercolor)
     citecolor=blue,        % color of links to bibliography
     filecolor=black,      % color of file links
-    urlcolor=cyan           % color of external links
+    urlcolor=blue           % color of external links
 }
 
 %\RequirePackage{color}
@@ -99,13 +104,13 @@
 
 %\title{Introduction to } % load mtheme
 % define title
-\date{\today}
-\author{Sahir Bhatnagar} % define date
+\date{July 5, 2018}
+\author{Sahir Bhatnagar, @syfi\_24} % define date
 % define author
-\institute{McGill Univeristy}
+\institute{McGill Univeristy \\ sahirbhatnagar.com}
 
-\title{An Introduction to \texttt{knitr} and \texttt{RMarkdown}}
-\subtitle{\href{https://github.com/sahirbhatnagar/knitr-tutorial}{https://github.com/sahirbhatnagar/knitr-tutorial}}
+\title{The Division of Labour}
+\subtitle{\url{https://github.com/sahirbhatnagar/knitr-tutorial} \\ \url{https://sahirbhatnagar.com/CSSC2018}}
 
 
 
@@ -150,135 +155,44 @@ knitr::read_chunk("slides-packages.R")
 \maketitle % define institute
 
 
-%\section{Acknowledments}
-
-\begin{frame}{Acknowledgements}
-% \hspace*{-1.9cm}\parbox[t]{\textwidth}
-%\frametitle{Acknowledgements}
+\begin{frame}\frametitle{The Division of Labour}
 \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 
 \column{.45\textwidth} % Left column and width
-
-\begin{itemize}
-%\scriptsize
-\item Toby, Matthieu, Vaughn, Ary
-\item \href{http://turgeonmaxime.github.io/}{Maxime Turgeon} (Windows)
-\item \href{https://www.researchgate.net/profile/Kevin_Mcgregor2}{Kevin McGregor} (Mac)
-\item Greg Voisin
-\item \href{http://www-cs-faculty.stanford.edu/~uno/}{Don Knuth} (\TeX)
-\item \href{http://www.statistik.lmu.de/~leisch/}{Friedrich Leisch} (Sweave)
-\item \href{http://yihui.name/knitr/}{Yihui Xie} (knitr)
-\item \href{http://daringfireball.net/projects/markdown/}{John Gruber} (Markdown)
-\item \href{http://pandoc.org/}{John MacFarlane} (Pandoc)
-\item You
-\end{itemize}
-
-\column{.45\textwidth} % Right column and width
-\begin{figure}
-\includegraphics[width=0.8\columnwidth]{mtluser.png}\\[5mm]
-\includegraphics[width=0.8\columnwidth]{notman.png}\\[5mm]
-\includegraphics[width=0.8\columnwidth]{revo.png}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6, keepaspectratio]{./smith}
+\small
+\caption{Adam Smith, author of \textit{The Wealth of Nations} (1776), in which he conceptualizes the notion of the division of labour}
+\label{fig:smith}
 \end{figure}
 
-\end{columns}
-\end{frame}
-
-
-\begin{frame}{Disclaimer \#1}
-\begin{figure}
-\includegraphics[width=0.8\columnwidth]{rstudio.png}\\[5mm]
-\includegraphics[width=0.2\columnwidth]{rlogo.png}\\[5mm]
-\includegraphics[width=0.2\columnwidth]{LaTeX_logo.png}
-\end{figure}
-
-\textit{I don't work for, nor am I an author of any of these packages. I'm just a messenger.}
-
-\end{frame}
-
-\begin{frame}{Disclaimer \#2}
-
-\begin{itemize}
-\item Material for this tutorial comes from many sources. For a complete list see:  \href{https://github.com/sahirbhatnagar/knitr-tutorial}{https://github.com/sahirbhatnagar/knitr-tutorial}
-\item Alot of the content in these slides are based on these two books
-\end{itemize}
-
-\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
-\column{.45\textwidth} % Left column and width
-\begin{figure}
-\includegraphics[width=0.6\columnwidth]{yihui.png}
-\end{figure}
-
-\column{.45\textwidth} % Right column and width
-\begin{figure}
-\includegraphics[width=0.6\columnwidth]{chris.png}
-\end{figure}
+\column{.5\textwidth} % Right column and width
+\small
+\begin{block}{Example: \LaTeX}
+Composition and logical structuring of text is the author's specific contribution to the production of a printed text. Matters such as the choice of the font family, should section headings be in bold face or small capitals? Should they be flush left or centered? Should the text be justified or not? Should the notes appear at the foot of the page or at the end? Should the text be set in one column or two? and so on, is the typesetter's business
+\end{block}
 \end{columns}
 
 \end{frame}
 
-\begin{frame}{Objectives for today}
-% \hspace*{-1.9cm}\parbox[t]{\textwidth}
-%\frametitle{Acknowledgements}
-\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 
-\column{.45\textwidth} % Left column and width
+\begin{frame}{Tools for Reproducible Research}
 
+\begin{block}{Free and Open Source Software}
 \begin{itemize}
-%\scriptsize
-\item Create a reproducible document (\code{pdf, html})
+\item \texttt{RStudio}: Creating, managing, compiling documents
+\item \LaTeX: Markup language for typesetting a pdf
+\item Markdown: Markup language for typesetting an html
+\item \texttt{R}: Statistical analysis language
+\item \texttt{knitr}: Integrate \LaTeX and \texttt{R} code. Based on Prof. Friedrich Leisch's \href{https://www.statistik.lmu.de/~leisch/Sweave/}{\texttt{Sweave}}
 \end{itemize}
-\pause 
-\column{.45\textwidth} % Right column and width
-\begin{figure}
-\includegraphics[width=0.8\columnwidth]{./juice}
-\end{figure}
-
-\end{columns}
+\end{block}
 \end{frame}
 
 
-\begin{frame}{C'est parti}
-%\hspace*{-1.5cm}\parbox[t]{\textwidth}{
-\begin{center}
-\includegraphics[scale=0.51]{introR.jpg}
-\end{center}
-%}
-\end{frame}
-
-\section{What?}
 
 
-\begin{frame}{What is needed for Reproducible research?}
-\def\firstcircle{(0,0) circle (1.5cm)}
-\def\secondcircle{(45:2cm) circle (1.5cm)}
-\def\thirdcircle{(0:2cm) circle (1.5cm)}
-% Now we can draw the sets:
-\begin{center}
-\begin{tikzpicture}
-    \draw \firstcircle node[below] {code};
-    \draw \secondcircle node [above] {data};
-    \draw \thirdcircle node [below] {text};
-
-    % Now we want to highlight the intersection of the first and the
-    % second circle:
-
-    %\begin{scope}
-    %  \clip \firstcircle;
-    %  \fill[red] \secondcircle;
-    %\end{scope}
-
-    % Next, we want the highlight the intersection of all three circles:
-
-    \begin{scope}
-      \clip \firstcircle;
-      \clip \secondcircle;
-      \fill[green] \thirdcircle;
-    \end{scope}
-\end{tikzpicture}
-\end{center}
-\end{frame}
-
-\section{Why?}
 
 \begin{frame}
 \begin{tikzpicture}
@@ -305,28 +219,9 @@ knitr::read_chunk("slides-packages.R")
 \end{tikzpicture}
 \end{frame}
 
-\section{001-motivating-example}
-
-\begin{frame}{A Motivating Example}
-\textit{Demonstrate:} \href{https://github.com/sahirbhatnagar/knitr-tutorial/tree/master/001-motivating-example}{001-motivating-example}\\
-\end{frame}
 
 
 
-\section{How?}
-
-\begin{frame}{Tools for Reproducible Research}
-
-\begin{block}{Free and Open Source Software}
-\begin{itemize}
-\item \texttt{RStudio}: Creating, managing, compiling documents
-\item \LaTeX: Markup language for typesetting a pdf
-\item Markdown: Markup language for typesetting an html
-\item \texttt{R}: Statistical analysis language
-\item \texttt{knitr}: Integrate \LaTeX and \texttt{R} code. Based on Prof. Friedrich Leisch's \href{https://www.statistik.lmu.de/~leisch/Sweave/}{\texttt{Sweave}}
-\end{itemize}
-\end{block}
-\end{frame}
 
 %\begin{frame}\frametitle{RStudio: Integrated Development Environment (IDE)}
 %\begin{figure}[h!]
@@ -337,7 +232,6 @@ knitr::read_chunk("slides-packages.R")
 %\end{frame}
 
 
-\section{\texttt{knitr}}
 
 \begin{frame}{What \texttt{knitr} does}
 \textbf{\LaTeX} example:
@@ -348,43 +242,15 @@ knitr::read_chunk("slides-packages.R")
 \node (expr) [startstop] {Report.Rnw (contains both code and LaTeX)};
 \node (science) [decision, below of=expr, xshift=0cm, yshift=-2cm] {Report.tex};
 \draw [arrow] (expr) -- node[anchor=east]{\texttt{knitr::knit('Report.Rnw')}} (science);
-\pause \node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.pdf};
+\node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.pdf};
 \draw [arrow] (science) -- node[anchor=east]{\texttt{latex2pdf('Report.tex')}} (pdf);
 \end{tikzpicture}
 \end{center}
 \end{frame}
 
 
-\begin{frame}\frametitle{Compiling a \texttt{.Rnw} document}
 
-\begin{block}{The two steps on previous slide can be executed in one command:}
-\[ \textrm{\texttt{knitr::knit2pdf()}} \]
-\end{block}
 
-or in \texttt{RStudio}:
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.5, keepaspectratio]{./Compile-pdf.jpg}
-\end{figure}
-%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
-\end{frame}
-
-\begin{frame}\frametitle{Incorporating \texttt{R} code}
-
-\begin{itemize}
-\item Insert \texttt{R} code in a \textbf{Code Chunk} starting with $$ << \quad >>= $$
-and ending with \begin{center}
-{@}
-\end{center}
-\end{itemize}
-
-In \texttt{RStudio}:
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.35, keepaspectratio]{./sweave_chunk}
-\end{figure}
-%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
-\end{frame}
 
 \begin{frame}[fragile]{Example 1: Show code and results}
 <<out-first-code-chunk, echo=FALSE, comment=NA>>=
@@ -398,41 +264,8 @@ mean(x)
 \end{frame}
 
 
-\begin{frame}[fragile]{Example 2: Tidy code}
-<<out-first-code-chunk2, echo=FALSE, comment=NA>>=
-cat(paste("<<example-code-chunk-name2, echo=TRUE, tidy=TRUE>>=","for(i in 1:5){ print(i+3)}","@",sep="\n"))
-@
-produces
-<<echo=TRUE, tidy=TRUE>>=
-for(i in 1:5){ print(i+3)}
-@
-
-\end{frame}
 
 
-\begin{frame}[fragile]{Example 2.2: don't show code}
-<<out-first-code-chunk22, echo=FALSE, comment=NA>>=
-cat(paste("<<example-code-chunk-name3, echo=FALSE>>=","for(i in 1:5){ print(i+3)}","@",sep="\n"))
-@
-produces
-<<echo=FALSE, tidy=TRUE>>=
-for(i in 1:5){ print(i+3)}
-@
-
-\end{frame}
-
-
-\begin{frame}[fragile]{Example 2.3: don't evaluate and don't show the code}
-<<out-first-code-chunk23, echo=FALSE, comment=NA>>=
-cat(paste("<<example-code-chunk-name4, echo=FALSE, eval=FALSE>>=","for(i in 1:5){ print(i+3)}","@",sep="\n"))
-@
-produces
-<<echo=FALSE, eval=FALSE, tidy=TRUE>>=
-for(i in 1:5){ print(i+3)}
-@
-
-%\textit{Demonstrate:} Try it yourself
-\end{frame}
 
 
 
@@ -603,7 +436,7 @@ see 120
 \end{comment}
 
 
-\section{RMarkdown}
+
 
 \begin{frame}{Markdown: HTML without knowing HTML}
 \begin{center}
@@ -626,29 +459,15 @@ see 120
 \node (expr) [startstop] {Report.Rmd (contains both code and markdown)};
 \node (science) [decision, below of=expr, xshift=0cm, yshift=-2cm] {Report.md};
 \draw [arrow] (expr) -- node[anchor=east]{\texttt{knitr::knit('Report.Rmd')}} (science);
-\pause \node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.html, Report.pdf, Report.doc};
+\node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.html, Report.pdf, Report.doc};
 \draw [arrow] (science) -- node[anchor=east]{\texttt{pandoc}} (pdf);
 \end{tikzpicture}
 \end{center}
 \end{frame}
 
 
-\begin{frame}\frametitle{Compiling a \texttt{.Rmd} document}
-
-\begin{block}{The two steps on previous slide can be executed in one command:}
-\[ \textrm{\texttt{rmarkdown::render()}} \]
-\end{block}
-
-or in \texttt{RStudio}:
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.21, keepaspectratio]{rmddrop.png}
-\end{figure}
-%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
-\end{frame}
 
 
-\section{Final Remarks}
 
 \begin{frame}{How to choose between \LaTeX\mbox{ }and Markdown ?}
  %\hspace*{-1.9cm}\parbox[t]{\textwidth}{
@@ -690,32 +509,19 @@ publish to websites};
 \centering
 \includegraphics[scale=0.30, keepaspectratio]{./leek}
 \end{figure}
-\end{frame}
 
-\begin{frame}
-\frametitle{Always Remember ...}
+\vspace{2cm}
 
 \[ \textrm{Reproducibility} \propto \frac{1}{\textrm{copy paste}}  \]
 
-
-\end{frame}
-
-
-\begin{frame}{Is the juice worth the squeeze?}
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.40, keepaspectratio]{./juice}
-\end{figure}
-\end{frame}
-
-\begin{frame}[fragile]{Session Info}
-<<echo=FALSE, size='footnotesize', results = 'asis'>>=
-toLatex(sessionInfo(), locale = F)
-@
-Slides made with Beamer \href{https://github.com/matze/mtheme}{mtheme}
 \end{frame}
 
 
 
 \end{document}
+
+
+
+
+
 
