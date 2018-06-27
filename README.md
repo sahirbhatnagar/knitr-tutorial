@@ -1,8 +1,17 @@
 # Reproducible research: An introduction to [knitr](http://yihui.name/knitr/) and [RMarkdown](http://rmarkdown.rstudio.com/)
 
+
+A lightning talk presented by [Sahir Bhatnagar](https://sahirbhatnagar.com/) (McGill University) at the [2018 R in Montreal conference](http://rmontreal2018.ca/)
+  
+**Date**: Thursday July 5, 2018, 18:00  
+**Slides**: The slides used for this presentation can be found [here](https://github.com/sahirbhatnagar/knitr-tutorial/blob/master/slides/userR2018.pdf)  
+
+
+---
+
 A short talk presented by [Sahir Bhatnagar](http://sahirbhatnagar.com/) (McGill University) at the [Montr&eacute;al useR group](http://www.meetup.com/Montreal-R-User-Group/)
   
-**Date**: Wednesday August 12, 18:00  
+**Date**: Wednesday August 12, 2015, 18:00  
 **Location**: [Notman House](https://www.google.com/maps?f=q&hl=en&q=51+Sherbrooke+W.,+Montreal,+QC,+ca)  
 **Slides**: The slides used for this presentation can be found [here](https://github.com/sahirbhatnagar/knitr-tutorial/blob/master/slides/useR-mtl-2015.pdf)  
 **Material**: Click on the `Download ZIP` button on this page, or [fork it](https://help.github.com/articles/fork-a-repo/), or [clone it](http://stackoverflow.com/questions/651038/how-do-you-clone-a-git-repository-into-a-specific-folder)  
