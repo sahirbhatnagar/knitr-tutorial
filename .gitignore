@@ -17,7 +17,6 @@
 *.snm
 *_cache
 *_files
-*.md
 *.vrb
 *.nav
 *.blg
