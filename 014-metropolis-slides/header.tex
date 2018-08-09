@@ -1,0 +1,113 @@
+%% header.tex
+%%
+%% Copyright (C) 2016 - 2017  Dirk Eddelbuettel
+%%
+%% This file is part of samples-rmarkdown-metropolis repository.
+%%
+%% samples-rmarkdown-metropolis is free software: you can redistribute it
+%% and/or modify it under the terms of the GNU General Public License as
+%% published by the Free Software Foundation, either version 2 of the
+%% License, or (at your option) any later version.
+%%
+%% samples-rmarkdown-metropolis is distributed in the hope that it will be
+%% useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+%% Public License for more details.
+%%
+%% You should have received a copy of the GNU General Public License along with
+%% samples-rmarkdown-metropolis.  If not, see <http://www.gnu.org/licenses/>.
+
+%% If you have the Fira font installed, to actually have it used it 
+%% via rmarkdown you need to declare it here 
+%\setsansfont[ItalicFont={Fira Sans Light Italic},BoldFont={Fira Sans},BoldItalicFont={Fira Sans Italic}]{Fira Sans Light}
+%\setmonofont[BoldFont={Fira Mono Medium}]{Fira Mono}
+
+%% You can set various Metropolis options via \metroset{} here
+%\metroset{....}
+
+%% You can redefine colours, mostly by borrowing from Beamer
+\setbeamercolor{frametitle}{bg=gray}
+\usepackage{graphicx}
+\graphicspath{ {/home/sahir/git_repositories/math697/images/} }
+\usepackage{hyperref, url}
+\usepackage{caption}
+\usepackage[round,sort]{natbib}   % bibliography omit 'round' option if you prefer square brackets
+\usepackage{float}
+\usepackage{color, colortbl, xcolor}
+\definecolor{lightgray}{RGB}{200,200,200}
+\usepackage{array}
+\newcolumntype{L}{>{\centering\arraybackslash}m{3cm}} % used for text wrapping in ctable
+\usepackage{ctable}
+\usepackage{nicefrac}
+%\usepackage{calrsfs}
+%\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+%\newcommand{\La}{\mathcal{L}}
+%\newcommand{\Lb}{\pazocal{L}}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\def\widebar#1{\overline{#1}}
+
+\def\Xmean{\skew3\widebar{X}}
+\def\Ymean{\widebar{Y}}
+\def\xmean{\bar{x}}
+\def\ymean{\bar{y}}
+\def\dint{\displaystyle\int}
+\def\dsum{\displaystyle\sum}
+
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\Xbar}{\bar{X}}
+\newcommand{\sumn}{\dsum_{i=1}^{n}}
+
+\metroset{numbering=fraction, block = fill}
+
+%% change fontsize of R code
+\let\oldShaded\Shaded
+\let\endoldShaded\endShaded
+\renewenvironment{Shaded}{\scriptsize\oldShaded}{\endoldShaded}
+
+%% change fontsize of output
+\let\oldverbatim\verbatim
+\let\endoldverbatim\endverbatim
+\renewenvironment{verbatim}{\scriptsize\oldverbatim}{\endoldverbatim}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+
+%% You also use hyperref, and pick colors 
+\hypersetup{colorlinks,citecolor=orange,filecolor=red,linkcolor=brown,urlcolor=blue}
+
+\newcommand {\framedgraphiccaption}[2] {
+            \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{#1}
+            \caption{#2}
+            \end{figure}
+}
+
+\newcommand {\framedgraphic}[1] {
+            \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{#1}
+            \end{figure}
+}
+
+%\usepackage{amsthm}
+\setbeamertemplate{theorems}[numbered]
+
+%% when rendered with rmarkdown, somehow the unicode char for the dot
+%% disappears so we redefine it here -- that is an older comments, seems font-specific
+%\renewcommand{\textbullet}{$\cdot$}
+%\renewcommand{\itemBullet}{▸}   % unicode U+25b8 'black right pointing small triangle'
+
+%% The institute macro puts a small line for affiliation at the bottom
+\institute{McGill University} 
+
+%% We can also place a logo
+%\titlegraphic{\hfill\includegraphics[height=1cm]{someLogo.pdf}}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -12,7 +12,7 @@
 *.brf
 *.toc
 *.synctex.gz
-*.tex
+*concordance.tex
 *figure
 *.snm
 *_cache
